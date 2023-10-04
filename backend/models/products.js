@@ -3,15 +3,15 @@ const db = require('../config/db');
 
 const Product = db.define('t_products', {
   p_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  category: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   p_brand: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  p_category: {
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   p_price: {
@@ -36,7 +36,7 @@ const Product = db.define('t_products', {
     allowNull: false,
   },
   p_status: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   create_date: {
@@ -46,6 +46,7 @@ const Product = db.define('t_products', {
   },
   update_date: {
     type: DataTypes.DATE,
+    allowNull: false,
     field: 'updatedAt',
   },
 });

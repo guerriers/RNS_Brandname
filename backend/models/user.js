@@ -3,15 +3,15 @@ const db = require('../config/db');
 
 const User = db.define('t_users', {
   f_name: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   l_name: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   email: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
     unique: true,
   },
@@ -20,15 +20,15 @@ const User = db.define('t_users', {
     allowNull: false,
   },
   profile_img: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   password: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   status: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   create_date: {
@@ -38,6 +38,7 @@ const User = db.define('t_users', {
   },
   update_date: {
     type: DataTypes.DATE,
+    allowNull: true,
     field: 'updatedAt',
   },
 });
