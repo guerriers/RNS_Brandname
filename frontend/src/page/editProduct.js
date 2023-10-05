@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { Form, Row, Col, Image } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Form, Row, Col, Image, Container } from "react-bootstrap";
 import "../css/addProduct.css";
 
 const EditProduct = ({ history }) => {
@@ -21,10 +21,11 @@ const EditProduct = ({ history }) => {
     user_id: "2",
   };
 
-  const [isSubmit, setIsSubmit] = useState(false);
-  const [validated, setValidated] = useState(false);
+  const [setIsSubmit] = useState(false);
+  const [setValidated] = useState(false);
   const [productEdit, setProductEdit] = useState(initialValues);
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const [setHasLoaded] = useState(false);
+  // const [hasLoaded, setHasLoaded] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,9 +88,11 @@ const EditProduct = ({ history }) => {
   }, [id]);
 
   return (
-    <Fragment>
+    <Container>
+
+    {/* <Fragment>
       {hasLoaded ? (
-        <Fragment>
+        <Fragment> */}
           <div>
             <div className="Header">
               <h1>Edit Product</h1>
@@ -262,11 +265,12 @@ const EditProduct = ({ history }) => {
               </div>
             </Form>
           </div>
-        </Fragment>
+        {/* </Fragment>
       ) : (
         <Fragment>Loading...</Fragment>
       )}
-    </Fragment>
+    </Fragment> */}
+    </Container>
   );
 };
 

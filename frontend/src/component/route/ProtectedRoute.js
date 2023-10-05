@@ -1,25 +1,26 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React, { Fragment, useState } from "react";
+import { Route, Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
-const ProtectedRoute = ({ component: Component, isAdmin, ...rest }) => {
-  const getEmail = localStorage.getItem("email");
-  const getStatus = localStorage.getItem("status");
-  const email = JSON.parse(getEmail);
-  const status = JSON.parse(getStatus);
-
-  if (!email || !status) {
-    return <Navigate to="/login" />;
+const ProtectedRoute = ({
+  isAdmin,
+  isAuthenticated,
+  children 
+}) => {
+  const token = Cookies.get("token");
+  const status = localStorage.getItem("status");
+  if(!token){
+    return <Navigate to="/login"/>
   }
 
-  if (isAdmin && status !== "1") {
-    return <Navigate to="/home" />;
+  if (!isAdmin && status==="1") {
+    return <Navigate to="/products" replace />
   }
-
-  if (!isAdmin && status === "1") {
-    return <Navigate to="/products" />;
+  if (isAdmin && status==="0") {
+    return <Navigate to="/admin" replace />
   }
+  return children 
 
-  return <Component {...rest} />;
 };
 
 export default ProtectedRoute;
