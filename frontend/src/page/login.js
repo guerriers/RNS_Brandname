@@ -1,35 +1,58 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (email === "admin@admin.com" && password === "1234") {
-      localStorage.setItem("email", email);
-      localStorage.setItem("status", "0");
-      navigate("/products"); 
-    } else if (email === "user@user.com" && password === "1234") {
-      localStorage.setItem("email", email);
-      localStorage.setItem("status", "1");
-      navigate("/"); 
-    } else {
-      alert("Invalid email or password");
-    }
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    console.log("Response status:", response.status);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Response data:", data);
+
+    if (data.message === 'Login successful') {
+      if (data.status === 0) {
+        navigate("/admin");
+      } else {
+        navigate("/products");
+      }
+    } else {
+      console.error("Login failed:", data.message);
+    }
+  } else {
+    console.error("Authentication failed");
+  }
+};
   return (
     <div>
-      <h2>Login</h2>
-      <form>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
+            required
           />
         </div>
         <div>
@@ -37,15 +60,14 @@ const Login = () => {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
+            required
           />
         </div>
-        <button type="button" onClick={handleLogin}>
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;
