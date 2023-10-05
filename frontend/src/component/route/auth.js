@@ -1,29 +1,34 @@
 class Auth {
     constructor() {
         this.authenticated = false;
-        this.isAdmin = false;
+        this.admin = false; 
     }
+
     login(cb) {
-        this.isAdmin = true;
+        this.admin = true; 
         this.authenticated = true;
         cb();
     }
+
     loginUser(cb) {
-        this.isAdmin = false
+        this.admin = false;
         this.authenticated = true;
         cb();
     }
+
     logout(cb) {
-        this.isAdmin = false;
+        this.admin = false;
         this.authenticated = false;
         window.location.reload();
         cb();
     }
+
     isAuthenticated() {
         return this.authenticated;
     }
-    isAdmin() {
-        return this.isAdmin;
+
+    isAdminUser() {
+        return this.admin;
     }
 }
 
