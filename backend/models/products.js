@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const db = require('../config/db');
+const { DataTypes } = require("sequelize");
+const db = require("../config/db");
 
-const Product = db.define('t_products', {
+const Product = db.define("t_products", {
   p_name: {
     type: DataTypes.TEXT,
     allowNull: false,
@@ -30,6 +30,10 @@ const Product = db.define('t_products', {
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    references: {
+      model: "t_users",
+      key: "id",
+    },
   },
   p_description: {
     type: DataTypes.TEXT,
@@ -42,12 +46,12 @@ const Product = db.define('t_products', {
   create_date: {
     type: DataTypes.DATE,
     allowNull: false,
-    field: 'createdAt', 
+    field: "createdAt",
   },
   update_date: {
     type: DataTypes.DATE,
     allowNull: false,
-    field: 'updatedAt',
+    field: "updatedAt",
   },
 });
 

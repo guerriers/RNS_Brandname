@@ -1,0 +1,130 @@
+.product-detail-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-detail {
+  flex: 1;
+  /* padding: 20px; */
+  background-color: #fff;
+  padding-right: 5%;
+}
+.phone-icon {
+  padding-right: 5px;
+}
+.product-detail h1 {
+  font-size: 24px;
+  text-align: left;
+}
+
+.p-status {
+  background-color: #e7c264;
+  color: #333333;
+  font-weight: bold;
+  position: relative;
+  border-radius: 20px;
+  padding: 5px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+.product-detail h2 {
+  text-align: left;
+  font-size: 18px;
+  color: #888;
+}
+
+.product-detail hr {
+  border: 2px bold #000000;
+  margin: 10px 0;
+}
+
+.product-detail p {
+  text-align: left;
+  font-size: 16px;
+}
+
+.product-detail .seller-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.seller-name {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 75%;
+}
+.product-detail .seller-info .profile-icon {
+  cursor: pointer;
+  color: #e7c264;
+  text-decoration: underline;
+  align-items: right;
+}
+
+.product-detail .seller-info .phone-icon {
+  cursor: pointer;
+  color: #e7c264;
+}
+
+.product-detail h3 {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.product-detail .contact-button {
+  background-color: #333333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.product-detail .contact-button:hover {
+  background-color: #e7c264;
+  color: #000000;
+  transition: background-color 0.3s ease;
+}
+.product-image {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.product-image1 {
+  position: relative;
+  max-width: 100%;
+}
+
+.product-image img {
+  width: auto;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.mini-image {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
