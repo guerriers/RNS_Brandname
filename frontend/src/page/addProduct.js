@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Image } from "react-bootstrap";
 import "../css/addProduct.css";
 
-const AddProduct = ({ history }) => {
+const AddProduct = () => {
   const initialValues = {
     p_name: "",
     p_category: "",
@@ -12,22 +12,24 @@ const AddProduct = ({ history }) => {
     p_description: "",
     p_receipt: "",
     p_status: "",
-    p_img: "https://lofficielthailand.com/wp-content/uploads/2020/07/Tote-Bag-Brand-Name-Celine-Paris-1-LOfficiel-Thaialnd.jpg",
-    user_id: "1",
+    p_img:
+      "https://lofficielthailand.com/wp-content/uploads/2020/07/Tote-Bag-Brand-Name-Celine-Paris-1-LOfficiel-Thaialnd.jpg",
+    user_id: "2",
   };
   const [formValues, setFormValues] = useState(initialValues);
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [setIsSubmit] = useState(false);
   const [validated, setValidated] = useState(false);
 
   const handleReset = () => {
     setIsSubmit(false);
-    history.push("/myProducts");
+    window.location.href = "/myProduct";
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const onSubmit = async (Product) => {
     const form = Product.currentTarget;
@@ -50,6 +52,9 @@ const AddProduct = ({ history }) => {
         .then((res) => {
           if (res.statusCode === 201) {
             alert("Added Product successfully");
+            console.log("showSuccessMessage before:", showSuccessMessage);
+            setShowSuccessMessage(true);
+            console.log("showSuccessMessage after:", showSuccessMessage);
             setIsSubmit(true);
             handleReset();
           }
@@ -62,6 +67,9 @@ const AddProduct = ({ history }) => {
   useEffect(() => {});
   return (
     <div>
+      {showSuccessMessage && (
+        <div className="success-message">Product added successfully!</div>
+      )}
       <div className="Header">
         <h1>Add Product</h1>
       </div>
@@ -87,9 +95,9 @@ const AddProduct = ({ history }) => {
             <Form.Control
               type="text"
               placeholder="Product name"
+              value={formValues.p_name}
               name="p_name"
               required
-              value={formValues.p_name}
               onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -137,14 +145,14 @@ const AddProduct = ({ history }) => {
 
           <Form.Group as={Col} controlId="formGridCondition">
             <Form.Label>
-              Condition<span style={{ color: "red" }}> *</span>
+              Conditions<span style={{ color: "red" }}> *</span>
             </Form.Label>
             <Form.Control
               type="number"
               placeholder="Product Condition (%)"
-              name="p_condition"
+              name="p_conditions"
               required
-              value={formValues.p_condition}
+              value={formValues.p_conditions}
               onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -211,19 +219,21 @@ const AddProduct = ({ history }) => {
               value="1"
               inline
               label="For Sell"
-              name="status"
+              name="p_status"
               type="radio"
+              required
               onChange={handleChange}
-              checked={formValues.status === "1"}
+              checked={formValues.p_status === "1"}
             />
             <Form.Check
               value="0"
               inline
               label="For Rent"
-              name="status"
+              name="p_status"
               type="radio"
+              required
               onChange={handleChange}
-              checked={formValues.status === "0"}
+              checked={formValues.p_status === "0"}
             />
           </Form.Group>
         </Row>
