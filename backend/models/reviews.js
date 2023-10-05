@@ -16,12 +16,12 @@ const Review = db.define("t_reviews", {
   },
   create_date: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
     field: "createdAt",
   },
   update_date: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
     field: "updatedAt",
   },
 });

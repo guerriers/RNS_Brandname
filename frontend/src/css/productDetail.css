@@ -1,6 +1,7 @@
 .product-detail-container {
   display: flex;
   justify-content: space-between;
+  margin-top: 50px;
 }
 
 .product-detail {
@@ -19,6 +20,7 @@
 
 .p-status {
   background-color: #e7c264;
+  margin-right: 5px;
   color: #333333;
   font-weight: bold;
   position: relative;
@@ -26,6 +28,16 @@
   padding: 5px 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: inline-block;
+}
+
+.for-rent {
+  background-color: #E7C264;
+  color: #000000;
+}
+
+.for-sell {
+  background-color: #87B1F9;
+  color: #ffffff;
 }
 .product-detail h2 {
   text-align: left;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Row, Col, Image } from "react-bootstrap";
+import { Form, Row, Col, Container } from "react-bootstrap";
 import "../css/addProduct.css";
 
 const AddProduct = () => {
@@ -12,12 +12,12 @@ const AddProduct = () => {
     p_description: "",
     p_receipt: "",
     p_status: "",
-    p_img:
-      "https://lofficielthailand.com/wp-content/uploads/2020/07/Tote-Bag-Brand-Name-Celine-Paris-1-LOfficiel-Thaialnd.jpg",
+    p_img: "https://lofficielthailand.com/wp-content/uploads/2020/07/Tote-Bag-Brand-Name-Celine-Paris-1-LOfficiel-Thaialnd.jpg",
     user_id: "2",
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [setIsSubmit] = useState(false);
+//   const [isSubmit, setIsSubmit] = useState(false);
   const [validated, setValidated] = useState(false);
 
   const handleReset = () => {
@@ -27,8 +27,13 @@ const AddProduct = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    if (name === "p_img") {
+      setFormValues({ ...formValues, [name]: value });
+    } else {
+      setFormValues({ ...formValues, [name]: value });
+    }
   };
+
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const onSubmit = async (Product) => {
@@ -66,6 +71,8 @@ const AddProduct = () => {
   };
   useEffect(() => {});
   return (
+    <Container>
+
     <div>
       {showSuccessMessage && (
         <div className="success-message">Product added successfully!</div>
@@ -81,11 +88,22 @@ const AddProduct = () => {
         onSubmit={onSubmit}
       >
         <Col xs={6} md={4}>
-          <Image src="xxx.jpeg" rounded />
-          <Form.Group controlId="formFileMultiple" className="mb-3">
-            <Form.Label>+</Form.Label>
-            <Form.Control type="file" multiple />
+          {/* <Image src="xxx.jpeg" rounded /> */}
+          <Form.Group as={Col} controlId="formFileMultiple">
+            <Form.Label>add image +</Form.Label>
+            <Form.Control
+              type="file"
+              multiple
+              name="p_img"
+              value={formValues.p_img}
+              onChange={handleChange}
+            />
+            <span style={{ color: "red" }}> (only .png, .jpg, .jpeg)</span>
+            <Form.Control.Feedback type="invalid">
+              Please Add Receipt
+            </Form.Control.Feedback>
           </Form.Group>
+
         </Col>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridName">
@@ -201,7 +219,6 @@ const AddProduct = () => {
             <Form.Label>Receipt</Form.Label>
             <Form.Control
               type="file"
-              placeholder="(.png, .jpg, .jpeg)"
               name="p_receipt"
               value={formValues.p_receipt}
               onChange={handleChange}
@@ -242,6 +259,7 @@ const AddProduct = () => {
         </div>
       </Form>
     </div>
+    </Container>
   );
 };
 

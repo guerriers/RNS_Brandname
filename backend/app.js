@@ -6,10 +6,14 @@ const cors = require("cors");
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const app = express();
-// app.use(express.static(path.join(__dirname, "img")));
-app.use(cors());
-app.use(bodyParser.json());
+const cookieParser = require("cookie-parser");
 
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 
