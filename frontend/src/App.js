@@ -9,6 +9,8 @@ import Home from "./page/home";
 import Login from "./page/login";
 import Products from "./page/products";
 import MyProducts from "./page/myProducts";
+import AddProduct from "./page/addProduct";
+import EditProduct from "./page/editProduct";
 import ProductDetail from "./page/productDetail";
 import NotFound from "./component/notFound";
 
@@ -27,7 +29,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/myProducts" element={<MyProducts />} />
-          <Route path="/productDetail" element={<ProductDetail />} />
+          <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/productDetail/:id" element={<ProductDetail />} />
+          <Route path="/editProduct/:id" element={<EditProduct />} />
           {/* <ProtectedRoute path="/" element={<Home />} isAdmin={true} /> */}
           {/* <ProtectedRoute path="/product" element={<Product />} isAdmin={true} /> */}
           {/* AdminPage */}

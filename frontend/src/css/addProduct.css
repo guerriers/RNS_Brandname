@@ -1,0 +1,57 @@
+.Header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.wrapperViewProduct {
+    max-width: auto;
+    display: grid;
+    column-gap: 20px;
+    row-gap: 20px;
+    margin: 0px auto;
+    padding: 0px 50px;
+}
+
+.form-control,.form-select{
+    border-radius: 15px !important;
+}
+
+.viewDataSubmit {
+    padding: 5px 70px;
+    border: none;
+    text-align: center;
+    color: #FFFFFF;
+    background: #E7C264;
+    border-radius: 15px;
+} 
+
+.formGridStatus{
+    margin-top: 25px;
+    
+}
+
+.form-check-input:checked{
+    background-color: #E7C264 !important;
+    border-color: #E7C264 !important;
+}
+.no-arrow {
+    -moz-appearance: textfield;
+  }
+  .no-arrow::-webkit-inner-spin-button {
+    display: none;
+  }
+  .no-arrow::-webkit-outer-spin-button,
+  .no-arrow::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+@media (min-width: 1000px) {
+    /* .wrapperViewProduct {
+        grid-template-columns: repeat(2, 1fr);
+    } */
+    /* .warpPerButton {
+    grid-column-end: span 2;
+    text-align: center;
+}  */
+}

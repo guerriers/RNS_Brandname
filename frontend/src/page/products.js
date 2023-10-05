@@ -24,8 +24,12 @@ const Product = () => {
           <Link to={`/productDetail/${product.id}`} key={product.id}>
             <div className="product-box">
               <img src={product.p_img} alt={product.p_name} />
-            
-              <div className="product-status">{product.p_status === 0 ? 'For Rent' : 'For Sell'}</div>
+              <div className={`product-status ${
+                product.p_status === "0" ? "for-rent" : "for-sell"
+              }`}
+            >
+              {product.p_status === "0" ? "For Rent" : "For Sell"}
+            </div>
               <div className="product-price">{`${product.p_price} THB`}</div>
             </div>
           </Link>
