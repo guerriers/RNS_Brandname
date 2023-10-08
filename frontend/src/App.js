@@ -13,7 +13,7 @@ import AddProduct from "./page/addProduct";
 import EditProduct from "./page/editProduct";
 import ProductDetail from "./page/productDetail";
 import NotFound from "./component/notFound";
-import VerifyUser from "./page/verifyUser";
+//import VerifyUser from "./page/verifyUser";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -51,7 +51,7 @@ function App() {
         <Route path="/myProducts" element={<MyProducts />} />
         <Route path="/addProduct" element={<AddProduct />} />
         <Route path="/productDetail/:id" element={<ProductDetail />} />
-        <Route path="/verifyUser" element={<VerifyUser />} />
+        {/* <Route path="/verifyUser" element={<VerifyUser />} /> */}
         <Route path="/editProduct/:id" element={<EditProduct />} />
         <Route
           path="/products"
