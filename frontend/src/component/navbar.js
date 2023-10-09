@@ -7,7 +7,15 @@ import { Link } from "react-router-dom";
 
 const NavbarComponent = () => {
   const logoutHandler = async () => {
-    window.location.reload();
+    try {
+      await fetch('/api/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+      window.location.href = '/login';
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
