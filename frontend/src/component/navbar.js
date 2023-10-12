@@ -1,13 +1,45 @@
-import React from "react";
+// import React from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaSignOutAlt } from "react-icons/fa";
 import "../css/component/navbar.css";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const NavbarComponent = () => {
+  const [user, setUser] = useState(null);
+  // const [userVerified, setUserVerified] = useState(false);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_BASE_URL}/api/auth/me`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+
+        if (response.status === 200) {
+          const data = await response.json();
+          setUser(data.user);
+        }
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
+
   const logoutHandler = async () => {
     window.location.reload();
+    Cookies.remove("token");
   };
 
   return (
@@ -29,15 +61,19 @@ const NavbarComponent = () => {
           <LinkContainer to="/myProducts">
             <Nav.Link>MY PRODUCT</Nav.Link>
           </LinkContainer>
+          {/* <LinkContainer to={userVerified ? "/myProducts" : "/userVerify"}>
+            <Nav.Link>MY PRODUCT</Nav.Link>
+          </LinkContainer> */}
           <LinkContainer to="/about">
             <Nav.Link>ABOUT</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/faqs">
             <Nav.Link>FAQs</Nav.Link>
           </LinkContainer>
+          <span className="text-dot-200">{user ? user.f_name : "Guest"}</span>
           <div className="logout" onClick={logoutHandler}>
-            <span className="text-dot-200"> {"SuperUser"} </span>
-            <FaSignOutAlt style={{ color: "#F7951F", cursor: "pointer" }} />
+            {/* {user ? user.f_name : "Guest"} */}
+            <FaSignOutAlt />
           </div>
         </Navbar.Collapse>
       </Container>

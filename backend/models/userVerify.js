@@ -1,7 +1,19 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/db");
 
-const Reviews = db.define("t_reviews", {
+const UserVerify = db.define("t_userVerify", {
+  verify_status: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  idCard_img: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  bank_img: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -9,10 +21,6 @@ const Reviews = db.define("t_reviews", {
       model: "t_users",
       key: "id",
     },
-  },
-  review_img: {
-    type: DataTypes.TEXT,
-    allowNull: false,
   },
   create_date: {
     type: DataTypes.DATE,
@@ -24,6 +32,8 @@ const Reviews = db.define("t_reviews", {
     allowNull: true,
     field: "updatedAt",
   },
+}, {
+  tableName: "t_userVerify",
 });
 
-module.exports = Reviews;
+module.exports = UserVerify;

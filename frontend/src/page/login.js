@@ -36,20 +36,14 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       }
     );
-    console.log("Response status:", response.status);
+    // 
     if (response.ok) {
       const data = await response.json();
-      console.log("Response data:", data.user.status);
 
       if (data.success) {
-        try {
-          Cookies.set("token", data.token, { expires: 7 });
-        } catch (err) {
-          console.error("Error setting localStorage:", err);
-        } finally {
-          console.log("Navigating to /products or /admin");
-          navigate(data.user.status === 0 ? "/admin" : "/products");
-        }
+        // Store token in cookies
+        Cookies.set("token", data.token, { expires: 7 });
+        navigate(data.user.status === 0 ? "/adminVerify" : "/products");
       } else {
         console.error("Login failed:", data.message);
       }
@@ -57,6 +51,7 @@ const LoginPage = () => {
       console.error("Authentication failed");
     }
   };
+
   return (
     <div>
       <h1>Login</h1>
