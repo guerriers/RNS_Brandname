@@ -65,13 +65,14 @@ const ProductDetail = () => {
           </div>
           <hr />
           <h3>Description</h3>
-          <p>
+          {/* <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum is simply dummy text of the printing and
             typesetting industry.Lorem Ipsum is simply dummy text of the
             printing and typesetting industry.{" "}
-          </p>
-          {/* <p>{product.p_description}</p> */}
+          </p> */}
+                  
+          <p>Conditions{product.p_conditions}% / {product.p_description}</p>
           <Button className="contact-button" onClick={handleContactClick}>
             <FaPhone className="phone-icon" />
             Contact
