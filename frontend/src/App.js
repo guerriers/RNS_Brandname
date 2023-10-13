@@ -13,7 +13,10 @@ import AddProduct from "./page/addProduct";
 import EditProduct from "./page/editProduct";
 import ProductDetail from "./page/productDetail";
 import NotFound from "./component/notFound";
-//import VerifyUser from "./page/verifyUser";
+import UserVerify from "./page/userVerify";
+import About from "./page/about";
+import FAQs from "./page/faqs";
+import AdminVerify from "./page/adminVerify";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,13 +49,12 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faqs" element={<FAQs />} />
         <Route path="/login" element={<Login />} />
         {/* UserPage */}
-        <Route path="/myProducts" element={<MyProducts />} />
-        <Route path="/addProduct" element={<AddProduct />} />
-        <Route path="/productDetail/:id" element={<ProductDetail />} />
-        {/* <Route path="/verifyUser" element={<VerifyUser />} /> */}
-        <Route path="/editProduct/:id" element={<EditProduct />} />
         <Route
           path="/products"
           element={
@@ -61,8 +63,55 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/productDetail/:id"
+          element={
+            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
+              <ProductDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/userVerify"
+          element={
+            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
+              <UserVerify />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/myProducts"
+          element={
+            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
+              <MyProducts />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/addProduct"
+          element={
+            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
+              <AddProduct />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/editProduct/:id"
+          element={
+            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
+              <EditProduct />
+            </ProtectedRoute>
+          }
+        />
         {/* AdminPage */}
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/adminVerify"
+          element={
+            <ProtectedRoute isAdmin={true} isAuthenticated={isAuthenticated}>
+              <AdminVerify />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Add the NotFound route */}
         <Route path="*" element={<NotFound />} />

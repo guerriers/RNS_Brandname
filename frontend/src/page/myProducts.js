@@ -1,28 +1,48 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import { Container, Button, Modal, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import "../css/myProducts.css";
+import { useNavigate } from "react-router-dom";
 
 const MyProducts = () => {
   const [userProducts, setUserProducts] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // const userEmail = localStorage.getItem("email");
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/products`)
-      .then((response) => {
-        setUserProducts(response.data);
-        console.log("Received user products data:", response.data);
+    // Fetch the user's verify_status
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/userVerify`)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("Received user verify data:", data);
+        // Check the verify_status
+        if (data.length > 0 && data[0].verify_status === "1") {
+          fetchProducts();
+        } else {
+          console.log("Please Verify Your Account");
+          navigate("/userVerify");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user verify data:", error);
+      });
+  }, [navigate]);
+
+  const fetchProducts = () => {
+    // Fetch the user's products
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/products`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUserProducts(data);
+        // console.log("Received user products data:", data);
       })
       .catch((error) => {
         console.error("Error fetching user products data:", error);
       });
-  }, []);
+  };
 
   const handleEditProduct = (productId) => {
     window.location.href = `/editProduct/${productId}`;

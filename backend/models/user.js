@@ -64,7 +64,7 @@ User.prototype.comparePassword = async function (enteredPassword) {
 // Return JWT token
 User.prototype.getJwtToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_TIME || '7d',
+    expiresIn: process.env.JWT_EXPIRES_TIME || '1h',
   });
 };
 

@@ -32,10 +32,12 @@
     color: #be9f4e !important; 
   }
 
+
   .text-dot-200{
     display: inline-block;
     width: 150px;
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
+    color:#be9f4e;
   }
