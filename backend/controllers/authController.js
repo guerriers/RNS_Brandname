@@ -41,6 +41,20 @@ exports.login = catchAsyncErrors(async (req, res) => {
   }
 });
 
+// Logout user
+exports.logout = catchAsyncErrors(async (req, res) => {
+  try {
+    res.cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    });
+    res.status(200).json({ success: true, message: "Logged out successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 // user profile
 exports.me = catchAsyncErrors(async (req, res) => {
   try {
