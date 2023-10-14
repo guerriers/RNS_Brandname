@@ -10,6 +10,11 @@
   color: #fff !important;
   padding: 0.5rem 1rem !important;
   font-weight: 500 !important;
+  transition: color 0.7s;
+}
+
+.nav-link:hover {
+  color: #be9f4e !important; 
 }
 
 .active {
@@ -23,21 +28,20 @@
   height: 60px;
 }
 
-  .logout {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    color: #be9f4e !important; 
-  }
+.logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #be9f4e !important;
+}
 
-
-  .text-dot-200{
-    display: inline-block;
-    width: 150px;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-    color:#be9f4e;
-  }
+.text-dot-200 {
+  display: inline-block;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  color: #be9f4e;
+}
