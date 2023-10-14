@@ -1,4 +1,3 @@
-// import React from "react";
 import React, { useState, useEffect } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
@@ -9,7 +8,6 @@ import Cookies from "js-cookie";
 
 const NavbarComponent = () => {
   const [user, setUser] = useState(null);
-  // const [userVerified, setUserVerified] = useState(false);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -56,23 +54,19 @@ const NavbarComponent = () => {
             navbarScroll
           ></Nav>
           <LinkContainer to="/products">
-            <Nav.Link class="products">PRODUCT</Nav.Link>
+            <Nav.Link className="products">PRODUCT</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/myProducts">
-            <Nav.Link>MY PRODUCT</Nav.Link>
+            <Nav.Link className="my-product">MY PRODUCT</Nav.Link>
           </LinkContainer>
-          {/* <LinkContainer to={userVerified ? "/myProducts" : "/userVerify"}>
-            <Nav.Link>MY PRODUCT</Nav.Link>
-          </LinkContainer> */}
           <LinkContainer to="/about">
-            <Nav.Link>ABOUT</Nav.Link>
+            <Nav.Link className="about">ABOUT</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/faqs">
-            <Nav.Link>FAQs</Nav.Link>
+            <Nav.Link className="faqs">FAQs</Nav.Link>
           </LinkContainer>
           <span className="text-dot-200">{user ? user.f_name : "Guest"}</span>
           <div className="logout" onClick={logoutHandler}>
-            {/* {user ? user.f_name : "Guest"} */}
             <FaSignOutAlt />
           </div>
         </Navbar.Collapse>
