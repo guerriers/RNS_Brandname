@@ -1,3 +1,8 @@
+h1 {
+  text-align: center;
+  margin-top: 40px;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
