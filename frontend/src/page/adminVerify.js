@@ -4,6 +4,8 @@ import { Container, Button, Modal, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import "../css/adminVerify.css";
+import { getUserVerify } from "../actions/userActions";
+import {useNavigate} from "react-router-dom"
 
 const AdminVerify = () => {
   const [user, setUser] = useState(null);
@@ -11,10 +13,18 @@ const AdminVerify = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [verifyIdToDelete, setVerifyIdToDelete] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
-    // const userEmail = localStorage.getItem("email");
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/userVerify`)
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    };
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/userVerify`,config)
     .then((response) => response.json())
     .then((data) => {
       setUserVerify(data);
@@ -26,7 +36,7 @@ const AdminVerify = () => {
 }, []);
 
   const handleViewRequest = (VerifyId) => {
-    window.location.href = `/viewRequest/${VerifyId}`;
+    navigate(`/viewRequest/${VerifyId}`);
   };
 
   const handleConfirmation = (VerifyId) => {
@@ -38,9 +48,15 @@ const AdminVerify = () => {
     setShowConfirmation(false);
 
     if (verifyIdToDelete) {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      };
       axios
         .delete(
-          `${process.env.REACT_APP_BASE_URL}/api/userVerify/${verifyIdToDelete}`
+          `${process.env.REACT_APP_BASE_URL}/api/userVerify/${verifyIdToDelete}`,config
         )
         .then(() => {
           setUserVerify((prevVerify) =>
@@ -79,21 +95,21 @@ const AdminVerify = () => {
               {/* <img src={user.profile_img} alt={user.f_name} /> */}
               <div
                 className={`verify-status ${
-                  request.verify_status === "0" ? "pending" : "verified"
+                  request.verify_status
                 }`}
               >
-                {request.verify_status === "0" ? "pending" : "verified"}
+                {request.verify_status}
               </div>
               <div className="verify-actions">
                 <Button
                   variant="gray"
-                  onClick={() => handleViewRequest(request.id)}
+                  onClick={() => handleViewRequest(request.user_id)}
                 >
                   ✎ View
                 </Button>
                 <Button
                   variant="gray"
-                  onClick={() => handleConfirmation(request.id)}
+                  onClick={() => handleConfirmation(request.user_id)}
                 >
                   🗑 Reject
                 </Button>

@@ -1,8 +1,22 @@
 const UserVerify = require("../models/userVerify");
+const User = require("../models/user");
+const { ErrorHandler } = require("../middlewares/errorHandlers");
+const { uploadImagesToAzure,deleteImagesFromAzure } = require('../utils/azureUpload');
 
 // Add a new user verification entry
 const createUserVerify = async (req, res) => {
+  // console.log("Request Body:", req.body.idCard_img);
   try {
+    let result = Array.isArray(req.files.idCard_img) ? req.files.idCard_img : [req.files.idCard_img].filter(Boolean);
+    let result2 = Array.isArray(req.files.bank_img) ? req.files.bank_img : [req.files.bank_img].filter(Boolean);
+    const idCard = await uploadImagesToAzure(result, 'idCard_img');
+    const bankImg = await uploadImagesToAzure(result2, 'bank_img');
+
+    req.body.idCard_img = idCard;
+    req.body.bank_img = bankImg;
+    req.body.user_id = req.user.id;
+    req.body.verify_status = "submitted";
+
     const newUserVerify = await UserVerify.create(req.body);
     return res.status(201).json(newUserVerify);
   } catch (error) {
@@ -16,25 +30,26 @@ const createUserVerify = async (req, res) => {
   }
 };
 
+
 // Get all user verification entries
 const getAllUserVerify = async (req, res) => {
+  // console.log(req)
   try {
     const userVerifications = await UserVerify.findAll();
     return res.status(200).json(userVerifications);
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Could not retrieve user verifications" });
+    return next(new ErrorHandler("Could not retrieve user verifications", 500));
   }
 };
 
-// Get a user verification entry by ID
-const getUserVerifyById = async (req, res) => {
-  const userVerificationId = req.params.id;
+// Get a user verification entry by Token
+const getUserVerifyByToken = async (req, res) => {
 
   try {
-    const userVerification = await UserVerify.findByPk(userVerificationId);
+    const userVerification = await UserVerify.findOne(
+      { where: { user_id: req.user.id } },
+    );
 
     if (!userVerification) {
       return res.status(404).json({ error: "User verification not found" });
@@ -42,7 +57,7 @@ const getUserVerifyById = async (req, res) => {
 
     return res.status(200).json(userVerification);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return res
       .status(500)
       .json({ error: "Could not retrieve the user verification" });
@@ -61,7 +76,6 @@ const updateUserVerify = async (req, res) => {
     }
 
     // Update user verification fields here
-    userVerification.verify_status = req.body.verify_status;
     userVerification.idCard_img = req.body.idCard_img;
     userVerification.bank_img = req.body.bank_img;
     userVerification.user_id = req.body.user_id;
@@ -85,7 +99,9 @@ const deleteUserVerify = async (req, res) => {
 
   try {
     const deletedRowCount = await UserVerify.destroy({
-      where: { id: userVerificationId },
+      where: {
+        user_id: userVerificationId
+      }
     });
 
     if (deletedRowCount === 0) {
@@ -104,10 +120,72 @@ const deleteUserVerify = async (req, res) => {
   }
 };
 
+//Admin
+// Admin Update a user verification entry by ID
+const adminUpdateUserVerify = async (req, res) => {
+  const userVerificationId = parseInt(req.params.id);
+  console.log("Admin Update User Verification", userVerificationId);
+
+  try {
+    const userVerification = await UserVerify.findOne({
+      where: {
+        user_id: userVerificationId
+      }
+    });
+
+    if (!userVerification) {
+      return res.status(404).json({ error: "User verification not found" });
+    }
+
+    // Update only the verify_status field
+    userVerification.verify_status = await req.body.verify_status;
+
+    // Save the updated record
+     userVerification.save();
+
+    return res.status(201).json({ message: "User verification updated successfully" });
+  } catch (error) {
+    console.error(error);
+
+    // Handle Sequelize validation errors
+    if (error.name === 'SequelizeValidationError') {
+      return res.status(400).json({ error: error.message });
+    }
+
+    return res.status(500).json({ error: "Could not update the user verification" });
+  }
+};
+
+
+// Get a user verification entry by Id
+const getUserVerifyById = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const userVerification = await UserVerify.findOne({
+      where: { user_id: userId },
+      include: [User],
+    });
+
+    if (!userVerification) {
+      return res.status(404).json({ error: "User verification not found" });
+    }
+
+    return res.status(200).json(userVerification);
+  } catch (error) {
+    // console.error(error);
+    return res
+      .status(500)
+      .json({ error: "Could not retrieve the user verification" });
+  }
+};
+
+
 module.exports = {
   createUserVerify,
   getAllUserVerify,
-  getUserVerifyById,
+  getUserVerifyByToken,
   updateUserVerify,
   deleteUserVerify,
+  adminUpdateUserVerify,
+  getUserVerifyById,
 };

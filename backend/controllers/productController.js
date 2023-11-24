@@ -1,15 +1,25 @@
 const Product = require("../models/products");
+const { ErrorHandler } = require("../middlewares/errorHandlers");
+// const cloudinary = require("cloudinary");
+const { uploadImagesToAzure,deleteImagesFromAzure } = require('../utils/azureUpload');
 
-// Add a new product
-const createProduct = async (req, res) => {
+const createProduct = async (req, res, next) => {
+  console.log("Creating product")
   try {
+    let images = Array.isArray(req.files.p_img) ? req.files.p_img : [req.files.p_img].filter(Boolean);
+    let receipts = Array.isArray(req.files.p_receipt) ? req.files.p_receipt : [req.files.p_receipt].filter(Boolean);
+    const imagesLinks = await uploadImagesToAzure(images, 'products');
+    const receiptLinks = await uploadImagesToAzure(receipts, 'receipts');
+
+    req.body.p_img = imagesLinks;
+    req.body.p_receipt = receiptLinks;
+    req.body.user_id = req.user.id;
+
     const newProduct = await Product.create(req.body);
     return res.status(201).json(newProduct);
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Could not add the product", details: error.message });
+    return next(error);
   }
 };
 
@@ -17,6 +27,21 @@ const createProduct = async (req, res) => {
 const getAllProduct = async (req, res) => {
   try {
     const product = await Product.findAll();
+    return res.status(200).json(product);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Could not retrieve products" });
+  }
+};
+
+// Get my product
+const getMyProducts = async (req, res) => {
+  try {
+    const product = await Product.findAll({
+      where: {
+        user_id: req.user.id
+      }
+    });
     return res.status(200).json(product);
   } catch (error) {
     console.error(error);
@@ -42,39 +67,86 @@ const getProductById = async (req, res) => {
   }
 };
 
+
+
 // Update a product by ID
-const updateProduct = async (req, res) => {
+const updateProduct = async (req, res, next) => {
   const productId = req.params.id;
   try {
     const product = await Product.findByPk(productId);
 
     if (!product) {
-      return res.status(404).json({ error: "Product not found" });
+      return next(new ErrorHandler('Product not found', 404));
     }
 
-    product.p_name = req.body.p_name;
-    product.p_category = req.body.p_category;
-    product.p_price = req.body.p_price;
-    product.p_conditions = req.body.p_conditions;
-    product.p_brand = req.body.p_brand;
-    product.p_description = req.body.p_description;
-    product.p_receipt = req.body.p_receipt;
-    product.p_status = req.body.p_status;
-    product.user_id = req.body.user_id;
+    if (req.files && req.files.p_img) {
+      let images = Array.isArray(req.files.p_img) ? req.files.p_img : [req.files.p_img].filter(Boolean);
 
-    await product.save();
+      if (product.p_img && product.p_img.length > 0) {
+        await Promise.all(product.p_img.map(async (image) => {
+          try {
+            await deleteImagesFromAzure(image.public_id);
+          } catch (error) {
+            console.error(`Error deleting image ${image.public_id}: ${error.message}`);
+          }
+        }));
+      }
 
-    return res.status(200).json({ message: "Product updated successfully" });
+      const imagesLinks = await uploadImagesToAzure(images, 'products');
+      req.body.p_img = imagesLinks;
+    }
+
+    if (req.files && req.files.p_receipt) {
+      let receipts = Array.isArray(req.files.p_receipt) ? req.files.p_receipt : [req.files.p_receipt].filter(Boolean);
+      if (product.p_receipt && product.p_receipt.length > 0) {
+        await Promise.all(product.p_receipt.map(async (receipt) => {
+          try {
+            await deleteImagesFromAzure(receipt.public_id);
+          } catch (error) {
+            console.error(`Error deleting receipt ${receipt.public_id}: ${error.message}`);
+          }
+        }));
+      }
+
+
+      const receiptLinks = await uploadImagesToAzure(receipts, 'receipts');
+      req.body.p_receipt = receiptLinks;
+    }
+
+    req.body.user_id = req.user.id;
+
+    product.set(req.body);
+    const productSave = await product.save();
+
+    return res.status(200).json({ message: 'Product updated successfully' });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Could not update the product" });
+    return next(error);
   }
 };
 
+
+
 // Delete a product by ID
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res, next) => {
   const productId = req.params.id;
   try {
+    const product = await Product.findByPk(productId);
+    console.log(product.p_img.length)
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    for (let i = 0; i < product.p_img.length; i++) {
+      console.log(product.p_img[i])
+      await deleteImagesFromAzure(product.p_img[i].public_id);
+    }
+
+    if (product.p_receipt) {
+      for (let i = 0; i < product.p_receipt.length; i++) {
+        await deleteImagesFromAzure(product.p_receipt[i].public_id);
+      }
+    }
     const deletedRowCount = await Product.destroy({ where: { id: productId } });
     if (deletedRowCount === 0) {
       return res.status(404).json({ error: "Product not found" });
@@ -83,13 +155,14 @@ const deleteProduct = async (req, res) => {
     return res.status(204).send();
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Could not delete the product" });
+    return next(error);
   }
 };
 
 module.exports = {
   createProduct,
   getAllProduct,
+  getMyProducts,
   getProductById,
   updateProduct,
   deleteProduct,

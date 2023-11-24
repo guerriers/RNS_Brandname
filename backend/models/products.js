@@ -1,7 +1,9 @@
-const { DataTypes } = require("sequelize");
-const db = require("../config/db");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-const Product = db.define("t_products", {
+class Product extends Model {};
+
+Product.init({
   p_name: {
     type: DataTypes.TEXT,
     allowNull: false,
@@ -22,11 +24,14 @@ const Product = db.define("t_products", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  p_receipt: DataTypes.TEXT,
+  p_receipt:{
+    type: DataTypes.ARRAY(DataTypes.JSON),
+    allowNull: true,
+    },
   p_img: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
+    type: DataTypes.ARRAY(DataTypes.JSON),
+    allowNull: true,
+    },
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -43,16 +48,11 @@ const Product = db.define("t_products", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  create_date: {
-    type: DataTypes.DATE,
-    allowNull: true,
-    field: "createdAt",
-  },
-  update_date: {
-    type: DataTypes.DATE,
-    allowNull: true,
-    field: "updatedAt",
-  },
-});
+}, {
+  sequelize,
+  modelName: 't_products',
+  timestamps: true,
+  paranoid: true,
+})
 
 module.exports = Product;

@@ -1,12 +1,4 @@
 const { Sequelize } = require('sequelize');
-
-const sequelize = new Sequelize({
-  dialect: 'postgres',
-  username: 'postgres',
-  password: '1234',
-  database: 'rns_brandname',
-  host: 'localhost',
-  port: 5432, 
-});
-
+const URI = `postgres://default:JXxWQpu6FMa0@ep-summer-shape-75925252.ap-southeast-1.postgres.vercel-storage.com:5432/verceldb?sslmode=require`;
+const sequelize = new Sequelize(URI);
 module.exports = sequelize;

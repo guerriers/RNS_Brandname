@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../src/css/index.css";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Cookies from "js-cookie";
 import ProtectedRoute from "./component/route/ProtectedRoute";
 import Navbar from "./component/navbar";
 import Home from "./page/home";
@@ -17,106 +16,70 @@ import UserVerify from "./page/userVerify";
 import About from "./page/about";
 import FAQs from "./page/faqs";
 import AdminVerify from "./page/adminVerify";
+import AdminViewRequest from "./page/adminViewRequest";
+import RequireAuth from './component/route/RequireAuth';
+import Layout from './component/Layout';
+import NewPassword from "./page/NewPassword";
+import ForgotPassword from "./page/ForgotPassword";
+
+// from store
+import store from "./store";
+import { useSelector } from "react-redux";
+import { loadUser } from "./actions/userActions";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(() => {
-    const checkAuthentication = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_BASE_URL}/api/auth/me`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
-        if (response.status === 200) {
-          localStorage.setItem("status", response.data.user.status);
-          setIsAuthenticated(true);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    store.dispatch(loadUser());
+    console.log("User loaded")
+  }, [store]);
 
-    checkAuthentication();
-  }, []);
+  const { user, isAuthenticated, loading } = useSelector((state) => state.auth);
+
+  if (loading) {
+    return null;
+  }
 
   return (
-    <div className="App">
-      <Navbar />
-      <Routes>
+    <Routes>
+      <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/faqs" element={<FAQs />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="login" element={<Login />} />
+        <Route path="/password/forgot" element={<ForgotPassword />} exact />
+        <Route path="/password/reset/:token" element={<NewPassword />} exact />
         {/* UserPage */}
-        <Route
-          path="/products"
-          element={
-            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
-              <Products />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/productDetail/:id"
-          element={
-            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
-              <ProductDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/userVerify"
-          element={
-            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
-              <UserVerify />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/myProducts"
-          element={
-            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
-              <MyProducts />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/addProduct"
-          element={
-            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
-              <AddProduct />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/editProduct/:id"
-          element={
-            <ProtectedRoute isAdmin={false} isAuthenticated={isAuthenticated}>
-              <EditProduct />
-            </ProtectedRoute>
-          }
-        />
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="products" element={<Products />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="productDetail/:id" element={<ProductDetail />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="userVerify" element={<UserVerify />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="myProducts" element={<MyProducts />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="addProduct" element={<AddProduct />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="editProduct/:id" element={<EditProduct />} />
+        </Route>
         {/* AdminPage */}
-        <Route
-          path="/adminVerify"
-          element={
-            <ProtectedRoute isAdmin={true} isAuthenticated={isAuthenticated}>
-              <AdminVerify />
-            </ProtectedRoute>
-          }
-        />
+        <Route element={<RequireAuth allowedRoles={"admin"} isAuthenticated={isAuthenticated} />}>
+          <Route path="adminVerify" element={<AdminVerify />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"admin"} isAuthenticated={isAuthenticated} />}>
+          <Route path="viewRequest/:id" element={<AdminViewRequest />} />
+        </Route>
 
         {/* Add the NotFound route */}
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+      </Route>
+    </Routes>
   );
 }
 

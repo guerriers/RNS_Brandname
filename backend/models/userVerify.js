@@ -1,39 +1,48 @@
-const { DataTypes } = require("sequelize");
-const db = require("../config/db");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require("../config/db");
+const User = require("./user");
 
-const UserVerify = db.define("t_userVerify", {
+class UserVerify extends Model {};
+
+UserVerify.init({
   verify_status: {
     type: DataTypes.TEXT,
     allowNull: false,
+    defaultValue: 'pending',
+    validate: {
+      notNull: {
+        msg: 'Verify Status cannot be null.',
+      },
+      notEmpty: {
+        msg: 'Verify Status cannot be empty.',
+      },
+      isIn: {
+        args: [['pending', 'submitted', 'verified']],
+        msg: 'Must be pending or verified.',
+      },
+    }
   },
   idCard_img: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
+    type: DataTypes.ARRAY(DataTypes.JSON),
+    allowNull: true,
+    },
   bank_img: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: DataTypes.ARRAY(DataTypes.JSON),
+    allowNull: true,
   },
   user_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
     references: {
       model: "t_users",
       key: "id",
     },
   },
-  create_date: {
-    type: DataTypes.DATE,
-    allowNull: true,
-    field: "createdAt",
-  },
-  update_date: {
-    type: DataTypes.DATE,
-    allowNull: true,
-    field: "updatedAt",
-  },
 }, {
-  tableName: "t_userVerify",
-});
+  sequelize,
+  modelName: 't_userVerify',
+  timestamps: true,
+  paranoid: true,
+})
 
 module.exports = UserVerify;

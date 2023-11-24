@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 
 function AboutPage() {
   return (
+    <Fragment>
     <div>
       <header>
         <h1>About</h1>
@@ -11,6 +12,7 @@ function AboutPage() {
         <p>&copy; {new Date().getFullYear()} RNS</p>
       </footer>
     </div>
+    </Fragment>
   );
 }
 
