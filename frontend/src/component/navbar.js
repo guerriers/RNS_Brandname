@@ -1,43 +1,34 @@
+// import React from "react";
 import React, { useState, useEffect } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaSignOutAlt } from "react-icons/fa";
 import "../css/component/navbar.css";
-import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { logout } from "../actions/userActions";
+import { checkVerify } from "../actions/userActions";
 
 const NavbarComponent = () => {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const { user, loading } = useSelector((state) => state.auth);
+  const { isVerified, verify_status } = useSelector(
+    (state) => state.verify_status
+  );
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_BASE_URL}/api/auth/me`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
-
-        if (response.status === 200) {
-          const data = await response.json();
-          setUser(data.user);
-        }
-      } catch (error) {
-        console.error("Error fetching user information:", error);
-      }
+    const fetchData = async () => {
+      dispatch(checkVerify());
     };
 
-    fetchUserInfo();
-  }, []);
+    fetchData();
+  }, [dispatch]);
 
   const logoutHandler = async () => {
-    window.location.reload();
-    Cookies.remove("token");
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -53,22 +44,65 @@ const NavbarComponent = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           ></Nav>
-          <LinkContainer to="/products">
-            <Nav.Link className="products">PRODUCT</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/myProducts">
-            <Nav.Link className="my-product">MY PRODUCT</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/about">
-            <Nav.Link className="about">ABOUT</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/faqs">
-            <Nav.Link className="faqs">FAQs</Nav.Link>
-          </LinkContainer>
-          <span className="text-dot-200">{user ? user.f_name : "Guest"}</span>
-          <div className="logout" onClick={logoutHandler}>
-            <FaSignOutAlt />
-          </div>
+
+          {!user && (
+            <LinkContainer to="/home">
+              <Nav.Link className="products">HOME</Nav.Link>
+            </LinkContainer>
+          )}
+
+          {user ? (
+            <>
+              {user.roles === "admin" && (
+                <>
+                  <LinkContainer to="/adminVerify">
+                    <Nav.Link>Verify Request</Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
+              {user.roles === "user" && (
+                <>
+                  <LinkContainer to="/products">
+                    <Nav.Link>PRODUCT</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/myProducts">
+                    <Nav.Link>MY PRODUCT</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/about">
+                    <Nav.Link>ABOUT</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/faqs">
+                    <Nav.Link>FAQs</Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
+
+              {user.roles === "user" && (
+                <span className="text-dot-200">
+                  {user && user.f_name}
+                  {" : "}
+                  {isVerified ? "Verified" : "Need Verified"}
+                </span>
+              )}
+
+              <div className="logout" onClick={logoutHandler}>
+                <FaSignOutAlt />
+              </div>
+            </>
+          ) : (
+            <>
+              <LinkContainer to="/about">
+                <Nav.Link>ABOUT</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/faqs">
+                <Nav.Link>FAQs</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/login">
+                <Nav.Link>SIGN IN</Nav.Link>
+              </LinkContainer>
+            </>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

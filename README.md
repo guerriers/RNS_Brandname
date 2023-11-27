@@ -1,9 +1,6 @@
-# `RNS_Brandname`
+- https://vercel.com/
+- https://mailtrap.io/home
+- https://console.cloudinary.com/
 
-git clone https://github.com/guerriers/RNS_Brandname.git
-
-cd frontend npm install
-npm run start
-
-cd backend npm install
-npm run dev
+rnsbrandname@gmail.com
+*2 1-5
