@@ -1,0 +1,119 @@
+.register {
+  background-image: url("../images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.register-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 13px;
+  background: #ffffff;
+  box-shadow: 0px 0px 13px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+
+.box-border-register {
+  padding: 10px 40px;
+  background: #333333;
+  border: 3px solid #a78610;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+
+.p {
+  margin: 0px;
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
+}
+
+.fffText-register {
+  margin: 0px;
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.form-wrapper-register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rowInput-register {
+  display: flex;
+  flex-direction: row;
+}
+
+.input2-register{
+  margin: 0 0 25px 5%;
+  height: 40px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: light;
+  padding: 0px 20px;
+  background: rgba(196, 196, 196, 0.1);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
+}
+
+.input-register {
+  height: 40px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: light;
+  margin-bottom: 25px;
+  padding: 0px 20px;
+  background: rgba(196, 196, 196, 0.1);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
+}
+
+.button-submit-register {
+  padding: 5px 0px;
+  border-radius: 50px;
+  border: none;
+  color: #333333;
+  background-color: #ffffff;
+  border: none;
+  width: 50%;
+  font-weight: 700;
+  margin: 25px 0px 50px 0px;
+  cursor: pointer;
+}
+.checkbox-container-register {
+  margin-bottom: 10px;
+  align-items: start;
+}
+.checkbox-container-register label {
+  display: inline-block;
+  margin-left: 5px;
+}
+a {
+  color: #eeba36 !important;
+  text-decoration: none !important;
+}
+
+.EEBA36Text-register {
+  margin-left: 50px !important;
+}
+
+label {
+  display: block;
+  color: #ffffff;
+}
+
+.img-logo-register {
+  width: auto;
+  height: 100px;
+  margin: 1% 0px 5%;
+}

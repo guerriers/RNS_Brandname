@@ -68,21 +68,17 @@ export const login = (email, password) => async (dispatch) => {
       payload: data.user,
     });
 
-
     dispatch({
       type: SAVE_TOKEN,
       payload: data.token,
     });
-    
-
 
     localStorage.setItem("token", data.token);
-    alert('Login successful');
-    
+    alert("Login successful");
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
-      payload: error.response ? error.response.data.error : "An error occurred"
+      payload: error.response ? error.response.data.error : "An error occurred",
     });
     alert(error.response.data.error);
     window.location.reload();
@@ -113,27 +109,30 @@ export const register = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
 
 //check verify
 export const checkVerify = () => async (dispatch, getState) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   console.log("TOKEN >?>>>>>>>>>>", token);
   try {
     const config = {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      };
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
     await dispatch({ type: CHECK_VERIFY_REQUEST });
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/api/userVerify/check`,config
+      `${process.env.REACT_APP_BASE_URL}/api/userVerify/check`,
+      config
     );
 
     dispatch({
@@ -144,26 +143,29 @@ export const checkVerify = () => async (dispatch, getState) => {
     console.error("CHECK VERIFY ERROR:", error);
     dispatch({
       type: CHECK_VERIFY_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
 //ADMIN route=> get verification submit data
 export const getUserVerify = () => async (dispatch, getState) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   console.log("TOKEN >?>>>>>>>>>>", token);
   try {
     const config = {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      };
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
     await dispatch({ type: ADMIN_VERIFY_REQUEST });
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/api/userVerify`,config
+      `${process.env.REACT_APP_BASE_URL}/api/userVerify`,
+      config
     );
 
     dispatch({
@@ -174,26 +176,29 @@ export const getUserVerify = () => async (dispatch, getState) => {
     console.error("CHECK VERIFY ERROR:", error);
     dispatch({
       type: ADMIN_VERIFY_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
 
 // Load user
 export const loadUser = () => async (dispatch, getState) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   console.log("TOKEN >?>>>>>>>>>>", token);
   try {
     const config = {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      };
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
     await dispatch({ type: LOAD_USER_REQUEST });
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/api/auth/me`,config
+      `${process.env.REACT_APP_BASE_URL}/api/auth/me`,
+      config
     );
 
     dispatch({
@@ -207,7 +212,9 @@ export const loadUser = () => async (dispatch, getState) => {
     }
     dispatch({
       type: LOAD_USER_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -236,7 +243,9 @@ export const updateProfile = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_PROFILE_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -265,7 +274,9 @@ export const updatePassword = (passwords) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_PASSWORD_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -294,7 +305,9 @@ export const forgotPassword = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FORGOT_PASSWORD_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -323,7 +336,9 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: NEW_PASSWORD_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -331,20 +346,21 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 // Logout user
 export const logout = () => async (dispatch) => {
   try {
-    
     await axios.get(`${process.env.REACT_APP_BASE_URL}/api/auth/logout`);
 
     await dispatch({
       type: LOGOUT_SUCCESS,
     });
-   await dispatch({
+    await dispatch({
       type: CLEAR_TOKEN,
     });
-     localStorage.removeItem('token');
+    localStorage.removeItem("token");
   } catch (error) {
     dispatch({
       type: LOGOUT_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -363,7 +379,9 @@ export const allUsers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALL_USERS_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -392,7 +410,9 @@ export const updateUser = (id, userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_USER_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -411,7 +431,9 @@ export const getUserDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };
@@ -430,7 +452,9 @@ export const deleteUser = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_USER_FAIL,
-      payload: error.response ? error.response.data.message : "An error occurred"
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
     });
   }
 };

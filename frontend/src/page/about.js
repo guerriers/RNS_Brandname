@@ -1,17 +1,17 @@
-import React,{Fragment} from 'react';
+import React, { Fragment } from "react";
 
 function AboutPage() {
   return (
     <Fragment>
-    <div>
-      <header>
-        <h1>About</h1>
-      </header>
+      <div>
+        <header>
+          <h1>About</h1>
+        </header>
 
-      <footer>
-        <p>&copy; {new Date().getFullYear()} RNS</p>
-      </footer>
-    </div>
+        <footer>
+          <p>&copy; {new Date().getFullYear()} RNS</p>
+        </footer>
+      </div>
     </Fragment>
   );
 }

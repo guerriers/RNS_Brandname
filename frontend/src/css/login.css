@@ -1,0 +1,113 @@
+.login {
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;  
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 13px;
+  background: #ffffff;
+  box-shadow: 0px 0px 13px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+
+.box-border {
+  padding: 10px 40px;
+  background: #333333;
+  border: 3px solid #a78610;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+
+.p {
+  margin: 0px;
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
+}
+
+.fffText {
+  margin: 0px;
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  height: 40px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: light;
+  margin-bottom: 25px;
+  padding: 0px 20px;
+  background: rgba(196, 196, 196, 0.1);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
+}
+.input2 {
+  height: 40px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: light;
+  margin-bottom: 5px;
+  padding: 0px 20px;
+  background: rgba(196, 196, 196, 0.1);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
+}
+
+.button-submit {
+  padding: 5px 0px;
+  border-radius: 50px;
+  border: none;
+  color: #333333;
+  background-color: #ffffff;
+  border: none;
+  width: 50%;
+  font-weight: 700;
+  margin: 25px 0px 50px 0px;
+  cursor: pointer;
+}
+a{
+  color: #eeba36 !important;
+  text-decoration: none !important;
+}
+
+.EEBA36Text {
+  margin-left: 50px !important;
+}
+
+label {
+  display: block;
+  color: #ffffff;
+}
+
+.checkbox-container {
+  margin-bottom: 10px;
+}
+.checkbox-container label {
+  display: inline-block;
+  margin-left: 5px;
+}
+.img-logo {
+  width: auto;
+  height: 100px;
+  margin: 20% 0px;
+}

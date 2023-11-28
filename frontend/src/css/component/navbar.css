@@ -1,7 +1,7 @@
 .navbar {
   height: auto;
-  font-family: Poppins, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   align-items: flex-end;
 }
 
@@ -11,10 +11,16 @@
   padding: 0.5rem 1rem !important;
   font-weight: 500 !important;
   border-radius: 100px;
+  transition: color 0.7s;
 }
-
+.nav-link:hover {
+  color: #be9f4e !important;
+}
 .active {
   background: #be9f4e !important;
+  color: #000000 !important;
+}
+.active:hover {
   color: #000000 !important;
 }
 
@@ -23,21 +29,20 @@
   height: 60px;
 }
 
-  .logout {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    color: #be9f4e !important; 
-  }
+.logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #be9f4e !important;
+}
 
-
-  .text-dot-200{
-    display: inline-block;
-    width: 150px;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-    color:#be9f4e;
-  }
+.text-dot-200 {
+  display: inline-block;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  color: #be9f4e;
+}

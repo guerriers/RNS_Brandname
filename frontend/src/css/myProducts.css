@@ -1,3 +1,8 @@
+h1 {
+  text-align: center;
+  margin-top: 40px;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -13,7 +18,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   cursor: pointer;
-  
 }
 
 .product-box:hover {
@@ -36,12 +40,12 @@
   font-weight: bold;
 }
 .for-rent {
-  background-color: #E7C264;
+  background-color: #e7c264;
   color: #000000;
 }
 
 .for-sell {
-  background-color: #87B1F9;
+  background-color: #87b1f9;
   color: #ffffff;
 }
 
@@ -58,7 +62,7 @@
 }
 
 .add-product-button {
-  background-color: #333333; 
+  background-color: #333333;
   color: #fff;
   padding: 10px 20px;
   border-radius: 20px;
