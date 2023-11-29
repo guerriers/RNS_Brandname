@@ -76,7 +76,7 @@ exports.forgotPassword = async (req, res, next) => {
   try {
     await sendEmail({
       email: user.email,
-      subject: "RNS Brandname Password Recovery",
+      subject: "RNS BrandName Password Recovery",
       message,
     });
     res.status(200).json({

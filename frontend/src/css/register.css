@@ -50,7 +50,7 @@
   flex-direction: row;
 }
 
-.input2-register{
+.input2-register {
   margin: 0 0 25px 5%;
   height: 40px;
   width: 100%;
@@ -103,10 +103,6 @@ a {
   text-decoration: none !important;
 }
 
-.EEBA36Text-register {
-  margin-left: 50px !important;
-}
-
 label {
   display: block;
   color: #ffffff;
@@ -116,4 +112,26 @@ label {
   width: auto;
   height: 100px;
   margin: 1% 0px 5%;
+}
+
+.popup-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: none;
+}
+
+.popup-box-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  padding: 20px;
 }
