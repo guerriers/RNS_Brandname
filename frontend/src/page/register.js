@@ -13,6 +13,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [termsOfService, setTermsOfService] = useState(false);
+  //   const [isPopupBoxVisible, setIsPopupBoxVisible] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -65,6 +66,9 @@ const RegisterPage = () => {
   const handleTermsOfServiceChange = (e) => {
     setTermsOfService(e.target.checked);
   };
+  //   const handleTermsOfServiceClick = () => {
+  //     setIsPopupBoxVisible(!isPopupBoxVisible);
+  //   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,15 +98,14 @@ const RegisterPage = () => {
       setRePassword("");
       setTermsOfService(false);
     } catch (err) {
-        setIsSubmit(false);
-        if (err.response) {
-      
-          const { message } = err.response.data;
-          alert(message);
-          dispatch(clearErrors()); 
-        } else {
-          console.error("Error:", err);
-        }
+      setIsSubmit(false);
+      if (err.response) {
+        const { message } = err.response.data;
+        alert(message);
+        dispatch(clearErrors());
+      } else {
+        console.error("Error:", err);
+      }
     }
   };
   return (
@@ -114,7 +117,11 @@ const RegisterPage = () => {
           <div className="register-box">
             <div className="box-border-register">
               <div>
-                <img src="../rns_logo.png" alt="Logo" className="img-logo-register" />
+                <img
+                  src="../rns_logo.png"
+                  alt="Logo"
+                  className="img-logo-register"
+                />
               </div>
               <form className="form-wrapper-register" onSubmit={handleSubmit}>
                 <div className="rowInput-register">
