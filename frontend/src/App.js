@@ -6,6 +6,7 @@ import ProtectedRoute from "./component/route/ProtectedRoute";
 import Navbar from "./component/navbar";
 import Home from "./page/home";
 import Login from "./page/login";
+import Register from "./page/register";
 import Products from "./page/products";
 import MyProducts from "./page/myProducts";
 import AddProduct from "./page/addProduct";
@@ -47,6 +48,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/faqs" element={<FAQs />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="/password/forgot" element={<ForgotPassword />} exact />
         <Route path="/password/reset/:token" element={<NewPassword />} exact />
         {/* UserPage */}

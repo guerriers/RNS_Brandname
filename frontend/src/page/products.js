@@ -68,7 +68,7 @@ const Product = () => {
         >
           <Col>
             <Input
-              placeholder="Search"
+              placeholder="Search products"
               suffix={<SearchOutlined style={{ color: "#E7C264" }} />}
               onChange={onChangeText}
               onPressEnter={onChangeText}
@@ -178,21 +178,23 @@ const Product = () => {
             </Checkbox.Group>
           </Col>
         </Col>
+
         <Col md={8} lg={9} xl={9} style={{ padding: "30px" }}>
           <h1>Products</h1>
           <Row>
-            {/* <div className="product-grid"> */}
             {products.map((product) => (
               <Col md={6} lg={4} xl={4} className="mt-4">
                 <Link to={`/productDetail/${product.id}`} key={product.id}>
                   <div className="product-box">
                     {product.p_img && product.p_img.length > 0 ? (
                       <img src={product.p_img[0].url} alt={product.p_name} />
-                    ) : (<p>No image available</p>)
-                    }
+                    ) : (
+                      <p>No image available</p>
+                    )}
                     <div
-                      className={`product-status ${product.p_status === "0" ? "for-rent" : "for-sell"
-                        }`}
+                      className={`product-status ${
+                        product.p_status === "0" ? "for-rent" : "for-sell"
+                      }`}
                     >
                       {product.p_status === "0" ? "For Rent" : "For Sell"}
                     </div>

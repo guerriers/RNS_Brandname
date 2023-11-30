@@ -90,7 +90,7 @@ const AdminVerify = () => {
         <div className="verify-grid">
           {userVerify.map((request) => (
             <div className="verify-box" key={request.id}>
-              <img src="../../public/assets/p1.jpeg" />
+              <img src="../images/p1.jpeg" />
               <br></br> watchara last
               {/* <img src={user.profile_img} alt={user.f_name} /> */}
               <div

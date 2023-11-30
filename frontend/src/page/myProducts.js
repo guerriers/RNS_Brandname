@@ -93,7 +93,7 @@ const MyProducts = () => {
       ) : (
         <Container>
           <div>
-            <h1>My Products</h1>
+            <h1 className="myProduct-h1">My Products</h1>
             {successMessage && (
               <Alert variant="success">{successMessage}</Alert>
             )}{" "}
@@ -107,9 +107,9 @@ const MyProducts = () => {
                 <span>+</span> Add Product
               </Button>
             </div>
-            <div className="product-grid">
+            <div className="myProduct-grid">
               {userProducts && userProducts.map((product) => (
-                <div className="product-box" key={product.id}>
+                <div className="myProduct-box" key={product.id}>
                   {product.p_img && product.p_img.length > 0 ? (
                     <img src={product.p_img[0].url} alt={product.p_name} />
                   ) : (
