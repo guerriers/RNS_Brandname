@@ -34,11 +34,11 @@ function AboutPage() {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nulla dui, in dapibus mauris tristique id. Nullam semper lectus sed orci venenatis, ac scelerisque lectus luctus.</p>
       </header>
 
-      <section className="team-section">
+      <section className="crew-section">
         <h2>Our Team</h2>
-        <div className="team-members">
+        <div className="crew-members">
           {team.map((member) => (
-            <div key={member.name} className="team-member">
+            <div key={member.name} className="crew-member">
               <img src={member.image} alt={member.name} />
               <p>{member.name}</p>
             </div>

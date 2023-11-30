@@ -1,0 +1,50 @@
+.faq-page {
+    padding: 0px;
+}
+  
+header {
+    text-align: center;
+}
+  
+h1 {
+    margin-bottom: 10px;
+}
+  
+p {
+    margin-bottom: 20px;
+}
+  
+.faq-list {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+  
+.faq-item {
+    position: relative;
+    cursor: pointer;
+}
+  
+.question-text {
+    margin-bottom: 10px;
+}
+  
+.question-text::before {
+    content: '\25B6'; /* Unicode character for a right-pointing triangle */
+    margin-right: 5px;
+}
+  
+.answer {
+    display: none;
+    margin-top: 10px;
+}
+  
+.faq-item.active .answer {
+    display: block;
+}
+  
+.faq-item.active .question-text::before {
+    content: '\25BC'; /* Unicode character for a down-pointing triangle when active */
+}
+  
