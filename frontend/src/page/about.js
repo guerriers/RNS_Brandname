@@ -1,6 +1,31 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import "../css/about.css";
 
 function AboutPage() {
+  const [team, setTeam] = useState([
+    {
+      name: 'Watchara Faichai',
+      image: "../assets/watchara.png"
+    },
+    {
+      name: 'Rachen Chaisri',
+      image: "../assets/rachen.png"
+    },
+    {
+      name: 'Nawasa Jaima',
+      image: "../assets/nawasa.png"
+    },
+  ]);
+
+  useEffect(() => {
+    team.forEach(member => {
+      const img = new Image();
+      img.onload = () => console.log(`${member.name}'s image loaded successfully`);
+      img.onerror = () => console.log(`Failed to load ${member.name}'s image`);
+      img.src = member.image;
+    });
+  }, [team]);
+
   return (
     <Fragment>
     <div>
@@ -9,11 +34,11 @@ function AboutPage() {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nulla dui, in dapibus mauris tristique id. Nullam semper lectus sed orci venenatis, ac scelerisque lectus luctus.</p>
       </header>
 
-      <section className="crew-section">
+      <section className="team-section">
         <h2>Our Team</h2>
-        <div className="crew-members">
+        <div className="team-members">
           {team.map((member) => (
-            <div key={member.name} className="crew-member">
+            <div key={member.name} className="team-member">
               <img src={member.image} alt={member.name} />
               <p>{member.name}</p>
             </div>

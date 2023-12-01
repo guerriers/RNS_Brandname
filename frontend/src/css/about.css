@@ -68,16 +68,16 @@ p {
   margin-right: 10px;
 }
 
-.crew-members {
+.team-members {
   display: flex;
 }
 
-.crew-member {
+.team-member {
   text-align: center;
   margin: 140px;
 }
 
-.crew-member img {
+.team-member img {
   width: 100%;
   height: auto;
   border-radius: 100%;
