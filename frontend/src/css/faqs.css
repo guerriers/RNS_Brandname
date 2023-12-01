@@ -8,6 +8,7 @@ header {
   
 h1 {
     margin-bottom: 10px;
+    font: 4em Popins, sans-serif;
 }
   
 p {
@@ -19,32 +20,44 @@ p {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    list-style-type: none;
 }
   
 .faq-item {
     position: relative;
     cursor: pointer;
-}
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    max-height: 40px; /* Set a default max-height */
+  }
   
 .question-text {
     margin-bottom: 10px;
+    position: relative;
 }
   
-.question-text::before {
-    content: '\25B6'; /* Unicode character for a right-pointing triangle */
-    margin-right: 5px;
-}
+.question-text::after {
+    content: '\25C0'; /* Unicode character for a right-pointing triangle */
+    margin-left: 5px;
+  }
   
 .answer {
-    display: none;
-    margin-top: 10px;
+  margin-top: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.faq-item.active {
+    max-height: 200px; /* Adjust the max-height based on your content */
+    background-color: blue;
 }
   
 .faq-item.active .answer {
-    display: block;
+    max-height: 500px; /* Adjust the max-height based on your content */
 }
   
-.faq-item.active .question-text::before {
-    content: '\25BC'; /* Unicode character for a down-pointing triangle when active */
+.faq-item.active .question-text::after {
+    content: '\25C0'; /* Unicode character for a down-pointing triangle when active */
 }
   

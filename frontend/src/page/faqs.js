@@ -44,8 +44,7 @@ function FAQPage() {
   return (
     <div className="faq-page">
       <header>
-        <h1>Frequently Asked Questions</h1>
-        <p>Find answers to common questions about our Second-Hand Marketplace.</p>
+        <h1>FAQs</h1>
       </header>
 
       <main className="faq-list">
@@ -56,7 +55,9 @@ function FAQPage() {
             onClick={() => handleToggle(index)}
           >
             <div className="question-text">{question.question}</div>
-            <p className="answer">{question.answer}</p>
+            <p className={`answer ${index === activeIndex ? "visible" : ""}`}>
+              {question.answer}
+            </p>
           </div>
         ))}
       </main>
