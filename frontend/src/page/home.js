@@ -12,27 +12,27 @@ function HomePage() {
         <h1 className="decorated-h1">Featured Categories</h1>
         <section className="categories">
           <div className="category" onClick={() => handleCategoryClick('Category 1')}>
-            <img src="../assets/p1.jpeg" alt="Category 1" />
+            <img src="../assets/p2.jpeg" alt="Category 1" />
             <p>Category 1</p>
           </div>
 
           <div className="category" onClick={() => handleCategoryClick('Category 2')}>
-            <img src="../assets/p1.jpeg" alt="Category 2" />
+            <img src="../assets/p2.jpeg" alt="Category 2" />
             <p>Category 2</p>
           </div>
 
           <div className="category" onClick={() => handleCategoryClick('Category 1')}>
-            <img src="../assets/p1.jpeg" alt="Category 3" />
+            <img src="../assets/p2.jpeg" alt="Category 3" />
             <p>Category 3</p>
           </div>
 
           <div className="category" onClick={() => handleCategoryClick('Category 2')}>
-            <img src="../assets/p1.jpeg" alt="Category 4" />
+            <img src="../assets/p2.jpeg" alt="Category 4" />
             <p>Category 4</p>
           </div>
 
           <div className="category" onClick={() => handleCategoryClick('Category 2')}>
-            <img src="../assets/p1.jpeg" alt="Category 4" />
+            <img src="../assets/p2.jpeg" alt="Category 4" />
             <p>Category 5</p>
           </div>
 
