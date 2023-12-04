@@ -1,6 +1,5 @@
 const Product = require("../models/products");
 const { ErrorHandler } = require("../middlewares/errorHandlers");
-// const cloudinary = require("cloudinary");
 const { uploadImagesToAzure,deleteImagesFromAzure } = require('../utils/azureUpload');
 
 const createProduct = async (req, res, next) => {

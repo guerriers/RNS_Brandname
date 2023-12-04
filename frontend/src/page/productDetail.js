@@ -13,21 +13,27 @@ const ProductDetail = () => {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`)
       .then((response) => response.json())
-      .then((data) => { setProduct(data); console.log(`Product`, data) })
+      .then((data) => {
+        setProduct(data);
+        console.log(`Product`, data);
+      })
       .catch((error) =>
         console.error("Error fetching product details: ", error)
       );
-
   }, [setProduct, id]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? product.p_img.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? product.p_img.length - 1 : prevIndex - 1
+    );
   };
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === product.p_img.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === product.p_img.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
   //   Profile Seller
@@ -57,12 +63,14 @@ const ProductDetail = () => {
 
           <div>
             <div
-              className={`p-status ${product.p_status === "0" ? "for-rent" : "for-sell"
-                }`}
+              className={`p-status ${
+                product.p_status === "0" ? "for-rent" : "for-sell"
+              }`}
             >
               {product.p_status === "0" ? "For Rent" : "For Sell"}
             </div>
-            {product && product.p_price && product.p_price.toLocaleString()} Bath/Month
+            {product && product.p_price && product.p_price.toLocaleString()}{" "}
+            Bath/Month
           </div>
           <hr />
           <div className="seller-info">
@@ -75,14 +83,10 @@ const ProductDetail = () => {
           </div>
           <hr />
           <h3>Description</h3>
-          {/* <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry.Lorem Ipsum is simply dummy text of the
-            printing and typesetting industry.{" "}
-          </p> */}
 
-          <p>Conditions{product.p_conditions}% / {product.p_description}</p>
+          <p>
+            Conditions{product.p_conditions}% / {product.p_description}
+          </p>
           <Button className="contact-button" onClick={handleContactClick}>
             <FaPhone className="phone-icon" />
             Contact
@@ -92,15 +96,32 @@ const ProductDetail = () => {
         <div className="product-image">
           <div className="product-image1">
             <div className="carousel">
-              {product.p_img && product.p_img.map((image, index) => (
-                <div className="img">
-                  <img key={index} src={image.url} width={155} height={155} alt={`Product Image ${index + 1}`} style={{ display: index === currentIndex ? 'block' : 'none', margin: 'auto' }} />
-                </div>
-              ))}
+              {product.p_img &&
+                product.p_img.map((image, index) => (
+                  <div className="img">
+                    <img
+                      key={index}
+                      src={image.url}
+                      width={155}
+                      height={155}
+                      alt={`Product Image ${index + 1}`}
+                      style={{
+                        display: index === currentIndex ? "block" : "none",
+                        margin: "auto",
+                      }}
+                    />
+                  </div>
+                ))}
             </div>
 
-            <FaArrowLeft className="slider-arrow left" onClick={handlePrevClick} />
-            <FaArrowRight className="slider-arrow right" onClick={handleNextClick} />
+            <FaArrowLeft
+              className="slider-arrow left"
+              onClick={handlePrevClick}
+            />
+            <FaArrowRight
+              className="slider-arrow right"
+              onClick={handleNextClick}
+            />
           </div>
         </div>
 

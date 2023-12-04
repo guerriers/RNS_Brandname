@@ -73,6 +73,12 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmit(true);
+    const formData = new FormData();
+    formData.set('firstName',firstName)
+    formData.set('lastName',lastName)
+    formData.set('email',email)
+    formData.set('phone',phone)
+    formData.set('password',password)
 
     if (!termsOfService) {
       alert("Please agree to the terms of service.");
@@ -88,7 +94,7 @@ const RegisterPage = () => {
 
     try {
       await dispatch(
-        register(firstName, lastName, email, phone, password, rePassword)
+        register(formData)
       );
       setFirstName("");
       setLastName("");

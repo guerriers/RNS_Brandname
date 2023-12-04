@@ -53,7 +53,7 @@ export const login = (email, password) => async (dispatch) => {
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
       },
     };
 
@@ -92,7 +92,7 @@ export const register = (userData) => async (dispatch) => {
 
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
       },
     };
 

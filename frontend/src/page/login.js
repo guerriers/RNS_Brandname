@@ -90,7 +90,7 @@ const LoginPage = ({ location }) => {
                   <input type="checkbox" id="rememberMe" />
                   <label for="rememberMe">Remember me</label>
 
-                  <a class="forgetPW" href="#">
+                  <a class="forgetPW" href="/password/forgot">
                     Forget password?
                   </a>
                 </div>
