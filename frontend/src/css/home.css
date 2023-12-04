@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -50,7 +52,15 @@ header img {
   z-index: 1;
 }
 
-.featured-categories {
+.decorated-h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em;
+  color: #000000;
+  padding-right: 600px;
+  margin-top: 40px;
+}
+
+.categories {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -60,13 +70,13 @@ header img {
   max-width: 300px;
   margin: 15px;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
 }
 
 .category img {
-  max-width: 100%;
-  border-radius: 4px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  
 }
 
 footer {
