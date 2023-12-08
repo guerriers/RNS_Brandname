@@ -70,7 +70,7 @@ const ProductDetail = () => {
             {/* <p>{product.f_name}</p> */}
             <span className="text-dot-200">
                   {product.user_id} 
-                  {user.f_name}  
+                  {/* {user.f_name}   */}
                 </span>
             <p className="seller-name"> Seller Name</p>
             <span className="profile-icon" onClick={handleProfileClick}>
