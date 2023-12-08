@@ -22,6 +22,7 @@ import RequireAuth from './component/route/RequireAuth';
 import Layout from './component/Layout';
 import NewPassword from "./page/NewPassword";
 import ForgotPassword from "./page/ForgotPassword";
+import Submitted from "./page/submitted";
 
 // from store
 import store from "./store";
@@ -60,6 +61,9 @@ function App() {
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="userVerify" element={<UserVerify />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="submitted" element={<Submitted />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="myProducts" element={<MyProducts />} />
