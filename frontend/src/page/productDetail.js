@@ -9,6 +9,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
+  // const [user, setUser] = useState({});
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`)
@@ -20,7 +21,7 @@ const ProductDetail = () => {
       .catch((error) =>
         console.error("Error fetching product details: ", error)
       );
-  }, [setProduct, id]);
+  }, [id]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -50,16 +51,16 @@ const ProductDetail = () => {
           <hr />
 
           <div>
-            <div className={`p-status ${
+            <div
+              className={`p-status ${
                 product.p_status === "0" ? "for-rent" : "for-sell"
               }`}
             >
               {product.p_status === "0" ? "For Rent" : "For Sell"}
             </div>
             <h4>
-
-            {product && product.p_price && product.p_price.toLocaleString()}{" "}
-            Bath/Month
+              {product && product.p_price && product.p_price.toLocaleString()}{" "}
+              Bath/Month
             </h4>
 
             <h4>Conditions {product.p_conditions}% </h4>
@@ -67,11 +68,10 @@ const ProductDetail = () => {
           <hr />
 
           <div className="seller-info">
-            {/* <p>{product.f_name}</p> */}
             <span className="text-dot-200">
-                  {product.user_id} 
-                  {/* {user.f_name}   */}
-                </span>
+              {product.user_id}
+              {/* {user.f_name}   */}
+            </span>
             <p className="seller-name"> Seller Name</p>
             <span className="profile-icon" onClick={handleProfileClick}>
               Icon
@@ -79,37 +79,35 @@ const ProductDetail = () => {
           </div>
           <hr />
           <div>
+            <h3>Description</h3>
 
-          <h3>Description</h3>
-
-          <p>
-            ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss{product.p_description}
-          </p>
-          <Button className="contact-button" onClick={handleContactClick}>
-            <FaPhone className="phone-icon" />
-            Contact
-          </Button>
+            <p>
+              ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+              {product.p_description}
+            </p>
+            <Button className="contact-button" onClick={handleContactClick}>
+              <FaPhone className="phone-icon" />
+              Contact
+            </Button>
           </div>
         </div>
 
         <div className="product-image">
-      
-            {/* <div className="carousel"> */}
-              {product.p_img &&
-                product.p_img.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image.url}
-                      alt={`Product Image ${index + 1}`}
-                      style={{
-                        display: index === currentIndex ? "block" : "none",
-                        margin: "auto",
-                      }}
-                    />
-                  // </div>
-                ))}
-            {/* </div> */}
-
+          {/* <div className="carousel"> */}
+          {product.p_img &&
+            product.p_img.map((image, index) => (
+              <img
+                key={index}
+                src={image.url}
+                alt={`Product Image ${index + 1}`}
+                style={{
+                  display: index === currentIndex ? "block" : "none",
+                  margin: "auto",
+                }}
+              />
+              // </div>
+            ))}
+          {/* </div> */}
         </div>
 
         <Modal show={showProfileModal} onHide={handleCloseProfileModal}>
