@@ -20,6 +20,8 @@ const LoginPage = ({ location }) => {
 
   const redirect = window.location.search
     ? window.location.search.split("=")[1]
+    : isAuthenticated && user && user.roles === "admin"
+    ? "/adminVerify"
     : "/products";
 
   useEffect(() => {
@@ -90,7 +92,7 @@ const LoginPage = ({ location }) => {
                   <input type="checkbox" id="rememberMe" />
                   <label for="rememberMe">Remember me</label>
 
-                  <a class="forgetPW" href="#">
+                  <a class="forgetPW" href="/password/forgot">
                     Forget password?
                   </a>
                 </div>
@@ -99,7 +101,8 @@ const LoginPage = ({ location }) => {
                   LOGIN
                 </button>
                 <p className="fffText">
-                  Don't have an account? | <a href="/register">Create a new account</a>
+                  Don't have an account? |{" "}
+                  <a href="/register">Create a new account</a>
                 </p>
               </form>
             </div>

@@ -40,7 +40,7 @@ UserVerify.init({
   },
 }, {
   sequelize,
-  modelName: 't_userVerify',
+  modelName: 't_userVerifies',
   timestamps: true,
   paranoid: true,
 })

@@ -163,15 +163,15 @@ exports.updateProfile = async (req, res, next) => {
   if (req.body.avatar !== "") {
     const user = await User.findById(req.user.id);
 
-    const image_id = user.avatar.public_id;
-    const removeImg = await cloudinary.v2.uploader.destroy(image_id);
-    console.log(removeImg);
+    // const image_id = user.avatar.public_id;
+    // const removeImg = await cloudinary.v2.uploader.destroy(image_id);
+    // console.log(removeImg);
 
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
+    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //   folder: "avatars",
+    //   width: 150,
+    //   crop: "scale",
+    // });
 
     newUserData.avatar = {
       public_id: result.public_id,

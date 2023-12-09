@@ -9,26 +9,21 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
+  // const [user, setUser] = useState({});
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`)
       .then((response) => response.json())
-      .then((data) => { setProduct(data); console.log(`Product`, data) })
+      .then((data) => {
+        setProduct(data);
+        console.log(`Product`, data);
+      })
       .catch((error) =>
         console.error("Error fetching product details: ", error)
       );
-
-  }, [setProduct, id]);
+  }, [id]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? product.p_img.length - 1 : prevIndex - 1));
-  };
-
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === product.p_img.length - 1 ? 0 : prevIndex + 1));
-  };
 
   //   Profile Seller
   const handleProfileClick = () => {
@@ -57,51 +52,62 @@ const ProductDetail = () => {
 
           <div>
             <div
-              className={`p-status ${product.p_status === "0" ? "for-rent" : "for-sell"
-                }`}
+              className={`p-status ${
+                product.p_status === "0" ? "for-rent" : "for-sell"
+              }`}
             >
               {product.p_status === "0" ? "For Rent" : "For Sell"}
             </div>
-            {product && product.p_price && product.p_price.toLocaleString()} Bath/Month
+            <h4>
+              {product && product.p_price && product.p_price.toLocaleString()}{" "}
+              Bath/Month
+            </h4>
+
+            <h4>Conditions {product.p_conditions}% </h4>
           </div>
           <hr />
-          <div className="seller-info">
-            {/* <p>{product.f_name}</p> */}
 
+          <div className="seller-info">
+            <span className="text-dot-200">
+              {product.user_id}
+              {/* {user.f_name}   */}
+            </span>
             <p className="seller-name"> Seller Name</p>
             <span className="profile-icon" onClick={handleProfileClick}>
               Icon
             </span>
           </div>
           <hr />
-          <h3>Description</h3>
-          {/* <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry.Lorem Ipsum is simply dummy text of the
-            printing and typesetting industry.{" "}
-          </p> */}
+          <div>
+            <h3>Description</h3>
 
-          <p>Conditions{product.p_conditions}% / {product.p_description}</p>
-          <Button className="contact-button" onClick={handleContactClick}>
-            <FaPhone className="phone-icon" />
-            Contact
-          </Button>
+            <p>
+              ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+              {product.p_description}
+            </p>
+            <Button className="contact-button" onClick={handleContactClick}>
+              <FaPhone className="phone-icon" />
+              Contact
+            </Button>
+          </div>
         </div>
 
         <div className="product-image">
-          <div className="product-image1">
-            <div className="carousel">
-              {product.p_img && product.p_img.map((image, index) => (
-                <div className="img">
-                  <img key={index} src={image.url} width={155} height={155} alt={`Product Image ${index + 1}`} style={{ display: index === currentIndex ? 'block' : 'none', margin: 'auto' }} />
-                </div>
-              ))}
-            </div>
-
-            <FaArrowLeft className="slider-arrow left" onClick={handlePrevClick} />
-            <FaArrowRight className="slider-arrow right" onClick={handleNextClick} />
-          </div>
+          {/* <div className="carousel"> */}
+          {product.p_img &&
+            product.p_img.map((image, index) => (
+              <img
+                key={index}
+                src={image.url}
+                alt={`Product Image ${index + 1}`}
+                style={{
+                  display: index === currentIndex ? "block" : "none",
+                  margin: "auto",
+                }}
+              />
+              // </div>
+            ))}
+          {/* </div> */}
         </div>
 
         <Modal show={showProfileModal} onHide={handleCloseProfileModal}>

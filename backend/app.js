@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require('express');
 const cors = require("cors");
 const authRoutes = require('./routes/authRoutes');
@@ -12,7 +11,8 @@ const {isAuthenticatedUser} = require("./middlewares/auth");
 const fileUpload = require('express-fileupload'); 
 app.use(fileUpload());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  // origin: 'http://localhost:3000', 
+  origin: ["https://rnsbrandname.vercel.app","https://rnsbrandname-api.vercel.app"],
   credentials: true,
 }));
 app.use(express.json({ limit: "150mb" }));
