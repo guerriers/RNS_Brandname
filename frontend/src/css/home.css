@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anuphan&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -6,17 +11,17 @@ body {
 .homepage {
   text-align: center;
   max-width: auto;
+  max-height: auto;
   margin: 0;
   padding: 0;
 }
 
 header {
   position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-width: auto;
   overflow: hidden;
-  padding-bottom: 42.857%; /* 9 / 21 * 100 = 42.857% */
 }
 
 header img {
@@ -27,14 +32,28 @@ header img {
   max-width: 100%;
 }
 
-.banner {
+.banner-slider {
   position: relative;
   width: 100%;
-  padding-bottom: 42.857%; /* 9 / 21 * 100 = 42.857% */
+  padding-bottom: 35%;
   overflow: hidden;
 }
 
-.banner img {
+.banner-slider img {
+  width: 100%;
+  height: auto;
+  transition: opacity 0.35s ease-in-out;
+}
+
+.banner-slider img.active {
+  opacity: 1;
+}
+
+.banner-slider img.inactive {
+  opacity: 0;
+}
+
+.slider-wrapper img {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -45,12 +64,85 @@ header img {
   height: auto;
 }
 
+.banner-slider-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 1;
+}
+
+.banner-slider-dots button {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.banner-slider-dots button:hover {
+  background-color: #be9f4e;
+}
+
 .main {
   position: relative;
   z-index: 1;
 }
 
-.featured-categories {
+.decorated-h1 {
+  font-family: 'Anuphan', sans-serif;
+  font-size: 2em;
+  color: #000000;
+  padding-right: 600px;
+  margin-top: 40px;
+}
+
+.info-section {
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.info-lists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 90px;
+  justify-content: center;  
+}
+
+.info-list {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #bdbcbc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.info-list h4,p {
+  font-family: 'Kanit', sans-serif;
+}
+
+.info-list img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.info-list:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.info-list:not(:hover) {
+  transform: scale(1);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.categories {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -60,18 +152,84 @@ header img {
   max-width: 300px;
   margin: 15px;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+}
+
+.category p {
+  margin-top: 20px;
 }
 
 .category img {
-  max-width: 100%;
-  border-radius: 4px;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
 }
 
-footer {
+.category:hover {
+  transform: scale(1.15);
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.category:not(:hover) {
+  transform: scale(1);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.brands {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.brand {
+  max-width: 300px;
+  margin: 15px;
+  padding: 0px;
+}
+
+.brand p {
   margin-top: 20px;
-  padding: 10px;
+}
+
+.brand img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+
+.brand:hover {
+  transform: scale(1.15);
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.brand:not(:hover) {
+  transform: scale(1);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+
+.h {
+  width: 80%;
+  height: 3px;
+  border-radius: 2px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-bottom: 60px;
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+.footer-banner img {
+  position: relative;
+  width: 100%;
+  padding-bottom: 60px;
+  overflow: hidden;
+}
+
+.homefooter {
+  margin-top: 0px;
+  padding: 0px 0px;
+  padding-bottom: 20px;
   background-color: #333;
   color: #fff;
 }
