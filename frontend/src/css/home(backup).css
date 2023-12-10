@@ -281,7 +281,7 @@ header img {
   margin-left: 0px;
 }
 
-.footer-icons img {
+.footer-icons img, a {
   margin-top: 10px;
   margin-bottom: 20px;
   margin-left: 5px;

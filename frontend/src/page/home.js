@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { LinkContainer } from "react-router-bootstrap";
 import "../css/home.css";
 
 function HomePage() {
@@ -183,8 +184,27 @@ function HomePage() {
       <footer className='homefooter'>
         <div className='footer-banner'>
           <img src="../assets/footerbanner.png" alt="FooterBanner" />
+          <h4 className='image-text'>
+            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+            <LinkContainer to="/about">
+                <button className='image-button'>About Us</button>
+            </LinkContainer>
+          </h4>
         </div>
+
+        <h4 className='footer-text'>CONTACT</h4>
+        <p>+666531892219</p>
+        <p>rns_brandname@gmail.com</p>
+        
+        <div className='footer-icons'>
+          <a href="https://www.facebook.com/"><img src="../assets/facebook.png" alt="Facebook" /></a>
+          <a href="https://www.instagram.com/"><img src="../assets/instagram.png" alt="Instagram" /></a>
+          <a href="https://www.twitter.com/"><img src="../assets/x.png" alt="Twitter" /></a>
+        </div>
+
+        <img src="../rns_logo.png" alt="Logo" className="navbar-logo" />
         <p>&copy; {new Date().getFullYear()} RNS</p>
+        
       </footer>
     </div>
   );
