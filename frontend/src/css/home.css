@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anuphan&display=swap");
 
 body {
   margin: 0;
@@ -96,6 +98,47 @@ header img {
   color: #000000;
   padding-right: 600px;
   margin-top: 40px;
+}
+
+.info-section {
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.info-lists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 90px;
+  justify-content: center;  
+}
+
+.info-list {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #bdbcbc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.info-list h4,p {
+  font-family: 'Anuphan', sans-serif;
+}
+
+.info-list img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.info-list:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.info-list:not(:hover) {
+  transform: scale(1);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .categories {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../css/home.css";
 
 function HomePage() {
@@ -33,6 +33,34 @@ function HomePage() {
 
     console.log(`Clicked on ${slideIndex + 1}`);
   }
+
+  const [info, setinfo] = useState([
+    {
+      name: 'การบริการที่ยอดเยี่ยม',
+      image: "../assets/cart_icon.png",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nulla dui, in dapibus mauris tristique id."
+    },
+    {
+      name: 'มีบริการเช่าสินค้า',
+      image: "../assets/cart_icon.png",
+      desc: "สามารถเช่าสามารถเช่าสามารถเช่าสามารถเช่าสามารถเช่าสามารถเช่าสามารถเช่าสามารถเช่าสามารถเช่าสามารถเช่า"
+    },
+    {
+      name: 'ซื้อ-ขาย สินค้าได้ง่าย',
+      image: "../assets/cart_icon.png",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nulla dui, in dapibus mauris tristique id."
+    },
+  ]);
+
+  useEffect(() => {
+    info.forEach(list => {
+      const img = new Image();
+      img.onload = () => console.log(`${list.name}'s image loaded successfully`);
+      img.onerror = () => console.log(`Failed to load ${list.name}'s image`);
+      img.src = list.image;
+    });
+  }, [info]);
+
   return (
     <div className="homepage">
       <header className="banner-slider">
@@ -48,6 +76,17 @@ function HomePage() {
       
 
       <main className='main'>
+      <section className="info-section">
+        <div className="info-lists">
+          {info.map((list) => (
+            <div key={list.name} className="info-list">
+              <img src={list.image} alt={list.name} />
+              <h4>{list.name}</h4>
+              <p>{list.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
         <h1 className="decorated-h1">Featured Categories</h1>
         <section className="categories">
           <div className="category" onClick={() => handleCategoryClick('Category 1')}>
