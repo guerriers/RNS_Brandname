@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../css/home.css";
 
 function HomePage() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  function handleCategoryClick(category) {
+    // Handle category click, e.g., navigate to a specific category page
+    console.log(`Clicked on ${category}`);
+  }
+
+  function handleDotClick(slideIndex) {
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const imageElement = document.getElementById(`slide-${slideIndex + 1}`);
+
+    if (imageElement) {
+      const slidePosition = imageElement.offsetLeft - sliderWrapper.offsetLeft;
+      sliderWrapper.scrollTo({
+        left: slidePosition,
+        behavior: 'smooth',
+      });
+
+      document.querySelectorAll('.slider-wrapper img').forEach((img, index) => {
+        if (index === slideIndex) {
+          img.classList.add('active');
+        } else {
+          img.classList.remove('active');
+        }
+      });
+
+      setActiveSlide(slideIndex);
+    }
+
+    console.log(`Clicked on ${slideIndex + 1}`);
+  }
   return (
     <div className="homepage">
       <header className="banner-slider">
         <div className='slider-wrapper'>
-          <img id="slide-1" src="../assets/banner2.png" alt="Banner" className="active" />
-          <img id="slide-2" src="../assets/banner.jpeg" alt="Banner" className="inactive" />
+          <img id="slide-1" src="../assets/banner2.png" alt="Banner" className={activeSlide === 0 ? 'active' : 'inactive'} />
+          <img id="slide-2" src="../assets/banner.jpeg" alt="Banner" className={activeSlide === 1 ? 'active' : 'inactive'} />
         </div>
         <div className="banner-slider-dots">
           <button onClick={() => handleDotClick(0)}></button>
@@ -53,34 +84,5 @@ function HomePage() {
     </div>
   );
 }
-
-function handleCategoryClick(category) {
-  // Handle category click, e.g., navigate to a specific category page
-  console.log(`Clicked on ${category}`);
-}
-
-function handleDotClick(slideIndex) {
-  const imageElement = document.getElementById(`slide-${slideIndex + 1}`);
-
-  if (imageElement) {
-    const sliderWrapper = document.querySelector('.slider-wrapper');
-    const slidePosition = imageElement.offsetLeft - sliderWrapper.offsetLeft;
-    sliderWrapper.scrollTo({
-      left: slidePosition,
-      behavior: 'smooth',
-    });
-
-    document.querySelectorAll('.slider-wrapper img').forEach((img, index) => {
-      if (index === slideIndex) {
-        img.classList.add('active');
-      } else {
-        img.classList.remove('active');
-      }
-    });
-  }
-
-  console.log(`Clicked on ${slideIndex + 1}`);
-}
-
 
 export default HomePage;
