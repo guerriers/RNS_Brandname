@@ -210,8 +210,4 @@ function HomePage() {
   );
 }
 
-<<<<<<< HEAD
 export default HomePage;
-=======
-export default HomePage;
->>>>>>> 95851cd61d47c6d00b995bc2037a2530ead43f31
