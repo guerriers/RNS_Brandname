@@ -1,7 +1,19 @@
-.Header {
-  margin-top: 20px;
+.addProductContainer {
+  text-align: left;
+  /* display: flex; */
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.addProduct-h {
   text-align: center;
-  margin-bottom: 60px;
+  margin-top: 28px;
+  margin-bottom: 5%;
+  font-size: 36px;
+}
+
+.form-label {
+  color: black !important;
 }
 
 .wrapperViewProduct {
@@ -15,20 +27,80 @@
 
 .form-control,
 .form-select {
-  border-radius: 15px !important;
+  border-radius: 8px !important;
+}
+.addProductButton2 {
+  text-align:left;
+  margin-bottom: 10%;
+  margin-left: -7%;
+}
+.addButton {
+  padding: 12px 24px 12px 24px;
+  border: none;
+  text-align: center;
+  color: #333333;
+  background: #e7c264;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+}
+.addButton:hover {
+  background-color: #333333;
+  color: #ffffff;
 }
 
-.viewDataSubmit {
-  padding: 5px 70px;
+.cancelButton {
+  padding: 12px 24px 12px 24px;
   border: none;
   text-align: center;
   color: #ffffff;
-  background: #e7c264;
-  border-radius: 15px;
+  background-color: #e02121;
+  margin-left: 10%;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+}
+
+.cancelButton:hover {
+  background-color: #333333;
+  color: #ffffff;
 }
 
 .formGridStatus {
   margin-top: 25px;
+}
+
+.receiptAddFile {
+  color: #e7c264;
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.receiptAddFile:hover {
+  color: #3a6ecf;
+}
+
+.form-group-receipt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-group-receipt label {
+  text-align: center;
+}
+.form-group-receipt input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .form-check-input:checked {
@@ -47,12 +119,68 @@
   margin: 0;
 }
 
-/* button {
-    appearance: none;
-    background-color: blue;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-bottom: 60px;
-  } */
+.addImage {
+  background-color: #d6d0d0;
+  color: #333333;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  height: 350px;
+  width: 400px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.addImage:hover {
+  transform: translateY(-5px);
+}
+
+.plus-sign {
+  margin: 15px 15px 15px 15px;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 32px;
+}
+
+.productPreview {
+  border-radius: 8px;
+  height: 350px;
+  width: 400px;
+}
+
+.addProductGrid {
+  margin-left: 20%;
+}
+.addProductBox {
+  position: relative;
+  padding: 5px;
+  background-color: #fff;
+  transition: transform 0.2s;
+  cursor: pointer;
+  border-radius: 16px;
+  display: flex;
+}
+
+.addProductBox:hover {
+  transform: translateY(-5px);
+}
+
+.addProductBox img {
+  height: 350px;
+  width: 400px;
+  border-radius: 16px;
+}
+
+.addProductActions {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  border-radius: 50%;
+  font-weight: bold;
+  background-color: #333333;
+}
+
+.addProductActions:hover {
+  background-color: #e7c264;
+  color: #333333 !important;
+}

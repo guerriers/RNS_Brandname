@@ -1,6 +1,7 @@
-.myProduct-h1 {
+.myProduct-h{
   text-align: center;
-  margin-top: 40px;
+  margin-top: 28px;
+  font-size: 36px;
 }
 
 .myProduct-grid {
@@ -12,10 +13,8 @@
 
 .myProduct-box {
   position: relative;
-  border-radius: 16px;
   padding: 5px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   cursor: pointer;
 }
@@ -26,12 +25,11 @@
 
 .myProduct-box img {
   width: 100%;
-  height: auto;
   max-height: 250px;
   border-radius: 16px;
 }
 
-/* .product-status {
+.product-status {
   position: absolute;
   top: 10px;
   margin-top: 10px;
@@ -40,32 +38,41 @@
   border-radius: 100px;
   font-weight: bold;
 }
-.for-rent {
-  background-color: #e7c264;
-  color: #000000;
+
+.product-actions {
+  position: absolute;
+  bottom: 10px;
+  margin-bottom: 10px;
+  right: 20px;
+  border-radius: 100px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.15);
+  color: #ffffff;  
+    svg {
+      color: #ffffff;
+    }
 }
 
-.for-sell {
-  background-color: #87b1f9;
-  color: #ffffff;
-} */
+.faTrashIcon {
+  color: red !important;
+}
 
-.add-product-button {
+.addProductButton {
   background-color: #333333;
   color: #fff;
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 12px 24px 12px 24px;
+  border-radius: 16px;
   text-decoration: none;
   font-weight: bold;
   margin-right: 20px;
   border: none;
   outline: none;
 }
-.add-product-button:hover {
+.addProductButton:hover {
   background-color: #e7c264;
   color:#000000;
 }
-.add-product-button-container {
+.addProductButtonContainer {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;

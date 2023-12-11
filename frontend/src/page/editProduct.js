@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Form, Row, Col, Image, Container } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import "../css/addProduct.css";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux"
-import { updateProduct, getProductDetails, clearErrors } from '../actions/productActions'
-
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetails } from "../actions/productActions";
 
 const EditProduct = ({ history }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  // const history = useHistory();
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -24,12 +22,12 @@ const EditProduct = ({ history }) => {
     p_status: "",
     p_img: [],
   };
-  const [productsPreview, setProductsPreview] = useState([])
+  const [productsPreview, setProductsPreview] = useState([]);
   const [products, setProducts] = useState([]);
   const [oldProducts, setOldProducts] = useState([]);
   const [oldProductsPreview, setOldProductsPreview] = useState([]);
   const [receipts, setReceipts] = useState([]);
-  const [receiptsPreview, setReceiptsPreview] = useState([])
+  const [receiptsPreview, setReceiptsPreview ] = useState([]);
   const [oldReceipts, setOldReceipts] = useState([]);
   const [oldReceiptsPreview, setOldReceiptsPreview] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -37,53 +35,50 @@ const EditProduct = ({ history }) => {
   const [productEdit, setProductEdit] = useState(initialValues);
   const [hasLoaded, setHasLoaded] = useState(false);
   // const [hasLoaded, setHasLoaded] = useState(false);
-  const { error, product } = useSelector(state => state.productDetails)
+  const { error, product } = useSelector((state) => state.productDetails);
 
   const handleChange = (e) => {
-    const files = Array.from(e.target.files)
+    const files = Array.from(e.target.files);
 
     setProductsPreview([]);
-    setProducts([])
-    setOldProducts([])
+    setProducts([]);
+    setOldProducts([]);
 
-    files.forEach(file => {
+    files.forEach((file) => {
       const reader = new FileReader();
 
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setProductsPreview(oldArray => [...oldArray, reader.result])
+          setProductsPreview((oldArray) => [...oldArray, reader.result]);
         }
-      }
+      };
 
-      reader.readAsDataURL(file)
-    })
-    setProducts(files)
+      reader.readAsDataURL(file);
+    });
+    setProducts(files);
   };
 
   const handleReceipt = (e) => {
-    const files = Array.from(e.target.files)
+    const files = Array.from(e.target.files);
 
     setReceiptsPreview([]);
-    setReceipts([])
-    setOldReceipts([])
+    setReceipts([]);
+    setOldReceipts([]);
 
-    files.forEach(file => {
+    files.forEach((file) => {
       const reader = new FileReader();
 
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setReceiptsPreview(oldArray => [...oldArray, reader.result])
+          setReceiptsPreview((oldArray) => [...oldArray, reader.result]);
         }
-      }
+      };
 
-      reader.readAsDataURL(file)
-    })
-    setReceipts(files)
+      reader.readAsDataURL(file);
+    });
+    setReceipts(files);
   };
 
-  // const handleReset = () => {
-  //   history.push("/myProducts");
-  // };
   const handleReset = () => {
     setIsSubmit(false);
     navigate("/myProducts");
@@ -105,15 +100,15 @@ const EditProduct = ({ history }) => {
       });
 
       if (products.length > 0) {
-        products.forEach(product => {
-          formData.append('p_img', product)
-        })
+        products.forEach((product) => {
+          formData.append("p_img", product);
+        });
       }
 
-      if(receipts.length > 0) {
-        receipts.forEach(receipt => {
-          formData.append('p_receipt', receipt)
-        })
+      if (receipts.length > 0) {
+        receipts.forEach((receipt) => {
+          formData.append("p_receipt", receipt);
+        });
       }
 
       const token = localStorage.getItem("token");
@@ -123,21 +118,20 @@ const EditProduct = ({ history }) => {
         formData,
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
 
       if (response.status === 200) {
-        alert("Edit Success");
+        alert("Edit successfully");
         setIsSubmit(true);
         navigate("/myProducts");
       }
       if (response.status === 401) {
         alert(response.message);
       }
-
     }
   };
 
@@ -155,8 +149,8 @@ const EditProduct = ({ history }) => {
       fetchData();
     } else {
       setProductEdit(product);
-      setProductEdit(prevValues => {
-        const { p_img, p_receipt,...productWithoutPImg } = prevValues;
+      setProductEdit((prevValues) => {
+        const { p_img, p_receipt, ...productWithoutPImg } = prevValues;
         return productWithoutPImg;
       });
       setOldProducts(product.p_img || []);
@@ -167,250 +161,288 @@ const EditProduct = ({ history }) => {
   }, [id, dispatch, hasLoaded, product]);
 
   return (
-    <Container>
-      {/* <Fragment>
-      {hasLoaded ? (
-        <Fragment> */}
-      <div>
-        <div className="Header">
-          <h1>Edit Product</h1>
-        </div>
-        <Col xs={6} md={4}>
-          {oldProducts.map((img, index) => (
-            <img key={`${img.url}-${index}`} src={img.url} alt={img.url} className="mt-3 mr-2" width="55" height="52" />
-          ))}
+    <Fragment>
+      <>
+        <p className="addProduct-h">Edit Product</p>
+        <Row>
+          <Col md={5}>
+            <Form>
+              <Form.Group as={Col} controlId="formFileMultiple">
+                <Form.Label>
+                  <div className="addProductGrid">
+                    <div className="addProductBox">
+                      {oldProducts.map((img, index) => (
+                        <img
+                          key={`${img.url}-${index}`}
+                          src={img.url}
+                          alt={img.url}
+                          className="mt-3 mr-2"
+                          width="55"
+                          height="52"
+                        />
+                      ))}
 
-          {productsPreview.map(img => (
-            <img src={img} key={img} alt="Images Preview" className="mt-3 mr-2" width="55" height="52" />
-          ))}
-          <Form.Group controlId="formFileMultiple" className="mb-3">
-            <Form.Label>+</Form.Label>
-            <Form.Control
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              name="p_img"
-              onChange={handleChange}
-              multiple
-            />
-          </Form.Group>
-        </Col>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridName">
-            <Form.Label>
-              Name<span style={{ color: "red" }}> *</span>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Product name"
-              value={productEdit && productEdit.p_name}
-              name="p_name"
-              required
-              onChange={(e) =>
-                setProductEdit((prevValues) => ({
-                  ...prevValues,
-                  p_name: e.target.value,
-                }))
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Please Add Product Name
-            </Form.Control.Feedback>
-          </Form.Group>
+                      {productsPreview.map((img) => (
+                        <img
+                          src={img}
+                          key={img}
+                          alt="Images Preview"
+                          className="mt-3 mr-2"
+                          width="55"
+                          height="52"
+                        />
+                      ))}
+                      <div className="addProductActions">
+                        <span className="plus-sign">+</span>
+                      </div>
+                    </div>
+                  </div>
+                </Form.Label>
+                <Form.Control
+                  type="file"
+                  name="img"
+                  accept="image/*"
+                  onChange={handleChange}
+                  style={{ display: "none" }}
+                  multiple
+                />
+              </Form.Group>
+            </Form>
+          </Col>
+          <Col>
+            <div className="addProductContainer">
+              {/* {showSuccessMessage && (
+              <div className="success-message">Product added successfully!</div>
+            )} */}
+              <Form className="wrapperViewProduct" onSubmit={onSubmit}>
+                <Row className="mb-3">
+                  <Form.Group as={Col} md={4} controlId="formGridName">
+                    <Form.Label>
+                      Product Name<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      placeholder="Product name"
+                      value={productEdit && productEdit.p_name}
+                      required
+                      onChange={(e) =>
+                        setProductEdit((prevValues) => ({
+                          ...prevValues,
+                          p_name: e.target.value,
+                        }))
+                      }
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please Add Product Name
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} md={1}></Form.Group>
+                  <Form.Group as={Col} md={2} controlId="formGridCategory">
+                    <Form.Label>
+                      Category<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Select
+                      name="category"
+                      onChange={(e) =>
+                        setProductEdit((prevValues) => ({
+                          ...prevValues,
+                          p_category: e.target.value,
+                        }))
+                      }
+                      value={productEdit.p_category}
+                      required
+                    >
+                      <option value="">Category</option>
+                      <option value="Clothes">Clothes</option>
+                      <option value="Accessories">Accessories</option>
+                      <option value="Shoes/Sneakers">Shoes/Sneakers</option>
+                      <option value="Headwear">Headwear</option>
+                      <option value="Eyewear">Eyewear</option>
+                      <option value="Bag">Bag</option>
+                      <option value="Others">Others</option>
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      Please Select Category
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} md={1}></Form.Group>
+                </Row>
 
-          <Form.Group as={Col} controlId="formGridCategory">
-            <Form.Label>
-              Category<span style={{ color: "red" }}> *</span>
-            </Form.Label>
-            <Form.Select name="p_category" onChange={(e) =>
-              setProductEdit((prevValues) => ({
-                ...prevValues,
-                p_category: e.target.value,
-              }))
+                <Row className="mb-3">
+                  <Form.Group as={Col} md={2} controlId="formGridPrice">
+                    <Form.Label>
+                      Price | THB<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Product Price"
+                      name="price"
+                      required
+                      value={productEdit.p_price}
+                      onChange={(e) =>
+                        setProductEdit((prevValues) => ({
+                          ...prevValues,
+                          p_price: e.target.value,
+                        }))
+                      }
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please Add Product Price
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-            }
-              value={productEdit.p_category} required>
-              <option value="">Category</option>
-              <option value="Clothes">Clothes</option>
-              <option value="Accessories">Accessories</option>
-              <option value="Shoes/Sneakers">Shoes/Sneakers</option>
-              <option value="Headwear">Headwear</option>
-              <option value="Eyewear">Eyewear</option>
-              <option value="Bag">Bag</option>
-              <option value="Others">Others</option>
-            </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please Select Category
-            </Form.Control.Feedback>
-          </Form.Group>
+                  <Form.Group as={Col} md={2} controlId="formGridCondition">
+                    <Form.Label>
+                      Conditions %<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Product Condition (%)"
+                      name="conditions"
+                      required
+                      value={productEdit.p_conditions}
+                      onChange={(e) =>
+                        setProductEdit((prevValues) => ({
+                          ...prevValues,
+                          p_conditions: e.target.value,
+                        }))
+                      }
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please Add Condition
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} md={1}></Form.Group>
+                  <Form.Group as={Col} md={2} controlId="formGridBrand">
+                    <Form.Label>
+                      Brand<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Product Brand"
+                      name="brand"
+                      required
+                      value={productEdit.p_brand}
+                      onChange={(e) =>
+                        setProductEdit((prevValues) => ({
+                          ...prevValues,
+                          p_brand: e.target.value,
+                        }))
+                      }
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please Add Brand
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Row>
+
+                <Row className="mb-3">
+                  <Form.Group as={Col} md={7} controlId="formGridDescription">
+                    <Form.Label>
+                      Description<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      as="textarea"
+                      placeholder="Product Description"
+                      name="description"
+                      style={{ height: "100px" }}
+                      required
+                      value={productEdit.p_description}
+                      onChange={(e) =>
+                        setProductEdit((prevValues) => ({
+                          ...prevValues,
+                          p_description: e.target.value,
+                        }))
+                      }
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please Add Description
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Row>
+
+                {oldReceipts.map((img, index) => (
+                  <img
+                    key={`${img.url}-${index}`}
+                    src={img.url}
+                    alt={img.url}
+                    className="mt-3 mr-2"
+                    width="55"
+                    height="52"
+                  />
+                ))}
+                {receiptsPreview.map((img) => (
+                  <img
+                    src={img}
+                    key={img}
+                    alt="Images Preview"
+                    className="mt-3 mr-2"
+                    width="55"
+                    height="52"
+                  />
+                ))}
+                <Row className="mb-3">
+                  <Form.Group as={Col} md={2} controlId="formGridReceipt">
+                    <Form.Label>
+                      Receipt
+                      <p className="receiptAddFile">Add File</p>
+                    </Form.Label>
+
+                    <Form.Control
+                      name="receipt"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleReceipt}
+                      style={{ display: "none" }}
+                    />
+                  </Form.Group>
+
+                  <Form.Group as={Col} md={3}></Form.Group>
+
+                  <Form.Group as={Col} md={2} controlId="formGridStatus">
+                    <Form.Label>
+                      Rent | Sell
+                      <span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Select
+                      name="status"
+                      onChange={(e) =>
+                        setProductEdit((prevValues) => ({
+                          ...prevValues,
+                          p_status: e.target.value,
+                        }))
+                      }
+                      value={productEdit.p_status}
+                      required
+                    >
+                      <option value="">Select Status</option>
+                      <option value="0">Rent</option>
+                      <option value="1">Sell</option>
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      Please Select Category
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Row>
+
+                <div className="addProductButton2">
+                  <button className="addButton">Update Product</button>
+                  <button
+                    className="cancelButton"
+                    type="button"
+                    onClick={handleReset}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </Form>
+            </div>
+          </Col>
         </Row>
-
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridPrice">
-            <Form.Label>
-              Price | THB<span style={{ color: "red" }}> *</span>
-            </Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Product Price"
-              name="p_price"
-              required
-              value={productEdit.p_price}
-              onChange={(e) =>
-                setProductEdit((prevValues) => ({
-                  ...prevValues,
-                  p_price: e.target.value,
-                }))
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Please Add Product Price
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridCondition">
-            <Form.Label>
-              Condition<span style={{ color: "red" }}> *</span>
-            </Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Product Condition (%)"
-              name="p_conditions"
-              required
-              value={productEdit.p_conditions}
-              onChange={(e) =>
-                setProductEdit((prevValues) => ({
-                  ...prevValues,
-                  p_conditions: e.target.value,
-                }))
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Please Add Condition
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} controlId="formGridBrand">
-            <Form.Label>
-              Brand<span style={{ color: "red" }}> *</span>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Product Brand"
-              name="p_brand"
-              required
-              value={productEdit.p_brand}
-              onChange={(e) =>
-                setProductEdit((prevValues) => ({
-                  ...prevValues,
-                  p_brand: e.target.value,
-                }))
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Please Add Brand
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Row>
-
-        <Form.Group className="mb-3">
-          <Form.Label>
-            Description<span style={{ color: "red" }}> *</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            as="textarea"
-            placeholder="Product Description"
-            name="p_description"
-            style={{ height: "100px" }}
-            required
-            value={productEdit.p_description}
-            onChange={(e) =>
-              setProductEdit((prevValues) => ({
-                ...prevValues,
-                p_description: e.target.value,
-              }))
-            }
-          />
-          <Form.Control.Feedback type="invalid">
-            Please Add Description
-          </Form.Control.Feedback>
-        </Form.Group>
-
-
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridReceipt">
-            <Form.Label>Receipt</Form.Label>
-            {oldReceipts.map((img, index) => (
-            <img key={`${img.url}-${index}`} src={img.url} alt={img.url} className="mt-3 mr-2" width="55" height="52" />
-          ))}
-
-          {receiptsPreview.map(img => (
-            <img src={img} key={img} alt="Images Preview" className="mt-3 mr-2" width="55" height="52" />
-          ))}
-            <Form.Control
-              type="file"
-              placeholder="(.png, .jpg, .jpeg)"
-              name="p_receipt"
-              // value={productEdit.p_receipt}
-              onChange={handleReceipt}
-            />
-            <span style={{ color: "red" }}> (only .png, .jpg, .jpeg)</span>
-            <Form.Control.Feedback type="invalid">
-              Please Add Receipt
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          {/* <div className="check"> */}
-          <Form.Group as={Col} controlId="formGridStatus">
-            <span style={{ color: "red" }}> *</span>
-            <Form.Check
-              value="1"
-              inline
-              label="For Sell"
-              name="status"
-              type="radio"
-              onChange={(e) =>
-                setProductEdit((prevValues) => ({
-                  ...prevValues,
-                  p_status: e.target.value,
-                }))
-              }
-              checked={productEdit.p_status === "1"}
-            />
-            <Form.Check
-              value="0"
-              inline
-              label="For Rent"
-              name="status"
-              type="radio"
-              onChange={(e) =>
-                setProductEdit((prevValues) => ({
-                  ...prevValues,
-                  p_status: e.target.value,
-                }))
-              }
-              checked={productEdit.p_status === "0"}
-            />
-          </Form.Group>
-        </Row>
-        <Form className="wrapperViewProduct" onSubmit={onSubmit}>
-          <div className="warpPerButton">
-            <button className="viewDataSubmit">Update Product</button>
-            <button
-              className="viewDataSubmit"
-              type="button"
-              onClick={handleReset}
-            >
-              Cancel
-            </button>
-          </div>
-        </Form>
-      </div>
-      {/* </Fragment>
-      ) : (
-        <Fragment>Loading...</Fragment>
-      )}
-    </Fragment> */}
-    </Container>
+      </>
+    </Fragment>
   );
 };
 
