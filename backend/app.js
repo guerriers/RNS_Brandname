@@ -11,8 +11,8 @@ const {isAuthenticatedUser} = require("./middlewares/auth");
 const fileUpload = require('express-fileupload'); 
 app.use(fileUpload());
 app.use(cors({
-  // origin: 'http://localhost:3000', 
-  origin: ["https://rnsbrandname.vercel.app","https://rnsbrandname-api.vercel.app"],
+  origin: 'http://localhost:3000', 
+  // origin: ["https://rnsbrandname.vercel.app","https://rnsbrandname-api.vercel.app"],
   credentials: true,
 }));
 app.use(express.json({ limit: "150mb" }));

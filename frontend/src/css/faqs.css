@@ -58,6 +58,10 @@ p {
 }
   
 .faq-item.active .question-text::after {
+<<<<<<< HEAD
     content: '\25BC'; 
+=======
+    content: '\25BC'; /* Unicode character for a down-pointing triangle when active */
+>>>>>>> 95851cd61d47c6d00b995bc2037a2530ead43f31
 }
   
