@@ -2,81 +2,79 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { checkVerify, clearErrors } from "../actions/userActions";
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-// const { user, loading } = useSelector(state => state.auth)
+// const { user, loading } = useSelector((state) => state.auth);
 
 const UserVerify = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-    // const dispatch = useDispatch();
-  const { isVerified,verifyStatus, loading } = useSelector((state) => state.verify_status);
+  const { isVerified, verifyStatus, loading } = useSelector(
+    (state) => state.verify_status
+  );
   const [idCardImg, setIdCardImg] = useState([]);
   const [bankImg, setBankImg] = useState([]);
-  const [idCardImgPreview,setIdCardImgPreview] = useState([]);
-  const [bankImgPreview,setBankImgPreview] = useState([]);
+  const [idCardImgPreview, setIdCardImgPreview] = useState([]);
+  const [bankImgPreview, setBankImgPreview] = useState([]);
 
   useEffect(() => {
     if (verifyStatus === "submitted") {
       navigate("/submitted");
-    } 
+    }
   }, [verifyStatus, navigate]);
 
-
-
   const handleIdCardChange = (e) => {
-    const files = Array.from(e.target.files)
+    const files = Array.from(e.target.files);
     const reader = new FileReader();
 
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setIdCardImgPreview(oldArray => [...oldArray, reader.result])
+        setIdCardImgPreview((oldArray) => [...oldArray, reader.result]);
       }
     };
 
     reader.readAsDataURL(e.target.files[0]);
-    setIdCardImg(files)
+    setIdCardImg(files);
   };
 
   const handleBankAccountChange = (e) => {
-    const files = Array.from(e.target.files)
+    const files = Array.from(e.target.files);
     const reader = new FileReader();
 
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setBankImgPreview(oldArray => [...oldArray, reader.result])
+        setBankImgPreview((oldArray) => [...oldArray, reader.result]);
       }
     };
 
     reader.readAsDataURL(e.target.files[0]);
-    setBankImg(files)
+    setBankImg(files);
   };
-
 
   const handleVerificationSubmit = async () => {
     const formData = new FormData();
-    idCardImg.forEach(img => {
-      formData.append('idCard_img', img)
-    })
-    bankImg.forEach(img => {
-      formData.append('bank_img', img)
-    })
-    const token = localStorage.getItem('token');
+    idCardImg.forEach((img) => {
+      formData.append("idCard_img", img);
+    });
+    bankImg.forEach((img) => {
+      formData.append("bank_img", img);
+    });
+    const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/userVerify`,
         formData,
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
 
       if (response.status === 201) {
         console.log("Verification submitted successfully.");
-        navigate("/about");
+        navigate("/submitted");
         dispatch(checkVerify());
       } else {
         console.error("Verification submission failed.");
@@ -85,7 +83,6 @@ const UserVerify = () => {
       console.error("Error submitting verification:", error);
     }
   };
-
 
   return (
     <>

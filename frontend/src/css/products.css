@@ -1,3 +1,9 @@
+.product-h{
+  text-align: center;
+  margin-top: 28px;
+  font-size: 36px !important;
+}
+
 .product-grid {
   display: flex;
   flex-wrap: wrap;

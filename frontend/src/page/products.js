@@ -179,8 +179,8 @@ const Product = () => {
           </Col>
         </Col>
 
-        <Col md={8} lg={9} xl={9} style={{ padding: "30px" }}>
-          <h1>Products</h1>
+        <Col md={8} lg={9} xl={9}>
+          <p className="product-h">Products</p>
           <Row>
             {products.map((product) => (
               <Col md={6} lg={4} xl={4} className="mt-4">

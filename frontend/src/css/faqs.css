@@ -28,7 +28,7 @@ p {
     cursor: pointer;
     overflow: hidden;
     transition: max-height 0.5s ease-out;
-    max-height: 40px; /* Set a default max-height */
+    max-height: 40px; 
   }
   
 .question-text {
@@ -37,7 +37,7 @@ p {
 }
   
 .question-text::after {
-    content: '\25C0'; /* Unicode character for a right-pointing triangle */
+    content: '\25C0'; 
     margin-left: 5px;
   }
   
@@ -49,15 +49,14 @@ p {
 }
 
 .faq-item.active {
-    max-height: 200px; /* Adjust the max-height based on your content */
+    max-height: 200px; 
     background-color: blue;
 }
   
 .faq-item.active .answer {
-    max-height: 500px; /* Adjust the max-height based on your content */
+    max-height: 500px; 
 }
   
 .faq-item.active .question-text::after {
-    content: '\25BC'; /* Unicode character for a down-pointing triangle when active */
+    content: '\25BC'; 
 }
-  

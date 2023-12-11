@@ -5,6 +5,8 @@ import axios from "axios";
 import "../css/myProducts.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const MyProducts = () => {
   const [userProducts, setUserProducts] = useState([]);
@@ -93,13 +95,13 @@ const MyProducts = () => {
       ) : (
         <Container>
           <div>
-            <h1 className="myProduct-h1">My Products</h1>
+            <p className="myProduct-h">My Products</p>
             {successMessage && (
               <Alert variant="success">{successMessage}</Alert>
             )}{" "}
-            <div className="add-product-button-container">
+            <div className="addProductButtonContainer">
               <Button
-                className="add-product-button"
+                className="addProductButton"
                 onClick={() => {
                   navigate("/addProduct")
                 }}
@@ -126,13 +128,13 @@ const MyProducts = () => {
                       variant="gray"
                       onClick={() => handleEditProduct(product.id)}
                     >
-                      ✎
+                      <FontAwesomeIcon icon={faPen} />
                     </Button>
                     <Button
                       variant="gray"
                       onClick={() => handleConfirmation(product.id)}
                     >
-                      🗑
+                      <FontAwesomeIcon className="faTrashIcon" icon={faTrash} />
                     </Button>
                   </div>
                 </div>
