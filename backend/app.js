@@ -3,6 +3,7 @@ const cors = require("cors");
 const authRoutes = require('./routes/authRoutes');
 const User = require("./models/user");
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require("./routes/userRoutes");
 const userVerifyRoutes = require('./routes/userVerifyRoutes');
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -21,6 +22,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use("/api/users", userRoutes);
 app.use('/api/userVerify', userVerifyRoutes);
 
 // Middleware to handle errors
