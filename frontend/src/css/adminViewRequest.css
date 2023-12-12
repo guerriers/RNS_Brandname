@@ -1,0 +1,96 @@
+.adminViewVerify {
+  width: 800px;
+  text-align: left;
+}
+
+.adminViewVerify h1 {
+  text-align: left;
+  margin-top: 28px;
+  margin-bottom: 5%;
+  font-size: 36px;
+}
+
+.adminViewVerify .img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.adminViewVerify img {
+  max-height: 150px;
+  max-width: 100%;
+}
+
+.fullNameStat {
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.fullName-p {
+  font-size: 20px !important;
+  text-align: center;
+  margin-left: 37%;
+  margin-right: 15%;
+}
+
+.reqDate {
+  color: #777575;
+  font-size: 14px;
+}
+
+.adminViewVerify span {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.ViewRequestButton {
+  text-align: center;
+}
+
+.acceptRequest {
+  padding: 12px 32px 12px 32px;
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  background: #be9f4e;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+  margin-bottom: 60px;
+  margin-top: 50px;
+}
+.acceptRequest:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.rejectRequest {
+  padding: 12px 32px 12px 32px;
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  background-color: #e02121;
+  margin-left: 15%;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+  margin-bottom: 60px;
+  margin-top: 50px;
+}
+
+.rejectRequest:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.verifiedStatus {
+  color: green;
+}
+
+.pendingStatus {
+  color: #e7c264;
+}

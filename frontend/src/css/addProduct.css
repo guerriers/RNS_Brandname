@@ -38,8 +38,8 @@
   padding: 12px 24px 12px 24px;
   border: none;
   text-align: center;
-  color: #333333;
-  background: #e7c264;
+  color: #ffffff;
+  background: #BE9F4E;
   text-decoration: none;
   font-weight: bold;
   border-radius: 16px;
@@ -75,7 +75,7 @@
 }
 
 .receiptAddFile {
-  color: #e7c264;
+  color: #BE9F4E;
   padding: 15px;
   border: none;
   cursor: pointer;
@@ -104,8 +104,8 @@
 }
 
 .form-check-input:checked {
-  background-color: #e7c264 !important;
-  border-color: #e7c264 !important;
+  background-color: #BE9F4E !important;
+  border-color: #BE9F4E !important;
 }
 .no-arrow {
   -moz-appearance: textfield;
@@ -181,6 +181,6 @@
 }
 
 .addProductActions:hover {
-  background-color: #e7c264;
+  background-color: #BE9F4E;
   color: #333333 !important;
 }

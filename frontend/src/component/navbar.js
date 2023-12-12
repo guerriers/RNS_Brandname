@@ -33,7 +33,7 @@ const NavbarComponent = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand as={Link}>
+        <Navbar.Brand as={Link} to="/home">
           <img src="../rns_logo.png" alt="Logo" className="navbar-logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
