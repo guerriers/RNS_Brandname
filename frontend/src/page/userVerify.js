@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Row, Col, Container, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { checkVerify, clearErrors } from "../actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import "../css/userVerify.css";
 // const { user, loading } = useSelector((state) => state.auth);
 
 const UserVerify = () => {
@@ -16,6 +17,11 @@ const UserVerify = () => {
   const [bankImg, setBankImg] = useState([]);
   const [idCardImgPreview, setIdCardImgPreview] = useState([]);
   const [bankImgPreview, setBankImgPreview] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [idCardError, setIdCardError] = useState(false);
+  const [bankAccountError, setBankAccountError] = useState(false);
+  const [formValid, setFormValid] = useState(true);
 
   useEffect(() => {
     if (verifyStatus === "submitted") {
@@ -82,6 +88,23 @@ const UserVerify = () => {
     } catch (error) {
       console.error("Error submitting verification:", error);
     }
+
+    if (idCardImg.length === 0 || bankImg.length === 0) {
+      setFormValid(false);
+      return; // Stop submission if validation fails
+    } else {
+      setFormValid(true);
+    }
+  };
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
   };
 
   return (
@@ -90,35 +113,93 @@ const UserVerify = () => {
         <div>loading...</div>
       ) : (
         <Container>
-          <div>
-            <h2 className="mt-4">User Verification</h2>
-            <p>xxxxx</p>
-            <p>xxxxx</p>
-            <p>xxxxx</p>
-
-            <Form>
-              <Form.Group controlId="idCard">
-                <Form.Label>Upload Identification Card:</Form.Label>
-                <Form.Control
-                  type="file"
-                  accept="image/*"
-                  onChange={handleIdCardChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="bankAccount">
-                <Form.Label>Upload Bank Account Photo:</Form.Label>
-                <Form.Control
-                  type="file"
-                  accept="image/*"
-                  onChange={handleBankAccountChange}
-                />
-              </Form.Group>
-              <Button variant="primary" onClick={handleVerificationSubmit}>
-                Submit Verification
-              </Button>
-            </Form>
+          <div className="identity-verification">
+            <h2 className="titleVerify">Identity verification</h2>
+            <div className="headerVerify">
+              <h5>ยืนยันตัวตนก่อนลงขายสินค้า</h5>
+              <li>โดยต้องแนบภาพถ่ายดังนี้</li>
+            </div>
+            <ul className="requirements">
+              <li>1. ถ่ายภาพบัตรประจําตัวประชาชน</li>
+              <li>
+                2. ถ่ายภาพหน้าสมุดบัญชีธนาคาร
+                (ชื่อต้องตรงกับในบัตรประจําตัวประชาชน)
+              </li>
+            </ul>
           </div>
+          <Form>
+            <Row>
+              <Col md={5}>
+                <img
+                  src={"../assets/idCard.png"}
+                  className="img-fluid clickable"
+                  alt="ID Card"
+                  onClick={() => openModal("../assets/idCardBig.png")}
+                />
+                <Form.Group as={Col} controlId="idCard">
+                  <Form.Label>
+                    Upload IDcard<span style={{ color: "red" }}> *</span>
+                  </Form.Label>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <Form.Control
+                      className="idCard"
+                      type="file"
+                      name="receipt"
+                      accept="image/*"
+                      onChange={handleIdCardChange}
+                      feedback="Please upload ID card image."
+                      required
+                    />
+                  </div>
+                </Form.Group>
+              </Col>
+              <Col>
+                <img
+                  src={"../assets/bookBank.png"}
+                  className="img-fluid clickable"
+                  alt="Book Bank"
+                  onClick={() => openModal("../assets/bookBankBig.png")}
+                />
+                <Form.Group as={Col} controlId="bankAccount">
+                  <Form.Label>
+                    Upload book-bank<span style={{ color: "red" }}> *</span>
+                  </Form.Label>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <Form.Control
+                      className="bankAccount"
+                      type="file"
+                      name="receipt"
+                      accept="image/*"
+                      onChange={handleBankAccountChange}
+                      feedback="Please select a book-bank image."
+                      required
+                    />
+                  </div>
+                </Form.Group>
+              </Col>
+            </Row>
+            {!formValid && (
+              <div className="alertVerifySubmit">
+                Please add ID card and book-bank images.
+              </div>
+            )}
+            <button className="verifyButton" onClick={handleVerificationSubmit}>
+              Submit Verify
+            </button>
+
+            <Modal show={isModalOpen} onHide={closeModal}>
+              <Modal.Header closeButton>
+                <Modal.Title>Example Image</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <img
+                  src={selectedImage}
+                  className="img-fluid"
+                  alt="Full Size"
+                />
+              </Modal.Body>
+            </Modal>
+          </Form>
         </Container>
       )}
     </>
