@@ -9,7 +9,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
-  // const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`)
@@ -21,21 +21,45 @@ const ProductDetail = () => {
       .catch((error) =>
         console.error("Error fetching product details: ", error)
       );
-  }, [id]);
+
+      // Fetch user details based on product user_id
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${product.user_id}`)
+      .then((response) => response.json())
+      .then((userData) => {
+        setUser(userData);
+      })
+      .catch((error) => console.error("Error fetching user details: ", error));
+  }, [id, product.user_id]);
+
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   //   Profile Seller
   const handleProfileClick = () => {
-    setShowProfileModal(true);
+    // Fetch user details based on product user_id
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${product.user_id}`)
+      .then((response) => response.json())
+      .then((userData) => {
+        setUser(userData);
+        setShowProfileModal(true);
+      })
+      .catch((error) => console.error("Error fetching user details: ", error));
   };
+
   const handleCloseProfileModal = () => {
     setShowProfileModal(false);
   };
 
   // Contact Seller
   const handleContactClick = () => {
-    setShowContactModal(true);
+    // Fetch user details based on product user_id
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${product.user_id}`)
+      .then((response) => response.json())
+      .then((userData) => {
+        setUser(userData);
+        setShowContactModal(true);
+      })
+      .catch((error) => console.error("Error fetching user details: ", error));
   };
 
   const handleCloseContactModal = () => {
@@ -56,23 +80,23 @@ const ProductDetail = () => {
                 product.p_status === "0" ? "for-rent" : "for-sell"
               }`}
             >
-              {product.p_status === "0" ? "For Rent" : "For Sell"}
+              {product.p_status === "0" ? "For Rent" : "For Sale"}
             </div>
             <h4>
-              {product && product.p_price && product.p_price.toLocaleString()}{" "}
-              Bath/Month
+              {product &&
+                product.p_price &&
+                product.p_price.toLocaleString()}{" "}
+              {product.p_status === "0" ? "/Month" : "THB"}
             </h4>
-
             <h4>Conditions {product.p_conditions}% </h4>
           </div>
           <hr />
 
           <div className="seller-info">
             <span className="text-dot-200">
-              {product.user_id}
-              {/* {user.f_name}   */}
+              {/* {product.user_id} */}
             </span>
-            <p className="seller-name"> Seller Name</p>
+            {<p className="seller-name"> {user.f_name}</p>}
             <span className="profile-icon" onClick={handleProfileClick}>
               Icon
             </span>
@@ -82,7 +106,6 @@ const ProductDetail = () => {
             <h3>Description</h3>
 
             <p>
-              ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
               {product.p_description}
             </p>
             <Button className="contact-button" onClick={handleContactClick}>
@@ -115,18 +138,28 @@ const ProductDetail = () => {
             <Modal.Title>Profile Seller</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Profile information</p>
+            {/* Display user information */}
+            <img className="profile-icon"
+              src={user.profile_img}
+              alt={`Profile Image of ${user.f_name}`}
+              style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+            />
+            <p>{`Name: ${user.f_name} ${user.l_name}`}</p>
+            {/* Add more user information as needed */}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleCloseProfileModal}>Close</Button>
           </Modal.Footer>
         </Modal>
+
         <Modal show={showContactModal} onHide={handleCloseContactModal}>
           <Modal.Header closeButton>
             <Modal.Title>Contact Seller</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Contact information</p>
+            {/* Display contact information */}
+            <p>Email: {user.email}</p>
+            <p>Phone: {user.phone}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleCloseContactModal}>Close</Button>
