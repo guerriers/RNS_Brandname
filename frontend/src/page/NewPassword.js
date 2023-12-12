@@ -1,85 +1,83 @@
-import React, { Fragment, useState, useEffect } from 'react'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { resetPassword, clearErrors } from '../actions/userActions'
-import { useNavigate, useParams } from 'react-router-dom'
-
+import React, { Fragment, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { resetPassword, clearErrors } from "../actions/userActions";
+import { useNavigate, useParams } from "react-router-dom";
 
 const NewPassword = () => {
-    const { token } = useParams();
+  const { token } = useParams();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+  const { error, success } = useSelector((state) => state.forgotPassword);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const { error, success } = useSelector(state => state.forgotPassword)
-
-    useEffect(() => {
-
-        if (error) {
-            alert(error);
-            dispatch(clearErrors());
-        }
-
-        if (success) {
-            alert('Password updated successfully')
-            navigate('/login')
-        }
-
-    }, [dispatch, alert, error, success, navigate])
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.set('password', password);
-        formData.set('confirmPassword', confirmPassword);
-
-        dispatch(resetPassword(token, formData))
-        setPassword('');
-        setConfirmPassword('')
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      dispatch(clearErrors());
     }
 
-    return (
-        <Fragment>
-            <form className="shadow-lg" onSubmit={submitHandler}>
-                <h1 className="mb-3">New Password</h1>
+    if (success) {
+      alert("Password updated successfully");
+      navigate("/login");
+    }
+  }, [dispatch, alert, error, success, navigate]);
 
-                <div className="form-group">
-                    <label htmlFor="password_field">Password</label>
-                    <input
-                        type="password"
-                        id="password_field"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
+  const submitHandler = (e) => {
+    e.preventDefault();
 
-                <div className="form-group">
-                    <label htmlFor="confirm_password_field">Confirm Password</label>
-                    <input
-                        type="password"
-                        id="confirm_password_field"
-                        className="form-control"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                </div>
+    const formData = new FormData();
+    formData.set("password", password);
+    formData.set("confirmPassword", confirmPassword);
 
-                <button
-                    id="new_password_button"
-                    type="submit"
-                    className="btn btn-block py-3">
-                    Set Password
-                </button>
+    dispatch(resetPassword(token, formData));
+    setPassword("");
+    setConfirmPassword("");
+  };
 
-            </form>
+  return (
+    <Fragment>
+      <div className="forgot-password-container">
+        <form className="forgot-password-form shadow-lg" onSubmit={submitHandler}>
+          <h1 className="">Reset Password</h1>
+          <div className="form-group">
+            <label htmlFor="password_field">Enter New Password</label>
+            <input
+              type="password"
+              id="password_field"
+              className="form-control"
+              value={password}
+              placeholder="Enter New Password"
+              onChange={(e) => setPassword(e.target.value)}
+              style={{ opacity: 0.8 }}
+            />
+          </div>
 
-        </Fragment>
-    )
-}
+          <div className="form-group">
+            <label htmlFor="confirm_password_field">Confirm New Password</label>
+            <input
+              type="password"
+              id="confirm_password_field"
+              className="form-control"
+              value={confirmPassword}
+              placeholder="Confirm New Password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              style={{ opacity: 0.8 }}
+            />
+          </div>
 
-export default NewPassword
+          <button
+            id="forgot_password_button"
+            type="submit"
+            className="forgotButton"
+          >
+            Reset Password
+          </button>
+        </form>
+      </div>
+    </Fragment>
+  );
+};
+
+export default NewPassword;
