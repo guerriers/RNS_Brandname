@@ -1,0 +1,17 @@
+.submitted-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .loading-spinner {
+    text-align: center;
+  }
+  
+  .waiting-message {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #333;
+  }
+  
