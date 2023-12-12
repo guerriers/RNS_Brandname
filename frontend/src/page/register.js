@@ -17,6 +17,8 @@ const RegisterPage = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isTermsOfServicePopupVisible, setIsTermsOfServicePopupVisible] =
+    useState(false);
 
   const { user, isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
@@ -64,21 +66,30 @@ const RegisterPage = () => {
   };
 
   const handleTermsOfServiceChange = (e) => {
-    setTermsOfService(e.target.checked);
+    if (!isTermsOfServicePopupVisible) {
+      setTermsOfService(e.target.checked);
+    }
   };
-  //   const handleTermsOfServiceClick = () => {
-  //     setIsPopupBoxVisible(!isPopupBoxVisible);
-  //   };
+
+  const handleTermsOfServiceClick = () => {
+    setIsTermsOfServicePopupVisible(!isTermsOfServicePopupVisible);
+  };
+
+  const handleAccept = () => {
+    setTermsOfService(true);
+    setIsTermsOfServicePopupVisible(false);
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmit(true);
     const formData = new FormData();
-    formData.set('firstName',firstName)
-    formData.set('lastName',lastName)
-    formData.set('email',email)
-    formData.set('phone',phone)
-    formData.set('password',password)
+    formData.set("firstName", firstName);
+    formData.set("lastName", lastName);
+    formData.set("email", email);
+    formData.set("phone", phone);
+    formData.set("password", password);
 
     if (!termsOfService) {
       alert("Please agree to the terms of service.");
@@ -93,9 +104,7 @@ const RegisterPage = () => {
     }
 
     try {
-      await dispatch(
-        register(formData)
-      );
+      await dispatch(register(formData));
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -116,6 +125,42 @@ const RegisterPage = () => {
   };
   return (
     <>
+      {isTermsOfServicePopupVisible && (
+        <div className="terms-of-service-popup">
+          <h3>Terms of Service</h3>
+          <div className="terms-of-service-content">
+            <p>
+              1.
+              ทีมผู้พัฒนาเป็นเพียงสื่อกลางในการซื้อขายแลกเปลี่ยนสินค้าแบรนด์เนมมือสองเท่านั้น
+              หากเกิดความเสียหายขึ้น
+              ทางทีมผู้พัฒนาจะไม่รับผิดชอบในกรณีใดทั้งสิ้น
+            </p>
+            <p>
+              2. ทีมผู้พัฒนามีการเก็บรวบรวมข้อมูลผู้ใช้บริการ
+              และอาจมีการเปิดเผยชื่อ นามสกุล อีเมล หมายเลขโทรศัพท์
+              หมายเลขบัตรประชาชน บัญชีทางการเงิน และอื่นๆ
+              เพื่อใช้เป็นการยืนยันตัวตนรวมถึงช่องทางการติดต่อระหว่างผู้ซื้อและผู้ขาย
+            </p>
+            <p>
+              3.
+              ทีมผู้พัฒนาขอสงวนสิทธิ์ในการเปลี่ยนแปลงข้อตกลงในการให้บริการได้ตลอดเวลา
+              โดยไม่ต้องแจ้งให้ผู้ใช้บริการทราบล่วงหน้า
+            </p>
+          </div>
+          <div className="termsButton">
+            <button
+              className="acceptButton"
+              type="button"
+              onClick={handleAccept}
+            >
+              Accept
+            </button>
+            <button className="closeButton" onClick={handleTermsOfServiceClick}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       {loading ? (
         <div>loading...</div>
       ) : (
@@ -197,7 +242,10 @@ const RegisterPage = () => {
                     onChange={handleTermsOfServiceChange}
                   />
                   <label for="termsOfService">
-                    Yes, I agree to the <a href="#">Terms of Service</a>
+                    Yes, I agree to the{" "}
+                    <a href="#" onClick={handleTermsOfServiceClick}>
+                      Terms of Service
+                    </a>
                   </label>
                 </div>
 
