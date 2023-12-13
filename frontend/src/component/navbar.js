@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Nav, Navbar, Container } from "react-bootstrap";
+import { Nav, Navbar, Container, NavDropdown, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { FaSignOutAlt } from "react-icons/fa";
 import "../css/component/navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../actions/userActions";
 import { checkVerify } from "../actions/userActions";
+
+import {
+  FaSignOutAlt,
+  FaUserEdit,
+  FaCheckCircle,
+  FaShoppingBag,
+} from "react-icons/fa";
 
 const NavbarComponent = () => {
   const dispatch = useDispatch();
@@ -30,6 +36,9 @@ const NavbarComponent = () => {
     navigate("/");
   };
 
+  const userProfile = "../assets/userProfile.png";
+  {
+  }
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -57,6 +66,10 @@ const NavbarComponent = () => {
                   <LinkContainer to="/adminVerify">
                     <Nav.Link>Verify Request</Nav.Link>
                   </LinkContainer>
+
+                  <div className="logout" onClick={logoutHandler}>
+                    <FaSignOutAlt />
+                  </div>
                 </>
               )}
               {user.roles === "user" && (
@@ -77,16 +90,49 @@ const NavbarComponent = () => {
               )}
 
               {user.roles === "user" && (
-                <span className="text-dot-200">
-                  {user && user.f_name}
-                  {" : "}
-                  {isVerified ? "Verified" : "Need Verified"}
-                </span>
-              )}
+                <NavDropdown
+                  id="nav-dropdown-dark"
+                  title={
+                    user && user.profile_img ? (
+                      <Image
+                        src={userProfile}
+                        // src={user.profile_img}
+                        className="userProfile"
+                        alt="User Profile"
+                      />
+                    ) : (
+                      <span>No Profile Image</span>
+                    )
+                  }
+                  menuVariant="dark"
+                >
+                  <NavDropdown.Item disabled>
+                    <span className="text-dot-200">
+                      {isVerified ? "Verified" : "Need Verified"}{" "}
+                      {isVerified ? (
+                        <FaCheckCircle style={{ color: "#18af2a" }} />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/myProfile">
+                    <FaUserEdit /> My Profile
+                  </NavDropdown.Item>
+                  {isVerified && (
+                    <NavDropdown.Item as={Link} to="/sellerProfile">
+                      <FaShoppingBag /> Seller Profile
+                    </NavDropdown.Item>
+                  )}
+                  <NavDropdown.Divider />
 
-              <div className="logout" onClick={logoutHandler}>
-                <FaSignOutAlt />
-              </div>
+                  <NavDropdown.Item>
+                    <div className="logout" onClick={logoutHandler}>
+                      <FaSignOutAlt />
+                    </div>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
             </>
           ) : (
             <>
