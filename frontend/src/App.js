@@ -23,6 +23,7 @@ import Layout from './component/Layout';
 import NewPassword from "./page/NewPassword";
 import ForgotPassword from "./page/ForgotPassword";
 import Submitted from "./page/submitted";
+import UserProfile from "./page/userProfile";
 
 // from store
 import store from "./store";
@@ -61,6 +62,14 @@ function App() {
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="userVerify" element={<UserVerify />} />
+        </Route>
+        {/* In case that user clicked from navbar */}
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="profile" element={<UserProfile />} />
+        </Route>
+          {/* In case that user clicked from productDetail page */}
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="profile/:id" element={<UserProfile />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="submitted" element={<Submitted />} />

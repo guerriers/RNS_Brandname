@@ -7,7 +7,7 @@ const getUserById = async (req, res, next) => {
 
   try {
     const user = await User.findByPk(userId, {
-      attributes: ["f_name", "l_name", "email", "phone", "profile_img"],
+      attributes: ["f_name", "l_name", "email", "phone", "profile_img", "createdAt"],
     });
 
     if (!user) {
