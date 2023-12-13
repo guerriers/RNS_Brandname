@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Modal, Container } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { FaPhone } from "react-icons/fa";
 import "../css/productDetail.css";
 
@@ -140,6 +141,9 @@ const ProductDetail = () => {
             />
             <p>{`Name: ${user.f_name} ${user.l_name}`}</p>
             {/* Add more user information as needed */}
+            <LinkContainer to={`/profile/${product.user_id}`}>
+              <button className='image-button'>Seller's Profile</button>
+            </LinkContainer>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleCloseProfileModal}>Close</Button>
