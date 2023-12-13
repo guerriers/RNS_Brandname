@@ -120,7 +120,7 @@ const NavbarComponent = () => {
                     <FaUserEdit /> My Profile
                   </NavDropdown.Item>
                   {isVerified && (
-                    <NavDropdown.Item as={Link} to="/sellerProfile">
+                    <NavDropdown.Item as={Link} to="/profile">
                       <FaShoppingBag /> Seller Profile
                     </NavDropdown.Item>
                   )}

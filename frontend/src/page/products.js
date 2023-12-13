@@ -184,7 +184,7 @@ const Product = () => {
           <Row>
             {products.map((product) => (
               <Col md={6} lg={4} xl={4} className="mt-4">
-                <Link to={`/productDetail/${product.id}`} key={product.id}>
+                <Link to={`/product/${product.id}`} key={product.id}>
                   <div className="product-box">
                     {product.p_img && product.p_img.length > 0 ? (
                       <img src={product.p_img[0].url} alt={product.p_name} />

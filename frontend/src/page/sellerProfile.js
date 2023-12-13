@@ -3,9 +3,9 @@ import { Button, Modal, Container } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import "../css/userProfile.css";
+import "../css/sellerProfile.css";
 
-function UserProfile() {
+function SellerProfile() {
   const { id } = useParams();
   const [user, setUser] = useState({});
   const [productCount, setProductCount] = useState(0);
@@ -95,7 +95,7 @@ function UserProfile() {
         <h4>Products from this seller:</h4>
         {userProducts.length > 0 ? (
           userProducts.map((product) => (
-                <Link to={`/productDetail/${product.id}`} key={product.id}>
+                <Link to={`/product/${product.id}`} key={product.id}>
                   <div className="product-box">
                     {product.p_img && product.p_img.length > 0 ? (
                       <img src={product.p_img[0].url} alt={product.p_name} />
@@ -147,4 +147,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default SellerProfile;
