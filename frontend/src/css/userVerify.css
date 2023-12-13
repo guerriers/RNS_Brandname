@@ -1,0 +1,67 @@
+.identity-verification {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.titleVerify {
+  text-align: center;
+  margin-top: 28px;
+  margin-bottom: 5%;
+  font-size: 36px;
+}
+.headerVerify {
+  text-align: left;
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
+
+.requirements {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 50px;
+}
+
+.form-label {
+  margin-top: 30px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.verifyButton {
+  padding: 12px 24px 12px 24px;
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  background: #be9f4e;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+  margin-top: 50px;
+}
+.verifyButton:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.bankAccount{
+  width: 300px;
+  margin-top:10px
+}
+
+.idCard{
+  width: 300px;
+  margin-top:10px
+}
+
+.alertVerifySubmit{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* text-align: center; */
+  font-size: 16px;
+  color: red;
+}

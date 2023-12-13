@@ -15,6 +15,7 @@
   background: #ffffff;
   box-shadow: 0px 0px 13px 8px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
+  color: #ffffff;
 }
 
 .box-border-register {
@@ -62,6 +63,7 @@
   box-sizing: border-box;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 100px;
+  color: #ffffff;
 }
 
 .input-register {
@@ -76,6 +78,7 @@
   box-sizing: border-box;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 100px;
+  color: #ffffff;
 }
 
 .button-submit-register {
@@ -134,4 +137,71 @@ label {
   height: 500px;
   background-color: white;
   padding: 20px;
+}
+
+.terms-of-service-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border: 10px solid #333333;
+  z-index: 100;
+  border-radius: 30px;
+}
+
+.terms-of-service-content {
+  margin-top: 40px;
+  /* text-align: left; */
+}
+
+.terms-of-service-content p {
+  margin: 0px;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
+  color: #333333;
+}
+.termsButton {
+  margin-bottom: 10%;
+  margin-top: 10%;
+}
+
+.acceptButton {
+  padding: 12px 24px 12px 24px;
+  border: none;
+  text-align: center;
+  color: #333333;
+  background: #e7c264;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+}
+.acceptButton:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.closeButton {
+  padding: 12px 24px 12px 24px;
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  background-color: #e02121;
+  margin-left: 10%;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+}
+
+.closeButton:hover {
+  background-color: #333333;
+  color: #ffffff;
 }
