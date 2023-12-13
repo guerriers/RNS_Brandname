@@ -134,15 +134,15 @@ const ProductDetail = () => {
           <Modal.Body>
             {/* Display user information */}
             <img
-              className="profile-icon"
-              src={user.profile_img}
+              className="profile-modal-icon"
+              src="../assets/userProfile.png" /* Don't forgot to change the pic na */
               alt={`Profile Image of ${user.f_name}`}
               style={{ width: "100px", height: "100px", borderRadius: "50%" }}
             />
-            <p>{`Name: ${user.f_name} ${user.l_name}`}</p>
+            <p className="profile-modal-info">{`Name: ${user.f_name} ${user.l_name}`}</p>
             {/* Add more user information as needed */}
             <LinkContainer to={`/profile/${product.user_id}`}>
-              <button className='image-button'>Seller's Profile</button>
+              <button className='sellerprofile-button'>Seller's Profile</button>
             </LinkContainer>
           </Modal.Body>
           <Modal.Footer>

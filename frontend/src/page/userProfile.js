@@ -1,49 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Button, Modal, Container } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import Col from "react-bootstrap/Col";
+import { useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 import "../css/userProfile.css";
 
 function UserProfile() {
   const { id } = useParams();
   const [user, setUser] = useState({});
-  const [isSellerProfile, setIsSellerProfile] = useState(false);
   const [productCount, setProductCount] = useState(0);
   const [userProducts, setUserProducts] = useState([]);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [reportContent, setReportContent] = useState("");
+  const { isVerified, verify_status } = useSelector(
+    (state) => state.verify_status
+  );
 
   useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    const userId = params.id;
-
-    if (userId) {
-      fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${userId}`)
+    // Fetch user details based on product user_id
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${id}`)
         .then((response) => response.json())
         .then((userData) => {
           setUser(userData);
-          setIsSellerProfile(true);
           fetchProducts(id);
+          console.log("Received user data:", userData);
+          console.log("Received user id:", id);
         })
         .catch((error) => console.error("Error fetching user details from URL: ", error));
-    } else {
-      fetch(`${process.env.REACT_APP_BASE_URL}/api/users/current`)
-        .then((response) => response.json())
-        .then((userData) => {
-          setUser(userData);
-          setIsSellerProfile(false);
-          fetchProducts(id);
-        })
-        .catch((error) => console.error("Error fetching current user details: ", error));
-    }
-
-    if (isSellerProfile) {
-      fetch(`${process.env.REACT_APP_BASE_URL}/api/products/count?user_id=${userId}`)
-        .then((response) => response.json())
-        .then((countData) => {
-          setProductCount(countData.count);
-        })
-        .catch((error) => console.error("Error fetching product count: ", error));
-    }
+        
   }, [id]);
 
   const fetchProducts = (userId) => {
@@ -55,33 +39,60 @@ function UserProfile() {
       .then((response) => response.json())
       .then((data) => {
         setUserProducts(data);
+        setProductCount(data.length);
       })
       .catch((error) => {
         console.error("Error fetching user products data:", error);
       });
   };
 
+  const handleReportClick = () => {
+    setShowReportModal(true);
+  };
+
+  const handleCloseReportModal = () => {
+    setShowReportModal(false);
+    setReportContent(""); // Reset report content when closing the modal
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Perform the submission logic here
+    console.log("Submitting report:", reportContent);
+
+    // Add logic for sending the report to the server or performing other actions
+    // For example, you might want to send a request to your server to handle the report
+    // ...
+
+    // Close the modal after submission
+    handleCloseReportModal();
+  };
+
+
   return (
     <Container>
       <div className="user-profile-container">
         <div className="user-profile-image">
-          <img src="../assets/userProfile.png" alt="user profile" />
+          <img src="../assets/userProfile.png" alt="user profile" /> {/* Don't forgot to change the pic na */}
         </div>
         <div className="user-profile-info">
-          <h1>{user.f_name} {user.l_name}</h1>
+          <h2>{user.f_name} {user.l_name}</h2>
+          <span className="verified-badge"> {isVerified ? "Verified" : "Need Verified"} </span>
           <h3>{user.email}</h3>
           <h3>{user.phone}</h3>
           <div>
-            <h3>Count Products from this seller: {productCount}</h3>
-            <h3>Joined since: {user.joinDate}</h3>
+            <h3>Products from {user.f_name}: {productCount}</h3>
+            <h3>Joined since: {user.createdAt}</h3>
           </div>
           <div>
-            <h3>Report Button</h3>
+          <button className='report-button' onClick={handleReportClick}>Report</button>
           </div>
         </div>
       </div>
 
       <div className="userProduct-grid">
+        <h4>Products from this seller:</h4>
         {userProducts.length > 0 ? (
           userProducts.map((product) => (
                 <Link to={`/productDetail/${product.id}`} key={product.id}>
@@ -103,10 +114,35 @@ function UserProfile() {
                 </Link>
           ))
         ) : (
-          <p>You have not post some Product.</p>
+          <p>This seller hasn't post any Product.</p>
         )}
       </div>
+        <Modal show={showReportModal} onHide={handleCloseReportModal}>
+        <Modal.Header closeButton>
+            <Modal.Title>Report Seller</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            {/* Report form */}
+            <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+                <label htmlFor="reportContent" className="form-label">Report Content:</label>
+                <textarea
+                className="form-control"
+                id="reportContent"
+                rows="4"
+                value={reportContent}
+                onChange={(e) => setReportContent(e.target.value)}
+                required
+                ></textarea>
+            </div>
 
+            <Modal.Footer>
+                <Button type="submit">Submit</Button>
+                <Button onClick={handleCloseReportModal}>Close</Button>
+            </Modal.Footer>
+            </form>
+        </Modal.Body>
+        </Modal>
     </Container>
   );
 }
