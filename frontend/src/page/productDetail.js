@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Modal, Container } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { FaPhone } from "react-icons/fa";
 import "../css/productDetail.css";
 
@@ -133,13 +134,16 @@ const ProductDetail = () => {
           <Modal.Body>
             {/* Display user information */}
             <img
-              className="profile-icon"
-              src={user.profile_img}
+              className="profile-modal-icon"
+              src="../assets/userProfile.png" /* Don't forgot to change the pic na */
               alt={`Profile Image of ${user.f_name}`}
               style={{ width: "100px", height: "100px", borderRadius: "50%" }}
             />
-            <p>{`Name: ${user.f_name} ${user.l_name}`}</p>
+            <p className="profile-modal-info">{`Name: ${user.f_name} ${user.l_name}`}</p>
             {/* Add more user information as needed */}
+            <LinkContainer to={`/profile/${product.user_id}`}>
+              <button className='sellerprofile-button'>Seller's Profile</button>
+            </LinkContainer>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleCloseProfileModal}>Close</Button>

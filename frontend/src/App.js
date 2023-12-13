@@ -24,7 +24,7 @@ import NewPassword from "./page/NewPassword";
 import ForgotPassword from "./page/ForgotPassword";
 import Submitted from "./page/submitted";
 import MyProfile from "./page/myProfile";
-// import UserProfile from "./page/userProfile";
+import UserProfile from "./page/userProfile";
 
 // from store
 import store from "./store";
@@ -103,6 +103,15 @@ function App() {
             />
           }
         >
+        {/* In case that user clicked from navbar */}
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="profile" element={<UserProfile />} />
+        </Route>
+          {/* In case that user clicked from productDetail page */}
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="profile/:id" element={<UserProfile />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="submitted" element={<Submitted />} />
         </Route>
         <Route
@@ -116,7 +125,7 @@ function App() {
           <Route path="myProducts" element={<MyProducts />} />
         </Route>
 
-        {/* <Route
+          <Route
           element={
             <RequireAuth
               allowedRoles={"user"}
@@ -125,7 +134,7 @@ function App() {
           }
         >
           <Route path="userProfile" element={<UserProfile />} />
-        </Route> */}
+        </Route>
         <Route
           element={
             <RequireAuth
