@@ -152,6 +152,8 @@ header img {
   max-width: 300px;
   margin: 15px;
   padding: 10px;
+  display: flex;
+  flex-wrap: nowrap !important;
 }
 
 .category p {
@@ -299,19 +301,30 @@ footer p {
   margin-left: 0px;
 }
 
-/* Previous arrow */
 .slick-prev {
   left: 20% !important;
   top: 40% !important;
   z-index: 1;
-  background-color: #be9f4e !important; 
+  color: #be9f4e !important; 
+} 
 
-}
-
-/* Next arrow */
 .slick-next {
   right: 20% !important;
   top: 40% !important;
   z-index: 1;
-  background-color: #be9f4e !important;
+  color: #be9f4e !important;
+}
+
+.slick-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: fit-content !important;
+
+} 
+
+.product-status {
+  margin-right: 30px;
+}
+.product-price {
+  margin-left: 10px;
 }
