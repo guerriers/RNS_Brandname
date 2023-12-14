@@ -51,3 +51,28 @@
   color: #ffffff;
   font-size: 32px;
 }
+
+.editProfileForm {
+    display: flex;
+    margin: 20px;
+    justify-content: space-around;
+}
+
+.formGridFirstName {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.formGridLastName {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.editProfileBtn {
+    margin: 10px;
+    bottom: 100px;
+    right: 150px;
+    position: fixed
+}
