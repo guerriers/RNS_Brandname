@@ -27,6 +27,7 @@ const AdminVerify = () => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/userVerify`, config)
       .then((response) => response.json())
       .then((data) => {
+        data.sort((a, b) => a.verify_status.localeCompare(b.verify_status));
         setUserVerify(data);
         setHasLoaded(false);
         console.log("Received user verify data:", data);
@@ -111,7 +112,6 @@ const AdminVerify = () => {
             {successMessage && (
               <Alert variant="success">{successMessage}</Alert>
             )}{" "}
-            
             <div className="verify-grid">
               {userVerify.map((request, index) => {
                 const userData = usersData[index] || {};
@@ -143,7 +143,6 @@ const AdminVerify = () => {
                 );
               })}
             </div>
-
             <Modal
               show={showConfirmation}
               onHide={() => setShowConfirmation(false)}
