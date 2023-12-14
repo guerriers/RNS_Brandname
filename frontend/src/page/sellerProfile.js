@@ -132,6 +132,7 @@ function SellerProfile() {
                   {user.createdAt ? formatDate(user.createdAt) : "N/A"}
                 </h3>
               </div>
+
             </div>
           </div>
         </Col>
