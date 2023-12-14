@@ -73,14 +73,21 @@ const ProductDetail = () => {
           <h1>{product.p_name}</h1>
           <h2>{product.p_brand}</h2>
           <hr />
-
           <div>
             <div
-              className={`p-status ${
-                product.p_status === "0" ? "for-rent" : "for-sell"
+              className={`p-statusDetail ${
+                product.p_status === "0"
+                  ? "for-rent-detail"
+                  : product.p_status === "1"
+                  ? "for-sell-detail"
+                  : "sold-out-detail"
               }`}
             >
-              {product.p_status === "0" ? "For Rent" : "For Sale"}
+              {product.p_status === "0"
+                ? "For Rent"
+                : product.p_status === "1"
+                ? "For Sell"
+                : "Sold Out"}
             </div>
             <h4>
               {product && product.p_price && product.p_price.toLocaleString()}{" "}
@@ -142,7 +149,7 @@ const ProductDetail = () => {
             <p className="profile-modal-info">{`Name: ${user.f_name} ${user.l_name}`}</p>
             {/* Add more user information as needed */}
             <LinkContainer to={`/profile/${product.user_id}`}>
-              <button className='sellerprofile-button'>Seller's Profile</button>
+              <button className="sellerprofile-button">Seller's Profile</button>
             </LinkContainer>
           </Modal.Body>
           <Modal.Footer>
