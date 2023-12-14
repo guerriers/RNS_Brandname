@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import "../css/home.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Col from "react-bootstrap/Col";
 
 function HomePage() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/api/products`)
+      .then((response) => {
+        // Sort the products based on the createdAt timestamp in descending order
+        const sortedProducts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setProducts(sortedProducts);
+        console.log("Received product data :", sortedProducts);
+      })
+      .catch((error) => {
+        console.error("Error fetching product data:", error);
+      });
+  }, []);
 
   function handleCategoryClick(category) {
     // Handle category click, e.g., navigate to a specific category page
@@ -66,32 +84,7 @@ function HomePage() {
   const redirectToURL = (targetURL) => {
     window.location.href = targetURL;
   }
-  const product = [
-    {
-      img: `../assets/p2.jpeg`,
-      text: `Product1`
-    },
-    {
-      img: `../assets/BestSeller2.png`,
-      text: `Product2`
-    },
-    {
-      img: `../assets/BestSeller3.png`,
-      text: `Product3`
-    },
-    {
-      img: `../assets/BestSeller4.png`,
-      text: `Product4`
-    },
-    {
-      img: `../assets/BestSeller2.png`,
-      text: `Product5`
-    },
-    {
-      img: `../assets/BestSeller3.png`,
-      text: `Product6`
-    }
-  ]
+
   const categories = [
     {
       img: `../assets/clothes.jpeg`,
@@ -355,19 +348,29 @@ function HomePage() {
 
         <hr className='h' />
       
-        <h1 className="decorated-h1">Best Seller</h1>
-            <Slider {...settings}>                
-                {product.map((d) => (
-                    <div className='category'>
-                      <img src={d.img} />
-                      <p>{d.text}</p>
+        <h1 className="decorated-h1">Recently Posted Products</h1>
+          <Slider {...settings}>
+                {products.map((product) => (
+                <Link to={`/product/${product.id}`} key={product.id}>
+                  <div className="category">
+                    {product.p_img && product.p_img.length > 0 ? (
+                      <img src={product.p_img[0].url} alt={product.p_name} />
+                    ) : (
+                      <p>No image available</p>
+                    )}
+                    <div
+                      className={`product-status ${
+                        product.p_status === "0" ? "for-rent" : "for-sell"
+                      }`}
+                    >
+                      {product.p_status === "0" ? "For Rent" : "For Sell"}
                     </div>
-              ))}
-            </Slider>
-       
-          
-
-
+                    <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
+                  </div>
+                </Link>
+            ))}
+          </Slider>
+        
         <hr className='h' />
 
         <h1 className="decorated-h1">Explore by Brand</h1>
