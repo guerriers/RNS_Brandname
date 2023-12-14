@@ -21,12 +21,18 @@
 
 .verified-badge {
   position: relative;
-  padding: 10px 20px 10px 20px;
-  background-color: #333333;
-  color: #f0f0f0;
+  padding: 10px 15px;
+  color: #be9f4e;
+  border: 2px solid #be9f4e;
   border-radius: 100px;
   font-weight: 700;
-  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+}
+
+.FaCheckSellerPro {
+  margin-bottom: 3px;
+  margin-left: 5px;
 }
 
 .user-profile-container h2 {
@@ -44,6 +50,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+  user-select: none;
 }
 
 .report-button {
@@ -87,6 +94,7 @@
   width: 100%;
   margin-bottom: 10px;
   text-align: left;
+  user-select: none;
 }
 
 .userProduct-box {
@@ -127,12 +135,14 @@
   max-height: 400px;
   overflow-y: auto;
   margin-bottom: 60px;
+  user-select: none;
 }
 
 .review-container h2 {
   text-align: center;
   color: #333;
   margin-top: 20px;
+  user-select: none;
 }
 
 .review-container ul {

@@ -6,6 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import "../css/sellerProfile.css";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaCheckCircle } from "react-icons/fa";
 
 function SellerProfile() {
   const { id } = useParams();
@@ -132,6 +133,10 @@ function SellerProfile() {
               <span className="verified-badge">
                 {" "}
                 {isVerified ? "Verified" : "Need Verified"}{" "}
+                <FaCheckCircle
+                  className="FaCheckSellerPro"
+                  style={{ color: "#18af2a" }}
+                />
               </span>
               <h3>E-mail: {user.email}</h3>
               <h3>Tel: {user.phone}</h3>
