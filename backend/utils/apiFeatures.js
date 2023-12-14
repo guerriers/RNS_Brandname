@@ -1,5 +1,5 @@
 // utils/APIFeatures.js
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 class APIFeatures {
   constructor(model, queryStr) {

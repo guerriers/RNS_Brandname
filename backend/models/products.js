@@ -49,11 +49,6 @@ Product.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    isAvailable: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true,
-    },
   },
   {
     sequelize,
