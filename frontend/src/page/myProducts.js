@@ -136,10 +136,10 @@ const MyProducts = () => {
                     <div
                       className={`product-status ${
                         product.p_status === "0"
-                          ? "for-rent"
+                          ? "for-rent-myProduct"
                           : product.p_status === "1"
-                          ? "for-sell"
-                          : "sold-out"
+                          ? "for-sell-myProduct"
+                          : "sold-out-myProduct"
                       }`}
                     >
                       {product.p_status === "0"

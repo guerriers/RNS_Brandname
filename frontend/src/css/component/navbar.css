@@ -45,6 +45,16 @@
   overflow: hidden !important;
   text-overflow: ellipsis;
   color: #be9f4e;
+  user-select: none;
+}
+.text-dot-200-nav {
+  display: inline-block;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  color: #be9f4e;
+  user-select: none;
 }
 
 .dropdown-item {
@@ -58,6 +68,6 @@
   object-fit: cover;
 }
 
-.text-dot-200{
+.text-dot-200 {
   text-align: center;
 }

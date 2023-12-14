@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Modal, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { FaPhone } from "react-icons/fa";
 import "../css/productDetail.css";
+import { FaCheckCircle, FaPhone } from "react-icons/fa";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -98,12 +98,25 @@ const ProductDetail = () => {
           <hr />
 
           <div className="seller-info">
-            <span className="text-dot-200">{/* {product.user_id} */}</span>
-            {<p className="seller-name"> {user.f_name}</p>}
-            <span className="profile-icon" onClick={handleProfileClick}>
-              Icon
-            </span>
+            {
+              <p className="seller-name" onClick={handleProfileClick}>
+                <FaCheckCircle
+                  className="faCheckProductDe"
+                  style={{ color: "#003cf0" }}
+                />
+                {user.f_name} {user.l_name}
+                {/* <p className="profile-icon-de">
+              </p> */}
+                <img
+                  className="profile-modal-icon2"
+                  src="../assets/userProfile.png"
+                  alt={`Profile Image`}
+                  style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+                />
+              </p>
+            }
           </div>
+
           <hr />
           <div>
             <h3>Description</h3>
