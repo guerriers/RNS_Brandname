@@ -253,7 +253,7 @@ const EditProduct = ({ history }) => {
                       value={productEdit.p_category}
                       required
                     >
-                      <option value="">Category</option>
+                      <option value="">Select Category</option>
                       <option value="Clothes">Clothes</option>
                       <option value="Accessories">Accessories</option>
                       <option value="Shoes/Sneakers">Shoes/Sneakers</option>
@@ -329,7 +329,7 @@ const EditProduct = ({ history }) => {
                       }
                       required
                     >
-                      <option value={""}>Brand</option>
+                      <option value={""}>Select Brand</option>
                       <option value={"Nike"}>Nike</option>
                       <option value={"Vans"}>Vans</option>
                       <option value={"Channel"}>Channel</option>

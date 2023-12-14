@@ -217,7 +217,7 @@ const AddProduct = () => {
                       }
                       required
                     >
-                      <option value={""}>Category</option>
+                      <option value={""}>Select Category</option>
                       <option value="Clothes">Clothes</option>
                       <option value="Accessories">Accessories</option>
                       <option value="Shoes/Sneakers">Shoes/Sneakers</option>
@@ -233,112 +233,51 @@ const AddProduct = () => {
                   <Form.Group as={Col} md={1}></Form.Group>
                 </Row>
 
-              <Row className="mb-3">
-                {/* <Form.Group as={Col} md={4}></Form.Group> */}
-                <Form.Group as={Col} md={2} controlId="formGridPrice">
-                  <Form.Label>
-                    Price | THB<span style={{ color: "red" }}> *</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Product Price"
-                    name="price"
-                    required
-                    value={formValues.p_price}
-                    onChange={(e) =>
-                      setFormValues((prevValues) => ({
-                        ...prevValues,
-                        p_price: e.target.value,
-                      }))
-                    }
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please Add Product Price
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md={2} controlId="formGridCondition">
-                  <Form.Label>
-                    Conditions<span style={{ color: "red" }}> *</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Conditions (%)"
-                    name="conditions"
-                    required
-                    value={formValues.p_conditions}
-                    onChange={(e) =>
-                      setFormValues((prevValues) => ({
-                        ...prevValues,
-                        p_conditions: e.target.value,
-                      }))
-                    }
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please Add Condition
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md={1}></Form.Group>
-                <Form.Group as={Col} md={2} controlId="formGridBrand">
-                  <Form.Label>
-                    Brand<span style={{ color: "red" }}> *</span>
-                  </Form.Label>
-                  <Form.Select
-                    name="brand"
-                    onChange={(e) =>
-                      setFormValues((prevValues) => ({
-                        ...prevValues,
-                        p_brand: e.target.value,
-                      }))
-                    }
-                    required
-                  >
-                    <option value={""}>Brand</option>
-                    <option value={"Nike"}>Nike</option>
-                    <option value={"Vans"}>Vans</option>
-                    <option value={"Channel"}>Channel</option>
-                    <option value={"Gucci"}>Gucci</option>
-                    <option value={"Tiffany&Co"}>Tiffany&Co.</option>
-                    <option value={"Adidas"}>Adidas</option>
-                    <option value={"Sephora"}>Sephora</option>
-                    <option value={"Puma"}>Puma</option>
-                    <option value={"Versace"}>Versace</option>
-                    <option value={"LVMH"}>LVMH</option>
-                    <option value={"TommyHilfiger"}>Tommy Hilfiger</option>
-                    <option value={"Guess"}>Guess</option>
-                    <option value={"CalvinKlein"}>Calvin Klein</option>
-                    <option value={"Coach"}>Coach</option>
-                    <option value={"Prada"}>Prada</option>
-                    <option value={"Lacoste"}>Lacoste</option>
-                    <option value={"Converse"}>Converse</option>
-                    <option value={"Cartier"}>Cartier</option>
-                    <option value={"LouisVuitton"}>Louis Vuitton</option>
-                    <option value={"Rolex"}>Rolex</option>
-                    <option value={"Zara"}>Zara</option>
-                    <option value={"H&M"}>H&M</option>
-                    <option value={"Hermes"}>Hermes</option>
-                    <option value={"Fendi"}>Fendi</option>
-                    <option value={"YSL"}>YSL</option>
-                    <option value={"Balenciaga"}>Balenciaga</option>
-                    <option value={"Supreme"}>Supreme</option>
-                    <option value={"Valentino"}>Valentino</option>
-                    <option value={"Dior"}>Dior</option>
-                    <option value={"PatekPhilippe"}>Patek Philippe</option>
-                    <option value={"Swarovski"}>Swarovski</option>
-                    <option value={"Burberry"}>Burberry</option>
-                    <option value={"TomFord"}>Tom Ford</option>
-                    <option value={"VictoriaSecret"}>Victoria's Secret</option>
-                    <option value={"NewBalance"}>New Balance</option>
-                    <option value={"ChristianLouboutin"}>Christian Louboutin</option>
-                    <option value={"RayBan"}>Ray Ban</option>
-                    <option value={"other"}>Other</option>
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    Please Add Brand
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <Row>
-
+                <Row className="mb-3">
+                  {/* <Form.Group as={Col} md={4}></Form.Group> */}
+                  <Form.Group as={Col} md={2} controlId="formGridPrice">
+                    <Form.Label>
+                      Price | THB<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Product Price"
+                      name="price"
+                      required
+                      value={formValues.p_price}
+                      onChange={(e) =>
+                        setFormValues((prevValues) => ({
+                          ...prevValues,
+                          p_price: e.target.value,
+                        }))
+                      }
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please Add Product Price
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} md={2} controlId="formGridCondition">
+                    <Form.Label>
+                      Conditions<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Conditions (%)"
+                      name="conditions"
+                      required
+                      value={formValues.p_conditions}
+                      onChange={(e) =>
+                        setFormValues((prevValues) => ({
+                          ...prevValues,
+                          p_conditions: e.target.value,
+                        }))
+                      }
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please Add Condition
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} md={1}></Form.Group>
                   <Form.Group as={Col} md={2} controlId="formGridBrand">
                     <Form.Label>
                       Brand<span style={{ color: "red" }}> *</span>
@@ -353,44 +292,79 @@ const AddProduct = () => {
                       }
                       required
                     >
-                      <option value={""}>Brand</option>
-                      <option value="Clothes">Clothes</option>
-                      <option value="Accessories">Accessories</option>
-                      <option value="Shoes/Sneakers">Shoes/Sneakers</option>
-                      <option value="Headwear">Headwear</option>
-                      <option value="Eyewear">Eyewear</option>
-                      <option value="Bag">Bag</option>
-                      <option value="Others">Others</option>
+                      <option value={""}>Select Brand</option>
+                      <option value={"Nike"}>Nike</option>
+                      <option value={"Vans"}>Vans</option>
+                      <option value={"Channel"}>Channel</option>
+                      <option value={"Gucci"}>Gucci</option>
+                      <option value={"Tiffany&Co"}>Tiffany&Co.</option>
+                      <option value={"Adidas"}>Adidas</option>
+                      <option value={"Sephora"}>Sephora</option>
+                      <option value={"Puma"}>Puma</option>
+                      <option value={"Versace"}>Versace</option>
+                      <option value={"LVMH"}>LVMH</option>
+                      <option value={"TommyHilfiger"}>Tommy Hilfiger</option>
+                      <option value={"Guess"}>Guess</option>
+                      <option value={"CalvinKlein"}>Calvin Klein</option>
+                      <option value={"Coach"}>Coach</option>
+                      <option value={"Prada"}>Prada</option>
+                      <option value={"Lacoste"}>Lacoste</option>
+                      <option value={"Converse"}>Converse</option>
+                      <option value={"Cartier"}>Cartier</option>
+                      <option value={"LouisVuitton"}>Louis Vuitton</option>
+                      <option value={"Rolex"}>Rolex</option>
+                      <option value={"Zara"}>Zara</option>
+                      <option value={"H&M"}>H&M</option>
+                      <option value={"Hermes"}>Hermes</option>
+                      <option value={"Fendi"}>Fendi</option>
+                      <option value={"YSL"}>YSL</option>
+                      <option value={"Balenciaga"}>Balenciaga</option>
+                      <option value={"Supreme"}>Supreme</option>
+                      <option value={"Valentino"}>Valentino</option>
+                      <option value={"Dior"}>Dior</option>
+                      <option value={"PatekPhilippe"}>Patek Philippe</option>
+                      <option value={"Swarovski"}>Swarovski</option>
+                      <option value={"Burberry"}>Burberry</option>
+                      <option value={"TomFord"}>Tom Ford</option>
+                      <option value={"VictoriaSecret"}>
+                        Victoria's Secret
+                      </option>
+                      <option value={"NewBalance"}>New Balance</option>
+                      <option value={"ChristianLouboutin"}>
+                        Christian Louboutin
+                      </option>
+                      <option value={"RayBan"}>Ray Ban</option>
+                      <option value={"other"}>Other</option>
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
-                      Please Select Brand
+                      Please Add Brand
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Row>
-                  <Row className="mb-3">
-                    <Form.Group as={Col} md={7} controlId="formGridDescription">
-                      <Form.Label>
-                        Description<span style={{ color: "red" }}> *</span>
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        as="textarea"
-                        placeholder="Product Description"
-                        name="description"
-                        style={{ height: "100px" }}
-                        required
-                        value={formValues.p_description}
-                        onChange={(e) =>
-                          setFormValues((prevValues) => ({
-                            ...prevValues,
-                            p_description: e.target.value,
-                          }))
-                        }
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please Add Description
-                      </Form.Control.Feedback>
-                    </Form.Group>
+                <Row className="mb-3">
+                  <Form.Group as={Col} md={7} controlId="formGridDescription">
+                    <Form.Label>
+                      Description<span style={{ color: "red" }}> *</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      as="textarea"
+                      placeholder="Product Description"
+                      name="description"
+                      style={{ height: "100px" }}
+                      required
+                      value={formValues.p_description}
+                      onChange={(e) =>
+                        setFormValues((prevValues) => ({
+                          ...prevValues,
+                          p_description: e.target.value,
+                        }))
+                      }
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please Add Description
+                    </Form.Control.Feedback>
+                  </Form.Group>
                 </Row>
 
                 {receiptsPreview.map((img) => (
