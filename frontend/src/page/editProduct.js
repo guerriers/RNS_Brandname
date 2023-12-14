@@ -320,16 +320,13 @@ const EditProduct = ({ history }) => {
                     </Form.Label>
                     <Form.Select
                       name="brand"
-                      
                       value={productEdit.p_brand}
-
                       onChange={(e) =>
                         setProductEdit((prevValues) => ({
                           ...prevValues,
                           p_brand: e.target.value,
                         }))
                       }
-                      
                       required
                     >
                       <option value={""}>Brand</option>
@@ -366,12 +363,15 @@ const EditProduct = ({ history }) => {
                       <option value={"Swarovski"}>Swarovski</option>
                       <option value={"Burberry"}>Burberry</option>
                       <option value={"TomFord"}>Tom Ford</option>
-                      <option value={"VictoriaSecret"}>Victoria's Secret</option>
+                      <option value={"VictoriaSecret"}>
+                        Victoria's Secret
+                      </option>
                       <option value={"NewBalance"}>New Balance</option>
-                      <option value={"ChristianLouboutin"}>Christian Louboutin</option>
+                      <option value={"ChristianLouboutin"}>
+                        Christian Louboutin
+                      </option>
                       <option value={"RayBan"}>Ray Ban</option>
                       <option value={"other"}>Other</option>
-
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       Please Select Brand
@@ -460,8 +460,9 @@ const EditProduct = ({ history }) => {
                       required
                     >
                       <option value="">Select Status</option>
-                      <option value="0">Rent</option>
-                      <option value="1">Sell</option>
+                      <option value="0">For Rent</option>
+                      <option value="1">For Sell</option>
+                      <option value="2">Sold Out</option>
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       Please Select Category
