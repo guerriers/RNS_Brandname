@@ -29,6 +29,7 @@ const UserVerify = () => {
     }
   }, [verifyStatus, navigate]);
 
+  const MAX_IMAGE_SIZE_MB = 149;
   const handleIdCardChange = (e) => {
     const files = Array.from(e.target.files);
     const reader = new FileReader();
@@ -40,7 +41,13 @@ const UserVerify = () => {
     };
 
     reader.readAsDataURL(e.target.files[0]);
-    setIdCardImg(files);
+    if (e.target.files[0].size > MAX_IMAGE_SIZE_MB * 1024 * 1024) {
+      setIdCardError(true);
+      alert("IdCard Image is too large, limited to no more than 150 MB.");
+    } else {
+      setIdCardError(false);
+      setIdCardImg(files);
+    }
   };
 
   const handleBankAccountChange = (e) => {
@@ -54,7 +61,13 @@ const UserVerify = () => {
     };
 
     reader.readAsDataURL(e.target.files[0]);
-    setBankImg(files);
+    if (e.target.files[0].size > MAX_IMAGE_SIZE_MB * 1024 * 1024) {
+      setBankAccountError(true);
+      alert("Book-bank Image is too large, limited to no more than 150 MB.");
+    } else {
+      setBankAccountError(false);
+      setBankImg(files);
+    }
   };
 
   const handleVerificationSubmit = async () => {
