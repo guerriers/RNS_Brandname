@@ -87,6 +87,27 @@
   color: #ffffff;
 }
 
+.deleteRequest {
+  padding: 12px 32px 12px 32px;
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  background-color: #e02121;
+  /* margin-left: 15%; */
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+  margin-bottom: 60px;
+  margin-top: 50px;
+}
+
+.deleteRequest:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
 .verifiedStatus {
   color: green;
 }

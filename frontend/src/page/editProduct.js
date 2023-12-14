@@ -253,13 +253,13 @@ const EditProduct = ({ history }) => {
                       value={productEdit.p_category}
                       required
                     >
-                      <option value="">Category</option>
-                      <option value="Clothes">Clothes</option>
+                      <option value="">Select Category</option>
                       <option value="Accessories">Accessories</option>
-                      <option value="Shoes/Sneakers">Shoes/Sneakers</option>
-                      <option value="Headwear">Headwear</option>
-                      <option value="Eyewear">Eyewear</option>
                       <option value="Bag">Bag</option>
+                      <option value="Clothes">Clothes</option>
+                      <option value="Eyewear">Eyewear</option>
+                      <option value="Headwear">Headwear</option>
+                      <option value="Shoes/Sneakers">Shoes/Sneakers</option>
                       <option value="Others">Others</option>
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
@@ -329,49 +329,49 @@ const EditProduct = ({ history }) => {
                       }
                       required
                     >
-                      <option value={""}>Brand</option>
-                      <option value={"Nike"}>Nike</option>
-                      <option value={"Vans"}>Vans</option>
-                      <option value={"Channel"}>Channel</option>
-                      <option value={"Gucci"}>Gucci</option>
-                      <option value={"Tiffany&Co"}>Tiffany&Co.</option>
+                      <option value={""}>Select Brand</option>
                       <option value={"Adidas"}>Adidas</option>
-                      <option value={"Sephora"}>Sephora</option>
-                      <option value={"Puma"}>Puma</option>
-                      <option value={"Versace"}>Versace</option>
-                      <option value={"LVMH"}>LVMH</option>
-                      <option value={"TommyHilfiger"}>Tommy Hilfiger</option>
-                      <option value={"Guess"}>Guess</option>
-                      <option value={"CalvinKlein"}>Calvin Klein</option>
-                      <option value={"Coach"}>Coach</option>
-                      <option value={"Prada"}>Prada</option>
-                      <option value={"Lacoste"}>Lacoste</option>
-                      <option value={"Converse"}>Converse</option>
-                      <option value={"Cartier"}>Cartier</option>
-                      <option value={"LouisVuitton"}>Louis Vuitton</option>
-                      <option value={"Rolex"}>Rolex</option>
-                      <option value={"Zara"}>Zara</option>
-                      <option value={"H&M"}>H&M</option>
-                      <option value={"Hermes"}>Hermes</option>
-                      <option value={"Fendi"}>Fendi</option>
-                      <option value={"YSL"}>YSL</option>
-                      <option value={"Balenciaga"}>Balenciaga</option>
-                      <option value={"Supreme"}>Supreme</option>
-                      <option value={"Valentino"}>Valentino</option>
-                      <option value={"Dior"}>Dior</option>
-                      <option value={"PatekPhilippe"}>Patek Philippe</option>
-                      <option value={"Swarovski"}>Swarovski</option>
                       <option value={"Burberry"}>Burberry</option>
-                      <option value={"TomFord"}>Tom Ford</option>
-                      <option value={"VictoriaSecret"}>
-                        Victoria's Secret
-                      </option>
-                      <option value={"NewBalance"}>New Balance</option>
+                      <option value={"Balenciaga"}>Balenciaga</option>
+                      <option value={"Coach"}>Coach</option>
+                      <option value={"Cartier"}>Cartier</option>
+                      <option value={"Channel"}>Channel</option>
+                      <option value={"Converse"}>Converse</option>
+                      <option value={"Calvin Klein"}>Calvin Klein</option>
                       <option value={"ChristianLouboutin"}>
                         Christian Louboutin
                       </option>
+                      <option value={"Dior"}>Dior</option>
+                      <option value={"Fendi"}>Fendi</option>
+                      <option value={"Gucci"}>Gucci</option>
+                      <option value={"Guess"}>Guess</option>
+                      <option value={"H&M"}>H&M</option>
+                      <option value={"Hermes"}>Hermes</option>
+                      <option value={"LVMH"}>LVMH</option>
+                      <option value={"Lacoste"}>Lacoste</option>
+                      <option value={"Louis Vuitton"}>Louis Vuitton</option>
+                      <option value={"Nike"}>Nike</option>
+                      <option value={"NewBalance"}>New Balance</option>
+                      <option value={"Prada"}>Prada</option>
+                      <option value={"Puma"}>Puma</option>
+                      <option value={"Patek Philippe"}>Patek Philippe</option>
+                      <option value={"Rolex"}>Rolex</option>
                       <option value={"RayBan"}>Ray Ban</option>
-                      <option value={"other"}>Other</option>
+                      <option value={"Sephora"}>Sephora</option>
+                      <option value={"Supreme"}>Supreme</option>
+                      <option value={"Swarovski"}>Swarovski</option>
+                      <option value={"Tom Ford"}>Tom Ford</option>
+                      <option value={"Tiffany&Co."}>Tiffany&Co.</option>
+                      <option value={"Tommy Hilfiger"}>Tommy Hilfiger</option>
+                      <option value={"YSL"}>YSL</option>
+                      <option value={"Vans"}>Vans</option>
+                      <option value={"Versace"}>Versace</option>
+                      <option value={"Valentino"}>Valentino</option>
+                      <option value={"VictoriaSecret"}>
+                        Victoria's Secret
+                      </option>
+                      <option value={"Zara"}>Zara</option>
+                      <option value={"Others"}>Others</option>
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       Please Select Brand

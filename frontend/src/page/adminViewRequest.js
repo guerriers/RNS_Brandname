@@ -43,9 +43,8 @@ const AdminViewRequest = ({ history }) => {
     setShowConfirmation(true);
   };
 
-  const handleRemoveRequest = () => {
+  const handleRemoveRequest = async () => {
     setShowConfirmation(false);
-
     if (verifyIdToDelete) {
       const token = localStorage.getItem("token");
       const config = {
@@ -288,14 +287,26 @@ const AdminViewRequest = ({ history }) => {
           </Row>
           <Form className="ViewRequestButton" onSubmit={onSubmit}>
             <div className="viewRequestButton2">
-              <button className="acceptRequest">Accept</button>
-              <button
-                className="rejectRequest"
-                type="button"
-                onClick={() => handleConfirmation(viewRequestEdit.user_id)}
-              >
-                Reject
-              </button>
+              {viewRequestEdit.verify_status === "verified" ? (
+                <button
+                  className="deleteRequest"
+                  type="button"
+                  onClick={() => handleConfirmation(viewRequestEdit.user_id)}
+                >
+                  Delete
+                </button>
+              ) : (
+                <>
+                  <button className="acceptRequest">Accept</button>
+                  <button
+                    className="rejectRequest"
+                    type="button"
+                    onClick={() => handleConfirmation(viewRequestEdit.user_id)}
+                  >
+                    Reject
+                  </button>
+                </>
+              )}
             </div>
           </Form>
           <Modal show={isModalOpen} onHide={closeModal}>
