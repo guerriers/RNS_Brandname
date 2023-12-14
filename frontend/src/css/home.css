@@ -161,7 +161,8 @@ header img {
 .category img {
   width: 200px;
   height: 200px;
-  border-radius: 100%;
+  border-radius: 10%;
+  margin-left: 50px;
 }
 
 .category:hover {
@@ -213,7 +214,7 @@ header img {
   border-radius: 2px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 10px;
+  margin-top: 60px;
   margin-bottom: 60px;
   background-color: #000000;
   opacity: 0.5;
@@ -226,7 +227,7 @@ header img {
 }
 
 .homefooter {
-  margin-top: 0px;
+  margin-top: 60px;
   padding: 0px 0px;
   padding-bottom: 20px;
   background-color: #333;
@@ -296,4 +297,21 @@ footer p {
   color: #ffffff;
   margin-top: 20px;
   margin-left: 0px;
+}
+
+/* Previous arrow */
+.slick-prev {
+  left: 20% !important;
+  top: 40% !important;
+  z-index: 1;
+  background-color: #be9f4e !important; 
+
+}
+
+/* Next arrow */
+.slick-next {
+  right: 20% !important;
+  top: 40% !important;
+  z-index: 1;
+  background-color: #be9f4e !important;
 }

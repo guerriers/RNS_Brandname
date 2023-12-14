@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { LinkContainer } from "react-router-bootstrap";
 import "../css/home.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function HomePage() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -53,6 +56,267 @@ function HomePage() {
     },
   ]);
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 2
+  };
+  const redirectToURL = (targetURL) => {
+    window.location.href = targetURL;
+  }
+  const product = [
+    {
+      img: `../assets/p2.jpeg`,
+      text: `Product1`
+    },
+    {
+      img: `../assets/BestSeller2.png`,
+      text: `Product2`
+    },
+    {
+      img: `../assets/BestSeller3.png`,
+      text: `Product3`
+    },
+    {
+      img: `../assets/BestSeller4.png`,
+      text: `Product4`
+    },
+    {
+      img: `../assets/BestSeller2.png`,
+      text: `Product5`
+    },
+    {
+      img: `../assets/BestSeller3.png`,
+      text: `Product6`
+    }
+  ]
+  const categories = [
+    {
+      img: `../assets/clothes.jpeg`,
+      text: `Clothes`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/accessories.jpeg`,
+      text: `Accessories`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/headwear.jpeg`,
+      text: `Headwear`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/eyewear.jpg`,
+      text: `Eyewear`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/bag.jpeg`,
+      text: `Bag`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/shoe.jpeg`,
+      text: `Shoe/Sneakers`,
+      targetURL: ``
+    }
+  ]
+  const brandname = [
+    {
+      img: `../assets/Nike.jpeg`,
+      text: `Nike`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/vans.jpeg`,
+      text: `Vans`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/channel.jpeg`,
+      text: `Channel`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/gucci.png`,
+      text: `Gucci`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/tiffany-co.jpeg`,
+      text: `Tiffany & CO.`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/Adidas.jpeg`,
+      text: `Adidas`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/Sephora.jpeg`,
+      text: `Sephora`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/puma.png`,
+      text: `Puma`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/versace.jpeg`,
+      text: `Versace`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/lvmh.png`,
+      text: `LVMH`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/tommyhilfiger.png`,
+      text: `Tommy Hilfiger`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/guess.png`,
+      text: `Guess`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/ck.png`,
+      text: `Calvin Klein`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/coach.png`,
+      text: `Coach`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/prada.png`,
+      text: `Prada`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/lacoste.jpeg`,
+      text: `Lacoste`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/Converse.png`,
+      text: `Converse`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/cartier.jpeg`,
+      text: `Cartier`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/lv.png`,
+      text: `Louis Vuitton`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/rolex.jpeg`,
+      text: `Rolex`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/zara.png`,
+      text: `Zara`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/hm.jpeg`,
+      text: `H&M`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/hermes.png`,
+      text: `Hermes`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/fendi.png`,
+      text: `Fendi`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/ysl.jpeg`,
+      text: `YSL`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/Balenciaga.jpeg`,
+      text: `Balenciaga`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/supreme.png`,
+      text: `Supreme`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/valentino.jpg`,
+      text: `Valentino`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/dior.jpeg`,
+      text: `Dior`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/patek.jpeg`,
+      text: `Patek Philippe`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/swarovski.png`,
+      text: `Swarovski`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/burberry.jpeg`,
+      text: `Burberry`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/tomford.jpeg`,
+      text: `Tom Ford`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/vs.png`,
+      text: `Victoria's Secret`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/nb.png`,
+      text: `New Balance`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/louboutin.png`,
+      text: `Christian Louboutin`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/rayban.png`,
+      text: `Ray Ban`,
+      targetURL: ``
+    },
+    {
+      img: `../assets/other.png`,
+      text: `Other`,
+      targetURL: ``
+    }
+  ]
+
   useEffect(() => {
     info.forEach(list => {
       const img = new Image();
@@ -67,7 +331,7 @@ function HomePage() {
       <header className="banner-slider">
         <div className='slider-wrapper'>
           <img id="slide-1" src="../assets/banner2.png" alt="Banner" className={activeSlide === 0 ? 'active' : 'inactive'} />
-          <img id="slide-2" src="../assets/banner.jpeg" alt="Banner" className={activeSlide === 1 ? 'active' : 'inactive'} />
+          <img id="slide-2" src="../assets/bg1.jpg" alt="Banner" className={activeSlide === 1 ? 'active' : 'inactive'} />
         </div>
         <div className="banner-slider-dots">
           <button onClick={() => handleDotClick(0)}></button>
@@ -92,92 +356,43 @@ function HomePage() {
         <hr className='h' />
       
         <h1 className="decorated-h1">Best Seller</h1>
-        <section className="categories">
-          <div className="category" onClick={() => handleCategoryClick('Category 1')}>
-            <img src="../assets/p2.jpeg" alt="Category 1" />
-            <p>Category 1</p>
-          </div>
+            <Slider {...settings}>                
+                {product.map((d) => (
+                    <div className='category'>
+                      <img src={d.img} />
+                      <p>{d.text}</p>
+                    </div>
+              ))}
+            </Slider>
+       
+          
 
-          <div className="category" onClick={() => handleCategoryClick('Category 2')}>
-            <img src="../assets/BestSeller2.png" alt="Category 2" />
-            <p>Category 2</p>
-          </div>
-
-          <div className="category" onClick={() => handleCategoryClick('Category 3')}>
-            <img src="../assets/BestSeller3.png" alt="Category 3" />
-            <p>Category 3</p>
-          </div>
-
-          <div className="category" onClick={() => handleCategoryClick('Category 4')}>
-            <img src="../assets/BestSeller4.png" alt="Category 4" />
-            <p>Category 4</p>
-          </div>
-
-          <div className="category" onClick={() => handleCategoryClick('Category 5')}>
-            <img src="../assets/p2.jpeg" alt="Category 5" />
-            <p>Category 5</p>
-          </div>
-        </section>
 
         <hr className='h' />
 
         <h1 className="decorated-h1">Explore by Brand</h1>
-        <section className="brands">
-          <div className="brand" onClick={() => handleCategoryClick('brand 1')}>
-            <img src="../assets/p2.jpeg" alt="brand 1" />
-            <p>brand 1</p>
-          </div>
-
-          <div className="brand" onClick={() => handleCategoryClick('gucci')}>
-            <img src="../assets/brand_gucci.png" alt="gucci" />
-            <p>GUCCI</p>
-          </div>
-
-          <div className="brand" onClick={() => handleCategoryClick('dior')}>
-            <img src="../assets/brand_dior.png" alt="dior" />
-            <p>DIOR</p>
-          </div>
-
-          <div className="brand" onClick={() => handleCategoryClick('louisvuitton')}>
-            <img src="../assets/brand_lv.png" alt="louisvuitton" />
-            <p>LOUIS VUITTON</p>
-          </div>
-
-          <div className="brand" onClick={() => handleCategoryClick('brand 5')}>
-            <img src="../assets/p2.jpeg" alt="brand 4" />
-            <p>brand 5</p>
-          </div>
-        </section>
+            <Slider {...settings}>                
+              {brandname.map((d) => (
+                <div className='category' onClick={() => redirectToURL(d.targetURL)}>
+                  <img src={d.img} />
+                  <p>{d.text}</p>
+                </div>
+              ))}
+            </Slider>
+      
 
         <hr className='h' />
       
         <h1 className="decorated-h1">Explore by Category</h1>
-        <section className="categories">
-          <div className="category" onClick={() => handleCategoryClick('Category 1')}>
-            <img src="../assets/p2.jpeg" alt="Category 1" />
-            <p>Category 1</p>
-          </div>
-
-          <div className="category" onClick={() => handleCategoryClick('Category 2')}>
-            <img src="../assets/category_bag.png" alt="Category 2" />
-            <p>Bag</p>
-          </div>
-
-          <div className="category" onClick={() => handleCategoryClick('Category 3')}>
-            <img src="../assets/category_clothes.png" alt="Category 3" />
-            <p>Clothes</p>
-          </div>
-
-          <div className="category" onClick={() => handleCategoryClick('Category 4')}>
-            <img src="../assets/category_accessories.png" alt="Category 4" />
-            <p>Accessories</p>
-          </div>
-
-          <div className="category" onClick={() => handleCategoryClick('Category 5')}>
-            <img src="../assets/p2.jpeg" alt="Category 4" />
-            <p>Category 5</p>
-          </div>
-        </section>
+            <Slider {...settings}>                
+              {categories.map((d) => (
+                <div className='category' onClick={() => redirectToURL(d.targetURL)}>
+                  <img src={d.img}  />
+                  <p>{d.text}</p>
+                </div>
+              ))}
+            </Slider>
+      
 
       </main>
 

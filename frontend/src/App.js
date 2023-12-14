@@ -23,7 +23,8 @@ import Layout from './component/Layout';
 import NewPassword from "./page/NewPassword";
 import ForgotPassword from "./page/ForgotPassword";
 import Submitted from "./page/submitted";
-import UserProfile from "./page/userProfile";
+import SellerProfile from "./page/sellerProfile";
+import MyProfile from "./page/myProfile";
 
 // from store
 import store from "./store";
@@ -58,21 +59,24 @@ function App() {
           <Route path="products" element={<Products />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="productDetail/:id" element={<ProductDetail />} />
+          <Route path="product/:id" element={<ProductDetail />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="userVerify" element={<UserVerify />} />
         </Route>
         {/* In case that user clicked from navbar */}
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="profile" element={<UserProfile />} />
+          <Route path="profile" element={<SellerProfile />} />
         </Route>
           {/* In case that user clicked from productDetail page */}
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="profile/:id" element={<UserProfile />} />
+          <Route path="profile/:id" element={<SellerProfile />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="submitted" element={<Submitted />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="myProfile" element={<MyProfile />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="myProducts" element={<MyProducts />} />
