@@ -91,12 +91,12 @@ function SellerProfile() {
         </div>
       </div>
 
-      <div className="userProduct-grid">
+      <div className="sellerProduct-grid">
         <h4>Products from this seller:</h4>
         {userProducts.length > 0 ? (
           userProducts.map((product) => (
                 <Link to={`/product/${product.id}`} key={product.id}>
-                  <div className="product-box">
+                  <div className="sellerProduct-box">
                     {product.p_img && product.p_img.length > 0 ? (
                       <img src={product.p_img[0].url} alt={product.p_name} />
                     ) : (
