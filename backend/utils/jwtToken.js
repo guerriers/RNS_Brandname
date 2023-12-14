@@ -6,7 +6,7 @@ const sendToken = (user, statusCode, res) => {
     { id: user.id, status: user.status },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1h", // Token expires in 1 hours
+      expiresIn: "12h", // Token expires in 1 hours
     }
   );
 

@@ -1,3 +1,8 @@
+// const { Op } = require("sequelize");
+
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 const Product = require("../models/products");
 const { ErrorHandler } = require("../middlewares/errorHandlers");
 const {

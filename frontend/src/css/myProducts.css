@@ -1,4 +1,4 @@
-.myProduct-h{
+.myProduct-h {
   text-align: center;
   margin-top: 28px;
   font-size: 36px;
@@ -17,6 +17,8 @@
   background-color: #fff;
   transition: transform 0.2s;
   cursor: pointer;
+  max-height: 250px;
+  width: 400px;
 }
 
 .myProduct-box:hover {
@@ -24,33 +26,59 @@
 }
 
 .myProduct-box img {
-  width: 100%;
+  width: 400px;
   max-height: 250px;
   border-radius: 16px;
 }
 
-/* .product-status {
+.for-rent-myProduct {
+  background-color: #e7c264;
+  color: #000000;
   position: absolute;
-  top: 10px;
+  top: 7px;
   margin-top: 10px;
-  right: 20px;
+  right: 10px;
   padding: 5px 10px;
   border-radius: 100px;
   font-weight: bold;
-} */
+}
+
+.for-sell-myProduct {
+  background-color: #87b1f9;
+  color: #ffffff;
+  position: absolute;
+  top: 7px;
+  margin-top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 100px;
+  font-weight: bold;
+}
+
+.sold-out-myProduct {
+  background-color: rgba(51, 51, 51, 0.85);
+  font-weight: bold;
+  color: #fafafa;
+  transform: translateX(50%);
+  position: absolute;
+  top: 30%;
+  right: 50%;
+  padding: 50px;
+  border-radius: 100%;
+}
 
 .product-actions {
   position: absolute;
-  bottom: 10px;
-  margin-bottom: 10px;
-  right: 20px;
+  bottom: 7px;
+  /* margin-bottom: 10px; */
+  right: 10px;
   border-radius: 100px;
   font-weight: bold;
   background-color: rgba(0, 0, 0, 0.15);
-  color: #ffffff;  
-    svg {
-      color: #ffffff;
-    }
+  color: #ffffff;
+  svg {
+    color: #ffffff;
+  }
 }
 
 .faTrashIcon {
@@ -70,7 +98,7 @@
 }
 .addProductButton:hover {
   background-color: #e7c264;
-  color:#000000;
+  color: #000000;
 }
 .addProductButtonContainer {
   display: flex;

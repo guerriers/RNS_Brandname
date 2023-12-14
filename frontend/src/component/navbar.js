@@ -86,6 +86,7 @@ const NavbarComponent = () => {
                   <LinkContainer to="/faqs">
                     <Nav.Link>FAQs</Nav.Link>
                   </LinkContainer>
+                  <span className="text-dot-200-nav">K. {user.f_name}</span>
                 </>
               )}
 
