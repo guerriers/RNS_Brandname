@@ -8,6 +8,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Input, Checkbox, Slider } from "antd";
 const Product = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     axios
@@ -20,6 +21,11 @@ const Product = () => {
         console.error("Error fetching product data:", error);
       });
   }, []);
+
+  useEffect(() => {
+    const filtered = products.filter((product) => product.p_status !== "2");
+    setFilteredProducts(filtered);
+  }, [products]);
 
   const onChangeText = (checkedValues) => {
     const { value } = checkedValues.target;
@@ -182,7 +188,7 @@ const Product = () => {
         <Col md={8} lg={9} xl={9}>
           <p className="product-h">Products</p>
           <Row>
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Col md={6} lg={4} xl={4} className="mt-4">
                 <Link to={`/product/${product.id}`} key={product.id}>
                   <div className="product-box">
@@ -193,10 +199,18 @@ const Product = () => {
                     )}
                     <div
                       className={`product-status ${
-                        product.p_status === "0" ? "for-rent" : "for-sell"
+                        product.p_status === "0"
+                          ? "for-rent"
+                          : product.p_status === "1"
+                          ? "for-sell"
+                          : "sold-out"
                       }`}
                     >
-                      {product.p_status === "0" ? "For Rent" : "For Sell"}
+                      {product.p_status === "0"
+                        ? "For Rent"
+                        : product.p_status === "1"
+                        ? "For Sell"
+                        : "Sold Out"}
                     </div>
                     <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
                   </div>

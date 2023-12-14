@@ -39,6 +39,7 @@ const MyProducts = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        const sortedProducts = data.sort((a, b) => a.p_status - b.p_status);
         setUserProducts(data);
         // console.log("Received user products data:", data);
       })
@@ -92,6 +93,16 @@ const MyProducts = () => {
     }
   };
 
+  const handleToggleAvailability = (productId, currentStatus) => {
+    const updatedProducts = userProducts.map((product) => {
+      if (product.id === productId) {
+        product.isAvailable = !currentStatus;
+      }
+      return product;
+    });
+    setUserProducts(updatedProducts);
+  };
+
   return (
     <>
       {loading ? (
@@ -124,10 +135,18 @@ const MyProducts = () => {
                     )}
                     <div
                       className={`product-status ${
-                        product.p_status === "0" ? "for-rent" : "for-sell"
+                        product.p_status === "0"
+                          ? "for-rent"
+                          : product.p_status === "1"
+                          ? "for-sell"
+                          : "sold-out"
                       }`}
                     >
-                      {product.p_status === "0" ? "For Rent" : "For Sell"}
+                      {product.p_status === "0"
+                        ? "For Rent"
+                        : product.p_status === "1"
+                        ? "For Sell"
+                        : "Sold Out"}
                     </div>
                     <div className="product-actions">
                       <Button
