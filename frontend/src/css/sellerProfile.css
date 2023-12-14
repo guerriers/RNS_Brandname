@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anuphan&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+
+
+.user-profile-page {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.user-profile-container {
+    position: absolute;
+    left: 30px;;
+    width: 28%;
+    display: block;
+    gap: 20px !important;
+    margin-top: 60px !important;
+    margin-left: 3dvh ;
+    border: 2px solid #ddd;
+    border-radius: 5%;
+}
+
+.verified-badge {
+    position: relative;
+    padding: 5px 10px;
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 5%;
+    font-weight: 700;
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+
+}
+
+.user-profile-container h2 {
+    font-family: "Anuphan", sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.user-profile-container h3 {
+    font-family: "Anuphan", sans-serif;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.report-button {
+    position: relative;
+    bottom: 20%;
+    padding: 10px 0px;
+    border-radius: 50px;
+    border: none;
+    color: #ffffff;
+    background-color: #be9f4e;
+    border: none;
+    width: 50%;
+    font-weight: 700;
+    margin: 25px 40px 30px 40px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.report-button:hover {
+    background-color: #af0000;
+    color: #ffffff;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.report-button:not(:hover) {
+    background-color: #be9f4e;
+    color: #ffffff;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.user-profile-image img {
+    width: 30%;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.sellerProduct-grid {
+    position: absolute;
+    right: 30px;
+    display: flex !important;
+    width: 58% !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+    margin-top: 150px !important;
+    flex-direction: row;
+}
+
+.sellerProduct-grid h4 {
+    margin-top: -80px;
+    margin-bottom: 20px;
+    right: 65%;
+    position: absolute;
+}
+
+.sellerProduct-grid .product-status {
+    position: absolute;
+    top: 5px;
+    margin-top: 10px;
+    right: 20px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-weight: bold;
+}
+
+.sellerProduct-grid .product-status.sold {
+    background-color: #af0000;
+    color: #ffffff;
+}
+
+.sellerProduct-grid .product-status.available {
+    background-color: #be9f4e;
+    color: #ffffff;
+}
+
+.sellerProduct-grid .product-price {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 10%;
+    padding: 5px 10px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sellerProduct-box {
+  position: relative;
+  padding: 5px;
+  background-color: #fff;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.sellerProduct-box:hover {
+  transform: translateY(-5px);
+}
+
+.sellerProduct-box img {
+  width: 100%;
+  max-height: 250px;
+  border-radius: 16px;
+}
