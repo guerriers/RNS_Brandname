@@ -185,33 +185,27 @@ const UserVerify = () => {
               </Col>
             </Row>
           </div>
-          <Form>
-            {!formValid && (
-              <div className="alertVerifySubmit">
-                Please add ID card and book-bank images.
-              </div>
-            )}
-            <button
-              className="verifyButton"
-              onClick={handleVerificationSubmit}
-              disabled={idCardImg.length === 0 || bankImg.length === 0}
-            >
-              Submit Verify
-            </button>
+          {!formValid && (
+            <div className="alertVerifySubmit">
+              Please add ID card and book-bank images.
+            </div>
+          )}
+          <button
+            className="verifyButton"
+            onClick={handleVerificationSubmit}
+            disabled={idCardImg.length === 0 || bankImg.length === 0}
+          >
+            Submit Verify
+          </button>
 
-            <Modal show={isModalOpen} onHide={closeModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>Example Image</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <img
-                  src={selectedImage}
-                  className="img-fluid"
-                  alt="Full Size"
-                />
-              </Modal.Body>
-            </Modal>
-          </Form>
+          <Modal show={isModalOpen} onHide={closeModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Example Image</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <img src={selectedImage} className="img-fluid" alt="Full Size" />
+            </Modal.Body>
+          </Modal>
         </Container>
       )}
     </>
