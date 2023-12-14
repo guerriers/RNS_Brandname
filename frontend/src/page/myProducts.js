@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import "../css/myProducts.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const MyProducts = () => {
   const [userProducts, setUserProducts] = useState([]);
@@ -14,10 +14,10 @@ const MyProducts = () => {
   const [productIdToDelete, setProductIdToDelete] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
-  const { user, loading } = useSelector(state => state.auth)
-  const { isVerified, verifyStatus } = useSelector((state) => state.verify_status);
-
-
+  const { user, loading } = useSelector((state) => state.auth);
+  const { isVerified, verifyStatus } = useSelector(
+    (state) => state.verify_status
+  );
 
   useEffect(() => {
     if (!isVerified) {
@@ -31,9 +31,13 @@ const MyProducts = () => {
     // Fetch the user's products
     const token = localStorage.getItem("token");
     fetch(`${process.env.REACT_APP_BASE_URL}/api/products/myProducts`, {
-      method: 'GET',
-      headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${token}` },
-    }).then((response) => response.json())
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
       .then((data) => {
         setUserProducts(data);
         // console.log("Received user products data:", data);
@@ -62,7 +66,7 @@ const MyProducts = () => {
           `${process.env.REACT_APP_BASE_URL}/api/products/${productIdToDelete}`,
           {
             headers: {
-              'Authorization': `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         )
@@ -103,44 +107,48 @@ const MyProducts = () => {
               <Button
                 className="addProductButton"
                 onClick={() => {
-                  navigate("/addProduct")
+                  navigate("/addProduct");
                 }}
               >
                 <span>+</span> Add Product
               </Button>
             </div>
             <div className="myProduct-grid">
-              {userProducts && userProducts.map((product) => (
-                <div className="myProduct-box" key={product.id}>
-                  {product.p_img && product.p_img.length > 0 ? (
-                    <img src={product.p_img[0].url} alt={product.p_name} />
-                  ) : (
-                    <p>No image available</p>
-                  )}
-                  <div
-                    className={`product-status ${product.p_status === "0" ? "for-rent" : "for-sell"
+              {userProducts &&
+                userProducts.map((product) => (
+                  <div className="myProduct-box" key={product.id}>
+                    {product.p_img && product.p_img.length > 0 ? (
+                      <img src={product.p_img[0].url} alt={product.p_name} />
+                    ) : (
+                      <p>No image available</p>
+                    )}
+                    <div
+                      className={`product-status ${
+                        product.p_status === "0" ? "for-rent" : "for-sell"
                       }`}
-                  >
-                    {product.p_status === "0" ? "For Rent" : "For Sell"}
-                  </div>
-                  <div className="product-actions">
-                    <Button
-                      variant="gray"
-                      onClick={() => handleEditProduct(product.id)}
                     >
-                      <FontAwesomeIcon icon={faPen} />
-                    </Button>
-                    <Button
-                      variant="gray"
-                      onClick={() => handleConfirmation(product.id)}
-                    >
-                      <FontAwesomeIcon className="faTrashIcon" icon={faTrash} />
-                    </Button>
+                      {product.p_status === "0" ? "For Rent" : "For Sell"}
+                    </div>
+                    <div className="product-actions">
+                      <Button
+                        variant="gray"
+                        onClick={() => handleEditProduct(product.id)}
+                      >
+                        <FontAwesomeIcon icon={faPen} />
+                      </Button>
+                      <Button
+                        variant="gray"
+                        onClick={() => handleConfirmation(product.id)}
+                      >
+                        <FontAwesomeIcon
+                          className="faTrashIcon"
+                          icon={faTrash}
+                        />
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
-
             <Modal
               show={showConfirmation}
               onHide={() => setShowConfirmation(false)}

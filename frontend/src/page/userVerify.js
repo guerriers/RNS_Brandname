@@ -79,10 +79,14 @@ const UserVerify = () => {
       );
 
       if (response.status === 201) {
-        console.log("Verification submitted successfully.");
-        navigate("/submitted");
         dispatch(checkVerify());
+        alert("Verification submitted successfully.");
+        console.log("Verification submitted successfully.");
+        setTimeout(() => {
+          navigate("/submitted");
+        }, 2000);
       } else {
+        alert("Verification submission failed.");
         console.error("Verification submission failed.");
       }
     } catch (error) {
@@ -91,7 +95,7 @@ const UserVerify = () => {
 
     if (idCardImg.length === 0 || bankImg.length === 0) {
       setFormValid(false);
-      return; // Stop submission if validation fails
+      return;
     } else {
       setFormValid(true);
     }
@@ -119,17 +123,11 @@ const UserVerify = () => {
               <h5>ยืนยันตัวตนก่อนลงขายสินค้า</h5>
               <li>โดยต้องแนบภาพถ่ายดังนี้</li>
             </div>
-            <ul className="requirements">
+            <ul className="requirements1">
               <li>1. ถ่ายภาพบัตรประจําตัวประชาชน</li>
-              <li>
-                2. ถ่ายภาพหน้าสมุดบัญชีธนาคาร
-                (ชื่อต้องตรงกับในบัตรประจําตัวประชาชน)
-              </li>
             </ul>
-          </div>
-          <Form>
             <Row>
-              <Col md={5}>
+              <Col>
                 <img
                   src={"../assets/idCard.png"}
                   className="img-fluid clickable"
@@ -153,6 +151,14 @@ const UserVerify = () => {
                   </div>
                 </Form.Group>
               </Col>
+            </Row>
+            <ul className="requirements2">
+              <li>
+                2. ถ่ายภาพหน้าสมุดบัญชีธนาคาร
+                (ชื่อต้องตรงกับในบัตรประจําตัวประชาชน)
+              </li>
+            </ul>
+            <Row>
               <Col>
                 <img
                   src={"../assets/bookBank.png"}
@@ -178,12 +184,18 @@ const UserVerify = () => {
                 </Form.Group>
               </Col>
             </Row>
+          </div>
+          <Form>
             {!formValid && (
               <div className="alertVerifySubmit">
                 Please add ID card and book-bank images.
               </div>
             )}
-            <button className="verifyButton" onClick={handleVerificationSubmit}>
+            <button
+              className="verifyButton"
+              onClick={handleVerificationSubmit}
+              disabled={idCardImg.length === 0 || bankImg.length === 0}
+            >
               Submit Verify
             </button>
 
