@@ -27,7 +27,7 @@ const EditProduct = ({ history }) => {
   const [oldProducts, setOldProducts] = useState([]);
   const [oldProductsPreview, setOldProductsPreview] = useState([]);
   const [receipts, setReceipts] = useState([]);
-  const [receiptsPreview, setReceiptsPreview ] = useState([]);
+  const [receiptsPreview, setReceiptsPreview] = useState([]);
   const [oldReceipts, setOldReceipts] = useState([]);
   const [oldReceiptsPreview, setOldReceiptsPreview] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -320,13 +320,16 @@ const EditProduct = ({ history }) => {
                     </Form.Label>
                     <Form.Select
                       name="brand"
+                      
                       value={productEdit.p_brand}
+
                       onChange={(e) =>
                         setProductEdit((prevValues) => ({
                           ...prevValues,
                           p_brand: e.target.value,
                         }))
                       }
+                      
                       required
                     >
                       <option value={""}>Brand</option>
@@ -368,9 +371,10 @@ const EditProduct = ({ history }) => {
                       <option value={"ChristianLouboutin"}>Christian Louboutin</option>
                       <option value={"RayBan"}>Ray Ban</option>
                       <option value={"other"}>Other</option>
+
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
-                      Please Add Brand
+                      Please Select Brand
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Row>
