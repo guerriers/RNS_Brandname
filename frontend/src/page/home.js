@@ -70,7 +70,7 @@ function HomePage() {
     {
       name: 'สินค้าหลากหลายแบรนด์',
       image: "../assets/cart_icon.png",
-      desc: "เรามีสินค้าหลากหลายแบรนด์ ไม่ว่าจะเป็น แบรนด์เอ แบรนด์บี แบรนด์ซี และแบรนด์ดี"
+      desc: "เรามีสินค้าหลากหลายแบรนด์ ไม่ว่าจะเป็น Gucci Dior Cartier และแบรนด์ดังอื่นๆ"
     },
   ]);
 
@@ -79,7 +79,7 @@ function HomePage() {
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 2
+    slidesToScroll: 3
   };
   const redirectToURL = (targetURL) => {
     window.location.href = targetURL;
@@ -117,6 +117,7 @@ function HomePage() {
       targetURL: ``
     }
   ]
+
   const brandname = [
     {
       img: `../assets/Nike.jpeg`,
@@ -350,9 +351,9 @@ function HomePage() {
       
         <h1 className="decorated-h1">Recently Posted Products</h1>
           <Slider {...settings}>
-                {products.map((product) => (
-                <Link to={`/product/${product.id}`} key={product.id}>
-                  <div className="category">
+            {products.map((product) => (
+                <div className="category">
+                  <Link to={`/product/${product.id}`} key={product.id}>
                     {product.p_img && product.p_img.length > 0 ? (
                       <img src={product.p_img[0].url} alt={product.p_name} />
                     ) : (
@@ -366,8 +367,8 @@ function HomePage() {
                       {product.p_status === "0" ? "For Rent" : "For Sell"}
                     </div>
                     <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
             ))}
           </Slider>
         
@@ -403,7 +404,7 @@ function HomePage() {
         <div className='footer-banner'>
           <img src="../assets/footerbanner.png" alt="FooterBanner" />
           <h4 className='image-text'>
-            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+            "เว็บไซต์ของเราเป็นแค่เว็บไซต์ตัวกลางที่ช่วยให้พ่อค้า-แม่ค้าทุกคนสามารถมาลงขายสินค้าได้ เรามีสินค้าหลากหลายแบรนด์  นอกจากซื้อและขายสินค้ามือสองแล้วยังสามารถเช่าสินค้าแบรนด์เนมได้ด้วย สำหรับคนที่ต้องการเช่ามาใช้ชั่วคราว"
             <LinkContainer to="/about">
                 <button className='image-button'>About Us</button>
             </LinkContainer>
