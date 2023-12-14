@@ -151,9 +151,9 @@ function SellerProfile() {
                 </h3>
               </div>
               <div>
-                <button className="report-button" onClick={handleReportClick}>
-                  Report
-                </button>
+                {/* <button className="report-button" onClick={handleReportClick}> 
+                  Report 
+                </button> */}
               </div>
             </div>
           </div>
