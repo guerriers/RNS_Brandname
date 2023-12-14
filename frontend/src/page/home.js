@@ -351,7 +351,7 @@ function HomePage() {
       
         <h1 className="decorated-h1">Recently Posted Products</h1>
         <Slider {...settings} autoplay={true} autoplaySpeed={3000}>
-          {products.slice(-6).map((product) => (
+          {products.slice(-5).map((product) => (
             <Link to={`/product/${product.id}`} key={product.id}>
               <div className="category">
                 {product.p_img && product.p_img.length > 0 ? (
