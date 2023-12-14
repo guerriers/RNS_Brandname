@@ -13,9 +13,6 @@ function SellerProfile() {
   const [user, setUser] = useState({});
   const [productCount, setProductCount] = useState(0);
   const [userProducts, setUserProducts] = useState([]);
-
-  const [showReportModal, setShowReportModal] = useState(false);
-  const [reportContent, setReportContent] = useState("");
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewDate, setReviewDate] = useState("");
   const [reviewContent, setReviewContent] = useState("");
@@ -103,21 +100,6 @@ function SellerProfile() {
       });
   };
 
-  const handleReportClick = () => {
-    setShowReportModal(true);
-  };
-
-  const handleCloseReportModal = () => {
-    setShowReportModal(false);
-    setReportContent(""); // Reset report content when closing the modal
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting report:", reportContent);
-    handleCloseReportModal();
-  };
-
   return (
     <Container>
       <Row className="sellerPro">
@@ -150,11 +132,7 @@ function SellerProfile() {
                   {user.createdAt ? formatDate(user.createdAt) : "N/A"}
                 </h3>
               </div>
-              <div>
-                {/* <button className="report-button" onClick={handleReportClick}> 
-                  Report 
-                </button> */}
-              </div>
+
             </div>
           </div>
         </Col>
@@ -171,12 +149,12 @@ function SellerProfile() {
                       <p>No image available</p>
                     )}
                     <div
-                      className={`product-status ${
+                      className={`product-status-seller ${
                         product.p_status === "0"
-                          ? "for-rent"
+                          ? "for-rent-seller"
                           : product.p_status === "1"
-                          ? "for-sell"
-                          : "sold-out"
+                          ? "for-sell-seller"
+                          : "sold-out-seller"
                       }`}
                     >
                       {product.p_status === "0"
@@ -185,7 +163,7 @@ function SellerProfile() {
                         ? "For Sell"
                         : "Sold Out"}
                     </div>
-                    <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
+                    <div className="product-price-seller">{`${product.p_price.toLocaleString()} THB`}</div>
                   </div>
                 </Link>
               ))
@@ -259,35 +237,6 @@ function SellerProfile() {
             Send Review
           </Button>
         </Modal.Footer>
-      </Modal>
-
-      <Modal show={showReportModal} onHide={handleCloseReportModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Report Seller</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Report form */}
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="reportContent" className="form-label">
-                Report Content:
-              </label>
-              <textarea
-                className="form-control"
-                id="reportContent"
-                rows="4"
-                value={reportContent}
-                onChange={(e) => setReportContent(e.target.value)}
-                required
-              ></textarea>
-            </div>
-
-            <Modal.Footer>
-              <Button type="submit">Submit</Button>
-              <Button onClick={handleCloseReportModal}>Close</Button>
-            </Modal.Footer>
-          </form>
-        </Modal.Body>
       </Modal>
     </Container>
   );
