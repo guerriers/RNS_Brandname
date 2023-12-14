@@ -27,7 +27,7 @@ const EditProduct = ({ history }) => {
   const [oldProducts, setOldProducts] = useState([]);
   const [oldProductsPreview, setOldProductsPreview] = useState([]);
   const [receipts, setReceipts] = useState([]);
-  const [receiptsPreview, setReceiptsPreview ] = useState([]);
+  const [receiptsPreview, setReceiptsPreview] = useState([]);
   const [oldReceipts, setOldReceipts] = useState([]);
   const [oldReceiptsPreview, setOldReceiptsPreview] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -318,21 +318,28 @@ const EditProduct = ({ history }) => {
                     <Form.Label>
                       Brand<span style={{ color: "red" }}> *</span>
                     </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Product Brand"
+                    <Form.Select
                       name="brand"
-                      required
-                      value={productEdit.p_brand}
                       onChange={(e) =>
                         setProductEdit((prevValues) => ({
                           ...prevValues,
                           p_brand: e.target.value,
                         }))
                       }
-                    />
+                      value={productEdit.p_brand}
+                      required
+                    >
+                      <option value="">Brand</option>
+                      <option value="Clothes">Clothes</option>
+                      <option value="Accessories">Accessories</option>
+                      <option value="Shoes/Sneakers">Shoes/Sneakers</option>
+                      <option value="Headwear">Headwear</option>
+                      <option value="Eyewear">Eyewear</option>
+                      <option value="Bag">Bag</option>
+                      <option value="Others">Others</option>
+                    </Form.Select>
                     <Form.Control.Feedback type="invalid">
-                      Please Add Brand
+                      Please Select Brand
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Row>
