@@ -318,11 +318,8 @@ const EditProduct = ({ history }) => {
                     <Form.Label>
                       Brand<span style={{ color: "red" }}> *</span>
                     </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Product Brand"
+                    <Form.Select
                       name="brand"
-                      required
                       value={productEdit.p_brand}
                       onChange={(e) =>
                         setProductEdit((prevValues) => ({
@@ -330,7 +327,48 @@ const EditProduct = ({ history }) => {
                           p_brand: e.target.value,
                         }))
                       }
-                    />
+                      required
+                    >
+                      <option value={""}>Brand</option>
+                      <option value={"Nike"}>Nike</option>
+                      <option value={"Vans"}>Vans</option>
+                      <option value={"Channel"}>Channel</option>
+                      <option value={"Gucci"}>Gucci</option>
+                      <option value={"Tiffany&Co"}>Tiffany&Co.</option>
+                      <option value={"Adidas"}>Adidas</option>
+                      <option value={"Sephora"}>Sephora</option>
+                      <option value={"Puma"}>Puma</option>
+                      <option value={"Versace"}>Versace</option>
+                      <option value={"LVMH"}>LVMH</option>
+                      <option value={"TommyHilfiger"}>Tommy Hilfiger</option>
+                      <option value={"Guess"}>Guess</option>
+                      <option value={"CalvinKlein"}>Calvin Klein</option>
+                      <option value={"Coach"}>Coach</option>
+                      <option value={"Prada"}>Prada</option>
+                      <option value={"Lacoste"}>Lacoste</option>
+                      <option value={"Converse"}>Converse</option>
+                      <option value={"Cartier"}>Cartier</option>
+                      <option value={"LouisVuitton"}>Louis Vuitton</option>
+                      <option value={"Rolex"}>Rolex</option>
+                      <option value={"Zara"}>Zara</option>
+                      <option value={"H&M"}>H&M</option>
+                      <option value={"Hermes"}>Hermes</option>
+                      <option value={"Fendi"}>Fendi</option>
+                      <option value={"YSL"}>YSL</option>
+                      <option value={"Balenciaga"}>Balenciaga</option>
+                      <option value={"Supreme"}>Supreme</option>
+                      <option value={"Valentino"}>Valentino</option>
+                      <option value={"Dior"}>Dior</option>
+                      <option value={"PatekPhilippe"}>Patek Philippe</option>
+                      <option value={"Swarovski"}>Swarovski</option>
+                      <option value={"Burberry"}>Burberry</option>
+                      <option value={"TomFord"}>Tom Ford</option>
+                      <option value={"VictoriaSecret"}>Victoria's Secret</option>
+                      <option value={"NewBalance"}>New Balance</option>
+                      <option value={"ChristianLouboutin"}>Christian Louboutin</option>
+                      <option value={"RayBan"}>Ray Ban</option>
+                      <option value={"other"}>Other</option>
+                    </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       Please Add Brand
                     </Form.Control.Feedback>
