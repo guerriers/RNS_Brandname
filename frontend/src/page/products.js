@@ -173,6 +173,23 @@ const Product = () => {
     },
   };
 
+  const divideCategories = (categories) => {
+    const midIndex = Math.ceil(categories.length / 2);
+    const firstColumn = categories.slice(0, midIndex);
+    const secondColumn = categories.slice(midIndex);
+    return [firstColumn, secondColumn];
+  };
+  const [categoriesColumn1, categoriesColumn2] =
+    divideCategories(allCategories);
+
+  const divideBrand = (brand) => {
+    const midIndex = Math.ceil(brand.length / 2);
+    const firstColumn = brand.slice(0, midIndex);
+    const secondColumn = brand.slice(midIndex);
+    return [firstColumn, secondColumn];
+  };
+  const [brandColumn1, brandColumn2] = divideBrand(brands);
+
   return (
     <>
       <Row style={{ height: "100%", textAlign: "start", margin: 0 }}>
@@ -221,35 +238,60 @@ const Product = () => {
                   All
                 </Checkbox>
               </Col>
-              {/* <Col lg={6} sm={6} xs={12} className="mt-3">
+
+              <Col lg={6} sm={6} xs={12} className="mt-3">
                 {checkedCategory.map((category) => (
                   <div key={category}>{category}</div>
                 ))}
-              </Col> */}
-              <Col lg={12} sm={12} xs={24} className="mt-3">
-                <CheckboxGroup
-                  options={allCategories.slice(
-                    0,
-                    Math.ceil(allCategories.length / 2)
-                  )}
-                  value={checkedCategory}
-                  onChange={(values) => {
-                    setCheckedCategory(values);
-                    onChangeCheckbox("category", values);
-                  }}
-                />
               </Col>
-              <Col lg={12} sm={12} xs={24} className="mt-3">
-                <CheckboxGroup
-                  options={allCategories.slice(
-                    Math.ceil(allCategories.length / 2)
-                  )}
-                  value={checkedCategory}
-                  onChange={(values) => {
-                    setCheckedCategory(values);
-                    onChangeCheckbox("category", values);
-                  }}
-                />
+
+              <Col lg={6} sm={6} xs={12} className="mt-3">
+                {categoriesColumn1.map((category) => (
+                  <div key={category}>
+                    <Checkbox
+                      checked={checkedCategory.includes(category)}
+                      onChange={(e) => {
+                        const newCheckedCategory = [...checkedCategory];
+                        if (e.target.checked) {
+                          newCheckedCategory.push(category);
+                        } else {
+                          const index = newCheckedCategory.indexOf(category);
+                          if (index !== -1) {
+                            newCheckedCategory.splice(index, 1);
+                          }
+                        }
+                        setCheckedCategory(newCheckedCategory);
+                        onChangeCheckbox("category", newCheckedCategory);
+                      }}
+                    >
+                      {category}
+                    </Checkbox>
+                  </div>
+                ))}
+              </Col>
+              <Col lg={6} sm={6} xs={12} className="mt-3">
+                {categoriesColumn2.map((category) => (
+                  <div key={category}>
+                    <Checkbox
+                      checked={checkedCategory.includes(category)}
+                      onChange={(e) => {
+                        const newCheckedCategory = [...checkedCategory];
+                        if (e.target.checked) {
+                          newCheckedCategory.push(category);
+                        } else {
+                          const index = newCheckedCategory.indexOf(category);
+                          if (index !== -1) {
+                            newCheckedCategory.splice(index, 1);
+                          }
+                        }
+                        setCheckedCategory(newCheckedCategory);
+                        onChangeCheckbox("category", newCheckedCategory);
+                      }}
+                    >
+                      {category}
+                    </Checkbox>
+                  </div>
+                ))}
               </Col>
             </Row>
           </Col>
@@ -300,26 +342,59 @@ const Product = () => {
                   All
                 </Checkbox>
               </Col>
-
-              <Col lg={12} sm={12} xs={24} className="mt-3">
-                <CheckboxGroup
-                  options={brands.slice(0, Math.ceil(brands.length / 2))}
-                  value={checkedBrand}
-                  onChange={(values) => {
-                    setCheckedBrand(values);
-                    onChangeCheckbox("brands", values);
-                  }}
-                />
+              <Col lg={6} sm={6} xs={12} className="mt-3">
+                {checkedBrand.map((brand) => (
+                  <div key={brand}>{brand}</div>
+                ))}
               </Col>
-              <Col lg={12} sm={12} xs={24} className="mt-3">
-                <CheckboxGroup
-                  options={brands.slice(Math.ceil(brands.length / 2))}
-                  value={checkedBrand}
-                  onChange={(values) => {
-                    setCheckedBrand(values);
-                    onChangeCheckbox("brands", values);
-                  }}
-                />
+
+              <Col lg={6} sm={6} xs={12} className="mt-3">
+                {brandColumn1.map((brand) => (
+                  <div key={brand}>
+                    <Checkbox
+                      checked={checkedBrand.includes(brand)}
+                      onChange={(e) => {
+                        const newCheckedBrand = [...checkedBrand];
+                        if (e.target.checked) {
+                          newCheckedBrand.push(brand);
+                        } else {
+                          const index = newCheckedBrand.indexOf(brand);
+                          if (index !== -1) {
+                            newCheckedBrand.splice(index, 1);
+                          }
+                        }
+                        setCheckedBrand(newCheckedBrand);
+                        onChangeCheckbox("brand", newCheckedBrand);
+                      }}
+                    >
+                      {brand}
+                    </Checkbox>
+                  </div>
+                ))}
+              </Col>
+              <Col lg={6} sm={6} xs={12} className="mt-3">
+                {brandColumn2.map((brand) => (
+                  <div key={brand}>
+                    <Checkbox
+                      checked={checkedBrand.includes(brand)}
+                      onChange={(e) => {
+                        const newCheckedBrand = [...checkedBrand];
+                        if (e.target.checked) {
+                          newCheckedBrand.push(brand);
+                        } else {
+                          const index = newCheckedBrand.indexOf(brand);
+                          if (index !== -1) {
+                            newCheckedBrand.splice(index, 1);
+                          }
+                        }
+                        setCheckedBrand(newCheckedBrand);
+                        onChangeCheckbox("brand", newCheckedBrand);
+                      }}
+                    >
+                      {brand}
+                    </Checkbox>
+                  </div>
+                ))}
               </Col>
             </Row>
           </Col>
