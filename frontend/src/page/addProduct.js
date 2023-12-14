@@ -337,6 +337,7 @@ const AddProduct = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+              <Row>
 
                   <Form.Group as={Col} md={2} controlId="formGridBrand">
                     <Form.Label>
@@ -366,31 +367,30 @@ const AddProduct = () => {
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Row>
-
-                <Row className="mb-3">
-                  <Form.Group as={Col} md={7} controlId="formGridDescription">
-                    <Form.Label>
-                      Description<span style={{ color: "red" }}> *</span>
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      as="textarea"
-                      placeholder="Product Description"
-                      name="description"
-                      style={{ height: "100px" }}
-                      required
-                      value={formValues.p_description}
-                      onChange={(e) =>
-                        setFormValues((prevValues) => ({
-                          ...prevValues,
-                          p_description: e.target.value,
-                        }))
-                      }
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      Please Add Description
-                    </Form.Control.Feedback>
-                  </Form.Group>
+                  <Row className="mb-3">
+                    <Form.Group as={Col} md={7} controlId="formGridDescription">
+                      <Form.Label>
+                        Description<span style={{ color: "red" }}> *</span>
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        as="textarea"
+                        placeholder="Product Description"
+                        name="description"
+                        style={{ height: "100px" }}
+                        required
+                        value={formValues.p_description}
+                        onChange={(e) =>
+                          setFormValues((prevValues) => ({
+                            ...prevValues,
+                            p_description: e.target.value,
+                          }))
+                        }
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Please Add Description
+                      </Form.Control.Feedback>
+                    </Form.Group>
                 </Row>
 
                 {receiptsPreview.map((img) => (
