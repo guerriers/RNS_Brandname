@@ -77,7 +77,7 @@ function HomePage() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 5,
     slidesToScroll: 3
   };
@@ -350,32 +350,32 @@ function HomePage() {
         <hr className='h' />
       
         <h1 className="decorated-h1">Recently Posted Products</h1>
-          <Slider {...settings}>
-            {products.map((product) => (
-                <div className="category">
-                  <Link to={`/product/${product.id}`} key={product.id}>
-                    {product.p_img && product.p_img.length > 0 ? (
-                      <img src={product.p_img[0].url} alt={product.p_name} />
-                    ) : (
-                      <p>No image available</p>
-                    )}
-                    <div
-                      className={`product-status ${
-                        product.p_status === "0" ? "for-rent" : "for-sell"
-                      }`}
-                    >
-                      {product.p_status === "0" ? "For Rent" : "For Sell"}
-                    </div>
-                    <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
-                  </Link>
+        <Slider {...settings} autoplay={true} autoplaySpeed={3000}>
+          {products.slice(-5).map((product) => (
+            <Link to={`/product/${product.id}`} key={product.id}>
+              <div className="category">
+                {product.p_img && product.p_img.length > 0 ? (
+                  <img src={product.p_img[0].url} alt={product.p_name} />
+                ) : (
+                  <p>No image available</p>
+                )}
+                <div
+                  className={`product-status ${
+                    product.p_status === "0" ? "for-rent" : "for-sell"
+                  }`}
+                >
+                  {product.p_status === "0" ? "For Rent" : "For Sell"}
                 </div>
-            ))}
-          </Slider>
+                <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
+              </div>
+            </Link>
+          ))}
+        </Slider>
         
         <hr className='h' />
 
         <h1 className="decorated-h1">Explore by Brand</h1>
-            <Slider {...settings}>                
+            <Slider {...settings} speed={2000} autoplay={true} autoplaySpeed={3000}>                
               {brandname.map((d) => (
                 <div className='category' onClick={() => redirectToURL(d.targetURL)}>
                   <img src={d.img} />
@@ -384,11 +384,10 @@ function HomePage() {
               ))}
             </Slider>
       
-
         <hr className='h' />
       
         <h1 className="decorated-h1">Explore by Category</h1>
-            <Slider {...settings}>                
+            <Slider {...settings} autoplay={true} autoplaySpeed={4000}>                
               {categories.map((d) => (
                 <div className='category' onClick={() => redirectToURL(d.targetURL)}>
                   <img src={d.img}  />
