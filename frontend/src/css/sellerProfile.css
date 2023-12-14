@@ -86,12 +86,12 @@
 
 .sellerProduct-box {
   position: relative;
-  padding: 5px;
   background-color: #fff;
   transition: transform 0.2s;
   cursor: pointer;
-  max-width: 250px !important;
-  max-height: 250px !important;
+  height: 200px;
+  width: 250px;
+  border-radius: 16px;
 }
 
 .sellerProduct-box:hover {
@@ -102,6 +102,8 @@
   width: 100%;
   max-height: 250px;
   border-radius: 16px;
+  height: 200px;
+  width: 250px;
 }
 
 .review-container {
@@ -181,27 +183,28 @@
 .for-rent-seller {
   background-color: #e7c264;
   color: #000000;
-  top: 5px;
+  top: 1px;
   margin-top: 10px;
-  right: 20px;
+  right: 15px;
   padding: 5px 10px;
 }
 
 .for-sell-seller {
   background-color: #87b1f9;
   color: #ffffff;
-  top: 5px;
+  top: 1px;
   margin-top: 10px;
-  right: 20px;
+  right: 15px;
   padding: 5px 10px;
 }
 .sold-out-seller {
   background-color: rgba(51, 51, 51, 0.85);
   color: #fafafa;
-  transform: translateX(50%) !important;
-  top: 50px;
+  transform: translateX(50%);
+  top: 60px;
   right: 50%;
   padding: 30px;
+  border-radius: 100%;
 }
 
 .product-status-seller {
@@ -213,7 +216,7 @@
 
 .product-price-seller {
   position: absolute;
-  bottom: 7%;
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #333333;

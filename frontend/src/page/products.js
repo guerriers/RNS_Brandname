@@ -64,7 +64,7 @@ const Product = () => {
     name: "",
     category: [],
     p_status: [],
-    price: [0, 100000],
+    price: [0, 300000],
     condition: [0, 100],
     brand: [],
   });
@@ -147,21 +147,21 @@ const Product = () => {
   const Price = {
     0: {
       style: {
-        left: "10%",
+        left: "5%",
       },
       label: "0",
     },
-    100000: {
+    300000: {
       style: {
-        left: "85%",
+        left: "90%",
       },
-      label: "100,000",
+      label: "300,000",
     },
   };
   const Condition = {
     0: {
       style: {
-        left: "10%",
+        left: "5%",
       },
       label: "0%",
     },
@@ -300,9 +300,9 @@ const Product = () => {
             <h5>Price</h5>
             <Slider
               min={0}
-              max={100000}
+              max={300000}
               range={{ draggableTrack: true }}
-              defaultValue={[0, 100000]}
+              defaultValue={[0, 300000]}
               marks={Price}
               tooltip={{
                 formatter: (value) => {
