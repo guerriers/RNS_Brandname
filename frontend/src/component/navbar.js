@@ -120,6 +120,9 @@ const NavbarComponent = () => {
                   <NavDropdown.Item as={Link} to="/myProfile">
                     <FaUserEdit /> My Profile
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/myFavorite">
+                    <FaUserEdit /> My Favorite Product
+                  </NavDropdown.Item>
                   {isVerified && (
                     <NavDropdown.Item as={Link} to="/profile">
                       <FaShoppingBag /> Seller Profile

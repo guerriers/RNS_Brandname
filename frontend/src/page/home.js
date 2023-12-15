@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/home.css";
 import Slider from "react-slick";
@@ -9,6 +10,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Col from "react-bootstrap/Col";
 
 function HomePage() {
+  const navigate = useNavigate();
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [products, setProducts] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -30,8 +33,11 @@ function HomePage() {
   }, []);
 
   function handleCategoryClick(category) {
-    // Handle category click, e.g., navigate to a specific category page
-    console.log(`Clicked on ${category}`);
+    navigate(`/products?category=${category}`);
+  }
+
+  function handleBrandClick(brand) {
+    navigate(`/products?brand=${brand}`);
   }
 
   function handleDotClick(slideIndex) {
@@ -411,11 +417,8 @@ function HomePage() {
         <h1 className="decorated-h1">Explore by Brand</h1>
         <Slider {...autoSlideSettings}>
           {brandname.map((d) => (
-            <div
-              className="category"
-              onClick={() => redirectToURL(d.targetURL)}
-            >
-              <img src={d.img} />
+            <div className="category" onClick={() => handleBrandClick(d.text)}>
+              <img src={d.img} alt={d.text} />
               <p>{d.text}</p>
             </div>
           ))}
@@ -428,9 +431,9 @@ function HomePage() {
           {categories.map((d) => (
             <div
               className="category"
-              onClick={() => redirectToURL(d.targetURL)}
+              onClick={() => handleCategoryClick(d.text)}
             >
-              <img src={d.img} />
+              <img src={d.img} alt={d.text} />
               <p>{d.text}</p>
             </div>
           ))}

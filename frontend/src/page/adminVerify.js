@@ -130,14 +130,23 @@ const AdminVerify = () => {
                         variant="gray"
                         onClick={() => handleViewRequest(request.user_id)}
                       >
-                        ✎ View
+                        👁️ View
                       </Button>
-                      <Button
-                        variant="gray"
-                        onClick={() => handleConfirmation(request.user_id)}
-                      >
-                        🗑 Reject
-                      </Button>
+                      {request.verify_status === "verified" ? (
+                        <Button
+                          variant="gray"
+                          onClick={() => handleConfirmation(request.user_id)}
+                        >
+                          🗑️ Delete
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="gray"
+                          onClick={() => handleConfirmation(request.user_id)}
+                        >
+                          🚫 Reject
+                        </Button>
+                      )}
                     </div>
                   </div>
                 );

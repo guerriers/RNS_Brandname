@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import { SearchOutlined } from "@ant-design/icons";
@@ -58,6 +58,8 @@ const brands = [
 
 const CheckboxGroup = Checkbox.Group;
 const Product = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState({
@@ -80,24 +82,24 @@ const Product = () => {
   const onChangeCheckbox = (type, list) => {
     if (type == "category") {
       setCheckedCategory(list);
-      setFilter({
-        ...filter,
+      setFilter((prevFilter) => ({
+        ...prevFilter,
         category: list,
-      });
+      }));
     }
     if (type == "brand") {
       setCheckedBrand(list);
-      setFilter({
-        ...filter,
+      setFilter((prevFilter) => ({
+        ...prevFilter,
         brand: list,
-      });
+      }));
     }
 
     if (type == "p_status") {
-      setFilter({
-        ...filter,
+      setFilter((prevFilter) => ({
+        ...prevFilter,
         p_status: list,
-      });
+      }));
     }
   };
   const onCheckAllChange = (type, e) => {
@@ -121,8 +123,14 @@ const Product = () => {
   };
 
   useEffect(() => {
+    const params = {
+      category: queryParams.getAll("category"),
+      brand: queryParams.getAll("brand"),
+    };
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/products`, { params: filter })
+      .get(`${process.env.REACT_APP_BASE_URL}/api/products`, {
+        params: filter,
+      })
       .then((response) => {
         setProducts(response.data);
         console.log("Received product data:", response.data);
@@ -130,7 +138,8 @@ const Product = () => {
       .catch((error) => {
         console.error("Error fetching product data:", error);
       });
-  }, [filter]);
+  }, [filter, filter.brand, filter.category, location.search]);
+
   useEffect(() => {
     const filtered = products.filter((product) => product.p_status !== "2");
     setFilteredProducts(filtered);
