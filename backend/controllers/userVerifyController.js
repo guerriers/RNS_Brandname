@@ -2,6 +2,7 @@ const UserVerify = require("../models/userVerify");
 const User = require("../models/user");
 const { ErrorHandler } = require("../middlewares/errorHandlers");
 const { uploadImagesToAzure,deleteImagesFromAzure } = require('../utils/azureUpload');
+const Product = require("../models/products.js");
 
 // Add a new user verification entry
 const createUserVerify = async (req, res) => {
@@ -95,30 +96,55 @@ const updateUserVerify = async (req, res) => {
 
 // Delete a user verification entry by ID
 const deleteUserVerify = async (req, res) => {
-  const userVerificationId = req.params.id;
+  const userId = req.params.id;
 
   try {
+    // Get all products of the user
+    const userProducts = await Product.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+
+    // If no products found, return a message
+    if (userProducts.length > 0) {
+      // Loop through each userProduct and delete it
+      for (let userProduct of userProducts) {
+        for (let i = 0; i < userProduct.p_img.length; i++) {
+          await deleteImagesFromAzure(userProduct.p_img[i].public_id);
+        }
+
+        if (userProduct.p_receipt) {
+          for (let i = 0; i < userProduct.p_receipt.length; i++) {
+            await deleteImagesFromAzure(userProduct.p_receipt[i].public_id);
+          }
+        }
+
+        await userProduct.destroy({ where: { id: userProduct.id } });
+      }
+
+      console.log(`All products of user ID ${userId} deleted successfully.`);
+    }
+
+    // Delete the user verification entry
     const deletedRowCount = await UserVerify.destroy({
       where: {
-        user_id: userVerificationId
-      }
+        user_id: userId,
+      },
     });
 
     if (deletedRowCount === 0) {
       return res.status(404).json({ error: "User verification not found" });
     }
 
-    console.log(
-      `User verification ID ${userVerificationId} deleted successfully.`
-    );
+    console.log(`User verification ID ${userId} deleted successfully.`);
     return res.status(204).send();
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Could not delete the user verification" });
+    return res.status(500).json({ error: "Could not delete the user verification" });
   }
 };
+
 
 //Admin
 // Admin Update a user verification entry by ID
