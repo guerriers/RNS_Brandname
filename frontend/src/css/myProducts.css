@@ -29,6 +29,7 @@
   width: 400px;
   max-height: 250px;
   border-radius: 16px;
+  object-fit: cover;
 }
 
 .for-rent-myProduct {
