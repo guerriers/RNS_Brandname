@@ -4,10 +4,13 @@ const { ErrorHandler } = require("../middlewares/errorHandlers");
 const UserVerify = require("../models/userVerify");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const {
+  uploadImagesToAzure,
+  deleteImagesFromAzure,
+} = require("../utils/azureUpload");
 
 // Register a new user
 exports.register = async (req, res, next) => {
-
   try {
     const { email, password, firstName, lastName, phone } = req.body;
 
@@ -22,8 +25,8 @@ exports.register = async (req, res, next) => {
     sendToken(user, 200, res);
   } catch (error) {
     console.error(error);
-    if (error.name === 'SequelizeUniqueConstraintError' && error.fields.email) {
-      return res.status(400).json({ error: 'Email is already in use.' });
+    if (error.name === "SequelizeUniqueConstraintError" && error.fields.email) {
+      return res.status(400).json({ error: "Email is already in use." });
     }
     return next(error);
   }
@@ -57,12 +60,12 @@ exports.login = async (req, res, next) => {
 // Forgot password  => /api/password/forgot
 
 exports.forgotPassword = async (req, res, next) => {
-  console.log("EMAIL", req.body.email)
+  console.log("EMAIL", req.body.email);
   if (!req.body.email) {
     return next(new ErrorHandler("Email address is required", 400));
   }
   const user = await User.findOne({ where: { email: req.body.email } });
-  console.log("USER", user)
+  console.log("USER", user);
   if (!user) {
     return next(new ErrorHandler("User not found with this email", 404));
     // Get reset token
@@ -82,7 +85,7 @@ exports.forgotPassword = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: `Email sent to ${user.email}`,
-      forTest: resetUrl
+      forTest: resetUrl,
     });
   } catch (error) {
     user.resetPasswordToken = undefined;
@@ -98,9 +101,9 @@ exports.resetPassword = async (req, res, next) => {
   try {
     // Hash URL token
     const resetPasswordToken = crypto
-      .createHash('sha256')
+      .createHash("sha256")
       .update(req.params.token)
-      .digest('hex');
+      .digest("hex");
 
     const user = await User.findOne({
       where: {
@@ -109,11 +112,16 @@ exports.resetPassword = async (req, res, next) => {
     });
 
     if (!user) {
-      return next(new ErrorHandler('Password reset token is invalid or has been expired', 400));
+      return next(
+        new ErrorHandler(
+          "Password reset token is invalid or has been expired",
+          400
+        )
+      );
     }
 
     if (req.body.password !== req.body.confirmPassword) {
-      return next(new ErrorHandler('Password does not match', 400));
+      return next(new ErrorHandler("Password does not match", 400));
     }
 
     user.password = req.body.password;
@@ -122,7 +130,7 @@ exports.resetPassword = async (req, res, next) => {
     user.resetPasswordExpire = null;
 
     await user.save();
-    
+
     sendToken(user, 200, res);
   } catch (error) {
     next(error);
@@ -156,39 +164,56 @@ exports.updatePassword = async (req, res, next) => {
   await user.save();
   sendToken(user, 200, res);
 };
-//Update user profile => /api/v1/me/update
+
+//Update user profile => /api/auth/me/update
 exports.updateProfile = async (req, res, next) => {
-  const newUserData = { name: req.body.name, email: req.body.email };
+  const userId = req.user.id;
 
-  if (req.body.avatar !== "") {
-    const user = await User.findById(req.user.id);
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return next(new ErrorHandler("User not found", 404));
+    }
 
-    // const image_id = user.avatar.public_id;
-    // const removeImg = await cloudinary.v2.uploader.destroy(image_id);
-    // console.log(removeImg);
+    if (req.files && req.files.profile_img) {
+      let images = Array.isArray(req.files.profile_img)
+        ? req.files.profile_img
+        : [req.files.profile_img].filter(Boolean);
 
-    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    //   folder: "avatars",
-    //   width: 150,
-    //   crop: "scale",
-    // });
+      if (user.profile_img && user.profile_img.length > 0) {
+        await Promise.all(
+          user.profile_img.map(async (image) => {
+            try {
+              if (image.public_id !== "noimg" || image.url !== "noimg") {
+                await deleteImagesFromAzure(image.public_id);
+              }
+            } catch (error) {
+              console.error(
+                `Error deleting image ${image.public_id}: ${error.message}`
+              );
+            }
+          })
+        );
+      }
 
-    newUserData.avatar = {
-      public_id: result.public_id,
-      url: result.secure_url,
-    };
+      const imagesLinks = await uploadImagesToAzure(images, "profile_img");
+      req.body.profile_img = imagesLinks;
+    }
+
+    //Update avatar
+    req.body.user_id = req.user.id;
+    user.set(req.body);
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    return next(error);
   }
-
-  //Update avatar
-  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
-  res.status(200).json({
-    success: true,
-  });
 };
+
 // Logout user => /api/v1/logout
 exports.logout = async (req, res, next) => {
   res.cookie("token", null, { expires: new Date(Date.now()), httpOnly: true });
@@ -204,7 +229,7 @@ exports.logout = async (req, res, next) => {
 exports.allUsers = async (req, res, next) => {
   const users = await User.findAll({
     attributes: {
-      exclude: ['password'],
+      exclude: ["password"],
     },
   });
 
