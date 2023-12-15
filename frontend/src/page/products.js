@@ -402,37 +402,41 @@ const Product = () => {
 
         <Col md={8} lg={9} xl={9}>
           <p className="product-h">Products</p>
-          <Row>
-            {filteredProducts.map((product) => (
-              <Col md={6} lg={4} xl={4} className="mt-4">
-                <Link to={`/product/${product.id}`} key={product.id}>
-                  <div className="product-box">
-                    {product.p_img && product.p_img.length > 0 ? (
-                      <img src={product.p_img[0].url} alt={product.p_name} />
-                    ) : (
-                      <p>No image available</p>
-                    )}
-                    <div
-                      className={`product-status ${
-                        product.p_status === "0"
-                          ? "for-rent"
+          {filteredProducts.length === 0 ? (
+            <p>There are no products that match the selected filters.</p>
+          ) : (
+            <Row>
+              {filteredProducts.map((product) => (
+                <Col md={6} lg={4} xl={4} className="mt-4">
+                  <Link to={`/product/${product.id}`} key={product.id}>
+                    <div className="product-box">
+                      {product.p_img && product.p_img.length > 0 ? (
+                        <img src={product.p_img[0].url} alt={product.p_name} />
+                      ) : (
+                        <p>No image available</p>
+                      )}
+                      <div
+                        className={`product-status ${
+                          product.p_status === "0"
+                            ? "for-rent"
+                            : product.p_status === "1"
+                            ? "for-sell"
+                            : "sold-out"
+                        }`}
+                      >
+                        {product.p_status === "0"
+                          ? "For Rent"
                           : product.p_status === "1"
-                          ? "for-sell"
-                          : "sold-out"
-                      }`}
-                    >
-                      {product.p_status === "0"
-                        ? "For Rent"
-                        : product.p_status === "1"
-                        ? "For Sell"
-                        : "Sold Out"}
+                          ? "For Sell"
+                          : "Sold Out"}
+                      </div>
+                      <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
                     </div>
-                    <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
-                  </div>
-                </Link>
-              </Col>
-            ))}
-          </Row>
+                  </Link>
+                </Col>
+              ))}
+            </Row>
+          )}
         </Col>
       </Row>
     </>
