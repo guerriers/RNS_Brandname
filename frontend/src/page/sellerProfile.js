@@ -53,7 +53,7 @@ function SellerProfile() {
       handleCloseModal();
     }
   };
-
+  
   const { isVerified, verify_status } = useSelector(
     (state) => state.verify_status
   );
@@ -79,7 +79,7 @@ function SellerProfile() {
   const fetchProducts = (userId) => {
     const token = localStorage.getItem("token");
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/products/myProducts?user_id=${userId}`,
+      `${process.env.REACT_APP_BASE_URL}/api/products/user/${userId}`,
       {
         method: "GET",
         headers: {
