@@ -12,9 +12,7 @@
             "dest": "/"
         }
     ],
-    "git": {
-        "deploymentEnabled": {
-            "main": false
-        }
+    "github": {
+        "silent": true
     }
 }
