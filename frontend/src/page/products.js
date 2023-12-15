@@ -4,7 +4,9 @@ import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Checkbox, Slider } from "antd";
+import { useSelector } from "react-redux";
 import "../css/products.css";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const allCategories = [
   "Accessories",
@@ -58,7 +60,10 @@ const brands = [
 
 const CheckboxGroup = Checkbox.Group;
 const Product = () => {
+  const [favorites, setFavorites] = useState([]);
   const location = useLocation();
+  const id = localStorage.getItem("id");
+  const user = useSelector((state) => state.auth.user);
   const queryParams = new URLSearchParams(location.search);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
@@ -127,9 +132,13 @@ const Product = () => {
       category: queryParams.getAll("category"),
       brand: queryParams.getAll("brand"),
     };
+    const token = localStorage.getItem("token");
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/api/products`, {
         params: filter,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((response) => {
         setProducts(response.data);
@@ -138,12 +147,69 @@ const Product = () => {
       .catch((error) => {
         console.error("Error fetching product data:", error);
       });
-  }, [filter, filter.brand, filter.category, location.search]);
+    fetchFavorites();
+  }, [filter, location.search]);
 
   useEffect(() => {
     const filtered = products.filter((product) => product.p_status !== "2");
     setFilteredProducts(filtered);
   }, [products]);
+
+  const handleFavoriteClick = async (productId, action) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!user.id) {
+        console.error("User ID not found in localStorage");
+        return;
+      }
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/api/users/${user.id}/addFavorites`,
+        { productId, action },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Favorites updated successfully");
+        fetchFavorites();
+      } else {
+        console.error("Failed to update favorites. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error updating user favorites:", error);
+    }
+  };
+
+  const fetchFavorites = async (token) => {
+    try {
+      if (!user.id) {
+        console.error("User ID not found in localStorage");
+        return;
+      }
+
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/api/users/${user.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        setFavorites(response.data.favor || []);
+      } else {
+        console.error("Failed to fetch favorites. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error fetching user favorites:", error);
+    }
+  };
 
   const onChangeText = (e) => {
     setFilter({ ...filter, name: e.target.value });
@@ -414,7 +480,8 @@ const Product = () => {
           <Row>
             {filteredProducts.map((product) => (
               <Col md={6} lg={4} xl={4} className="mt-4">
-                <Link to={`/product/${product.id}`} key={product.id}>
+                <Link>
+                  {/* <Link to={`/product/${product.id}`} key={product.id}> */}
                   <div className="product-box">
                     {product.p_img && product.p_img.length > 0 ? (
                       <img src={product.p_img[0].url} alt={product.p_name} />
@@ -437,6 +504,20 @@ const Product = () => {
                         : "Sold Out"}
                     </div>
                     <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
+                    <div className="product-favorite">
+                      <button
+                        variant="gray"
+                        onClick={() => handleFavoriteClick(product.id, "add")}
+                      >
+                        {favorites.some(
+                          (item) => item.productId === product.id
+                        ) ? (
+                          <FaHeart />
+                        ) : (
+                          <FaRegHeart />
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </Link>
               </Col>
