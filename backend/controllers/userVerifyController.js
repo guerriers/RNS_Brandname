@@ -99,7 +99,7 @@ const updateUserVerify = async (req, res) => {
 
 // Delete a user verification entry by ID
 const deleteUserVerify = async (req, res) => {
-  const userVerificationId = req.params.id;
+  const userId = req.params.id;
 
   try {
     const sellerProducts = await Product.findAll({
@@ -127,17 +127,14 @@ const deleteUserVerify = async (req, res) => {
       return res.status(404).json({ error: "User verification not found" });
     }
 
-    console.log(
-      `User verification ID ${userVerificationId} deleted successfully.`
-    );
+    console.log(`User verification ID ${userId} deleted successfully.`);
     return res.status(204).send();
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ error: "Could not delete the user verification" });
+    return res.status(500).json({ error: "Could not delete the user verification" });
   }
 };
+
 
 //Admin
 // Admin Update a user verification entry by ID
