@@ -44,6 +44,29 @@ const getAllUserVerify = async (req, res) => {
   }
 };
 
+// Get user verification status by user_id
+const getUserVerificationStatus = async (req, res) => {
+  const userId = req.params.id; // Assuming you're passing the user_id as a route parameter
+
+  try {
+    const userVerification = await UserVerify.findOne({
+      where: {
+        user_id: userId,
+      },
+      attributes: ['verify_status'], // Only retrieve the verify_status field
+    });
+
+    if (!userVerification) {
+      return res.status(404).json({ error: "User verification not found" });
+    }
+
+    return res.status(200).json({ verify_status: userVerification.verify_status });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Could not retrieve user verification status" });
+  }
+};
+
 // Get a user verification entry by Token
 const getUserVerifyByToken = async (req, res) => {
 
@@ -213,4 +236,5 @@ module.exports = {
   deleteUserVerify,
   adminUpdateUserVerify,
   getUserVerifyById,
+  getUserVerificationStatus,
 };
