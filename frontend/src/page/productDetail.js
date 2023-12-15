@@ -91,7 +91,7 @@ const ProductDetail = () => {
             </div>
             <h4>
               {product && product.p_price && product.p_price.toLocaleString()}{" "}
-              {product.p_status === "0" ? "/Month" : "THB"}
+              {product.p_status === "0" ? "THB/Month" : "THB"}
             </h4>
             <h4>Conditions {product.p_conditions}% </h4>
           </div>
