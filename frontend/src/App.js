@@ -25,6 +25,7 @@ import ForgotPassword from "./page/ForgotPassword";
 import Submitted from "./page/submitted";
 import SellerProfile from "./page/sellerProfile";
 import MyProfile from "./page/myProfile";
+import MyFavorite from "./page/myFavorite";
 
 // from store
 import store from "./store";
@@ -77,6 +78,9 @@ function App() {
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="myProfile" element={<MyProfile />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="myFavorite" element={<MyFavorite />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="myProducts" element={<MyProducts />} />

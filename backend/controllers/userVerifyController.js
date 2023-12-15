@@ -1,16 +1,24 @@
 const UserVerify = require("../models/userVerify");
 const User = require("../models/user");
 const { ErrorHandler } = require("../middlewares/errorHandlers");
-const { uploadImagesToAzure,deleteImagesFromAzure } = require('../utils/azureUpload');
+const {
+  uploadImagesToAzure,
+  deleteImagesFromAzure,
+} = require("../utils/azureUpload");
+const Product = require("../models/products");
 
 // Add a new user verification entry
 const createUserVerify = async (req, res) => {
   // console.log("Request Body:", req.body.idCard_img);
   try {
-    let result = Array.isArray(req.files.idCard_img) ? req.files.idCard_img : [req.files.idCard_img].filter(Boolean);
-    let result2 = Array.isArray(req.files.bank_img) ? req.files.bank_img : [req.files.bank_img].filter(Boolean);
-    const idCard = await uploadImagesToAzure(result, 'idCard_img');
-    const bankImg = await uploadImagesToAzure(result2, 'bank_img');
+    let result = Array.isArray(req.files.idCard_img)
+      ? req.files.idCard_img
+      : [req.files.idCard_img].filter(Boolean);
+    let result2 = Array.isArray(req.files.bank_img)
+      ? req.files.bank_img
+      : [req.files.bank_img].filter(Boolean);
+    const idCard = await uploadImagesToAzure(result, "idCard_img");
+    const bankImg = await uploadImagesToAzure(result2, "bank_img");
 
     req.body.idCard_img = idCard;
     req.body.bank_img = bankImg;
@@ -21,15 +29,12 @@ const createUserVerify = async (req, res) => {
     return res.status(201).json(newUserVerify);
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({
-        error: "Could not add user verification",
-        details: error.message,
-      });
+    return res.status(500).json({
+      error: "Could not add user verification",
+      details: error.message,
+    });
   }
 };
-
 
 // Get all user verification entries
 const getAllUserVerify = async (req, res) => {
@@ -45,11 +50,10 @@ const getAllUserVerify = async (req, res) => {
 
 // Get a user verification entry by Token
 const getUserVerifyByToken = async (req, res) => {
-
   try {
-    const userVerification = await UserVerify.findOne(
-      { where: { user_id: req.user.id } },
-    );
+    const userVerification = await UserVerify.findOne({
+      where: { user_id: req.user.id },
+    });
 
     if (!userVerification) {
       return res.status(404).json({ error: "User verification not found" });
@@ -98,10 +102,25 @@ const deleteUserVerify = async (req, res) => {
   const userVerificationId = req.params.id;
 
   try {
+    const sellerProducts = await Product.findAll({
+      where: { user_id: userVerificationId },
+    });
+
+    for (const product of sellerProducts) {
+      for (let i = 0; i < product.p_img.length; i++) {
+        await deleteImagesFromAzure(product.p_img[i].public_id);
+      }
+      if (product.p_receipt) {
+        for (let i = 0; i < product.p_receipt.length; i++) {
+          await deleteImagesFromAzure(product.p_receipt[i].public_id);
+        }
+      }
+      await Product.destroy({ where: { id: product.id } });
+    }
     const deletedRowCount = await UserVerify.destroy({
       where: {
-        user_id: userVerificationId
-      }
+        user_id: userVerificationId,
+      },
     });
 
     if (deletedRowCount === 0) {
@@ -129,8 +148,8 @@ const adminUpdateUserVerify = async (req, res) => {
   try {
     const userVerification = await UserVerify.findOne({
       where: {
-        user_id: userVerificationId
-      }
+        user_id: userVerificationId,
+      },
     });
 
     if (!userVerification) {
@@ -141,21 +160,24 @@ const adminUpdateUserVerify = async (req, res) => {
     userVerification.verify_status = await req.body.verify_status;
 
     // Save the updated record
-     userVerification.save();
+    userVerification.save();
 
-    return res.status(201).json({ message: "User verification updated successfully" });
+    return res
+      .status(201)
+      .json({ message: "User verification updated successfully" });
   } catch (error) {
     console.error(error);
 
     // Handle Sequelize validation errors
-    if (error.name === 'SequelizeValidationError') {
+    if (error.name === "SequelizeValidationError") {
       return res.status(400).json({ error: error.message });
     }
 
-    return res.status(500).json({ error: "Could not update the user verification" });
+    return res
+      .status(500)
+      .json({ error: "Could not update the user verification" });
   }
 };
-
 
 // Get a user verification entry by Id
 const getUserVerifyById = async (req, res) => {
@@ -178,7 +200,6 @@ const getUserVerifyById = async (req, res) => {
       .json({ error: "Could not retrieve the user verification" });
   }
 };
-
 
 module.exports = {
   createUserVerify,

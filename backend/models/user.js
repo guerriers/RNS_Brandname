@@ -70,15 +70,15 @@ User.init(
       },
     },
     profile_img: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: false,
-      defaultValue: "noimg",
+      defaultValue: [{ public_id: 'noimg', url: 'noimg' }],
       validate: {
         notNull: {
-          msg: "Profile image cannot be null.",
+          msg: 'Profile image cannot be null.',
         },
         notEmpty: {
-          msg: "Profile image cannot be empty.",
+          msg: 'Profile image cannot be empty.',
         },
       },
     },
@@ -110,6 +110,10 @@ User.init(
           msg: "Must be Admin or User",
         },
       },
+    },
+    favor: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: true,
     },
     resetPasswordToken: {
       type: DataTypes.STRING,

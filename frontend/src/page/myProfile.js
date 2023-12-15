@@ -3,20 +3,18 @@ import { Form, Col, Container, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "../css/myProfile.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
+  const navigate = useNavigate();
   const [profilePreview, setProfilePreview] = useState([]);
   const [profile, setProfile] = useState([]);
   const [oldProfile, setOldProfile] = useState([]);
   const [loading, setLoading] = useState(true);
   const [validated, setValidated] = useState(false);
   const [editMode, setEditMode] = useState(false);
-
-  // Retrieve the user object from Redux store
   const user = useSelector((state) => state.auth.user);
-
   const id = localStorage.getItem("id");
-
   const [formValues, setFormValues] = useState({
     profile_img: [],
     f_name: "",
@@ -28,14 +26,12 @@ const MyProfile = () => {
   useEffect(() => {
     const fetchInitialValues = async () => {
       try {
-        // Check if there is a valid user object before making the API call
         if (!user || !user.id) {
           console.error("User object or user ID is null or undefined.");
           setLoading(false);
           return;
         }
 
-        // Make an API call to fetch the initial values
         const token = localStorage.getItem("token");
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/api/users/${user.id}`,
@@ -46,12 +42,11 @@ const MyProfile = () => {
           }
         );
 
-        // Use response.data instead of await response.json()
         setFormValues(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching initial values:", error);
-        setLoading(false); // Set loading to false even in case of an error
+        setLoading(false);
       }
     };
 
@@ -59,7 +54,7 @@ const MyProfile = () => {
   }, [user]);
 
   if (loading) {
-    return <p>Loading...</p>; // You can replace this with a loading spinner or any other loading indicator
+    return <p>Loading...</p>;
   }
 
   const handleChange = (e) => {
@@ -99,8 +94,6 @@ const MyProfile = () => {
       formData.append("l_name", formValues.l_name);
       formData.append("email", formValues.email);
       formData.append("phone", formValues.phone);
-
-      // Append files if available
       profile.forEach((file) => {
         formData.append("img", file);
       });
@@ -118,7 +111,8 @@ const MyProfile = () => {
 
       if (response.status === 200) {
         alert("Edit successfully");
-        // Perform any additional actions after a successful edit
+        // navigate("/myProfile");
+        window.location.reload();
       } else {
         alert("Failed to edit. Please try again.");
       }
@@ -178,20 +172,22 @@ const MyProfile = () => {
                       height="52"
                     />
                   ))}
-                  <div className="addProfileImgActions">
-                    <span className="plus-sign">+</span>
-                  </div>
+                  {editMode && (
+                    <div className="addProfileImgActions">
+                      <span className="plus-sign-myP">+</span>
+                      <Form.Control
+                        type="file"
+                        name="img"
+                        accept="image/*"
+                        onChange={handleChange}
+                        style={{ display: "none" }}
+                        multiple
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </Form.Label>
-            <Form.Control
-              type="file"
-              name="img"
-              accept="image/*"
-              onChange={handleChange}
-              style={{ display: "none" }}
-              multiple
-            />
           </Form.Group>
         </Form>
 

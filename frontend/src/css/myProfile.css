@@ -1,78 +1,76 @@
 .title {
-    font-size: 40px;
-    font-weight: 500;
-    max-width: fit-content;
-    margin: 20px;
+  font-size: 40px;
+  font-weight: 500;
+  max-width: fit-content;
+  margin: 20px;
 }
 
 .myProfile-img-grid {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }
 
 .imagePreview {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 10px;
-
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px;
 }
 
 .addProfileImgActions {
-    position: absolute;
-    bottom: 10px;
-    right: 0;
-    border-radius: 50%;
-    font-weight: bold;
-    background-color: #333333;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  border-radius: 50%;
+  font-weight: bold;
+  background-color: #333333;
 }
 
 .addProfileImgActions:hover {
-    background-color: #7e722a;
-    transition: 0.3s;
+  background-color: #7e722a;
+  transition: 0.3s;
 }
 
 .profileImgBox {
-    position: relative;
-    padding: 5px;
-    background-color: #fff;
-    transition: transform 0.2s;
-    cursor: pointer;
-    border-radius: 16px;
-    display: flex;
-
+  position: relative;
+  padding: 5px;
+  background-color: #fff;
+  transition: transform 0.2s;
+  border-radius: 16px;
+  display: flex;
 }
 
-.plus-sign {
+.plus-sign-myP {
   margin: 15px 15px 15px 15px;
   font-weight: bold;
   color: #ffffff;
   font-size: 32px;
+  cursor: pointer;
 }
 
 .editProfileForm {
-    display: flex;
-    margin: 20px;
-    justify-content: space-around;
+  display: flex;
+  margin: 20px;
+  justify-content: space-around;
 }
 
 .formGridFirstName {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 
 .formGridLastName {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 
 .editProfileBtn {
-    margin: 10px;
-    bottom: 100px;
-    right: 150px;
-    position: fixed
+  margin: 10px;
+  bottom: 100px;
+  right: 150px;
+  position: fixed;
 }
