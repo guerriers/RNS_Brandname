@@ -8,6 +8,15 @@ router.get("/check", isAuthenticatedUser,userVerifyController.getUserVerifyByTok
 router.post("/",isAuthenticatedUser, userVerifyController.createUserVerify);
 // router.put("/:id", userVerifyController.updateUserVerify);
 
+//User routes
+router
+  .route('/user-verification/:id')
+  .get(
+    isAuthenticatedUser,
+    authorizeRoles("user"),
+    userVerifyController.getUserVerificationStatus
+  ) 
+
 //Admin routes
 router
   .route("/")

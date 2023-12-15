@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Container, Form, Row, Col } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import "../css/sellerProfile.css";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaCheckCircle } from "react-icons/fa";
+import axios from "axios";
 
 function SellerProfile() {
   const { id } = useParams();
@@ -17,6 +18,8 @@ function SellerProfile() {
   const [reviewDate, setReviewDate] = useState("");
   const [reviewContent, setReviewContent] = useState("");
   const [selectedStars, setSelectedStars] = useState(0);
+  const dispatch = useDispatch();
+  const verifyStatus = useSelector((state) => state.verify_status);
   const [reviews, setReviews] = useState([
     {
       stars: 4,
@@ -53,10 +56,7 @@ function SellerProfile() {
       handleCloseModal();
     }
   };
-
-  const { isVerified, verify_status } = useSelector(
-    (state) => state.verify_status
-  );
+  
   const formatDate = (timestamp) => {
     const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
     return new Date(timestamp).toLocaleDateString(undefined, options);
@@ -74,12 +74,14 @@ function SellerProfile() {
       .catch((error) =>
         console.error("Error fetching user details from URL: ", error)
       );
+
+      fetchVerificationStatus(id);
   }, [id]);
 
   const fetchProducts = (userId) => {
     const token = localStorage.getItem("token");
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/products/myProducts?user_id=${userId}`,
+      `${process.env.REACT_APP_BASE_URL}/api/products/user/${userId}`,
       {
         method: "GET",
         headers: {
@@ -100,6 +102,18 @@ function SellerProfile() {
       });
   };
 
+  const fetchVerificationStatus = async (userId) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/api/user-verification/${userId}`
+      );
+      const verifyStatus = response.data.verify_status;
+      dispatch({ type: "SET_VERIFY_STATUS", verify_status: verifyStatus });
+    } catch (error) {
+      console.error("Error fetching verification status:", error);
+    }
+  };
+
   return (
     <Container>
       <Row className="sellerPro">
@@ -115,7 +129,7 @@ function SellerProfile() {
               </h2>
               <span className="verified-badge">
                 {" "}
-                {isVerified ? "Verified" : "Need Verified"}{" "}
+                {verifyStatus ? "Verified" : "Need Verified"}{" "}
                 <FaCheckCircle
                   className="FaCheckSellerPro"
                   style={{ color: "#18af2a" }}

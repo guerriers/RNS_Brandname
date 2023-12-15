@@ -111,6 +111,22 @@ const getProductById = async (req, res) => {
   }
 };
 
+// Get a product by UserID
+const getProductByUserId = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const products = await Product.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+    return res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Could not retrieve products by user ID" });
+  }
+};
+
 // Update a product by ID
 const updateProduct = async (req, res, next) => {
   const productId = req.params.id;
@@ -215,6 +231,7 @@ module.exports = {
   getAllProduct,
   getMyProducts,
   getProductById,
+  getProductByUserId,
   updateProduct,
   deleteProduct,
 };
