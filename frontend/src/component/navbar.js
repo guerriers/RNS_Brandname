@@ -124,7 +124,7 @@ const NavbarComponent = () => {
                     <FaHeart /> My Favorite product
                   </NavDropdown.Item>
                   {isVerified && (
-                    <NavDropdown.Item as={Link} to="/profile">
+                    <NavDropdown.Item as={Link} to={`/profile/${user.id}`}>
                       <FaShoppingBag /> Seller Profile
                     </NavDropdown.Item>
                   )}
