@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Checkbox, Slider } from "antd";
+import { useSelector } from "react-redux";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import "../css/products.css";
 
 const allCategories = [
@@ -58,8 +60,8 @@ const brands = [
 
 const CheckboxGroup = Checkbox.Group;
 const Product = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
+  const [favorites, setFavorites] = useState([]);
+  const user = useSelector((state) => state.auth.user);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState({
@@ -123,13 +125,13 @@ const Product = () => {
   };
 
   useEffect(() => {
-    const params = {
-      category: queryParams.getAll("category"),
-      brand: queryParams.getAll("brand"),
-    };
+    const token = localStorage.getItem("token");
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/api/products`, {
         params: filter,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((response) => {
         setProducts(response.data);
@@ -138,16 +140,91 @@ const Product = () => {
       .catch((error) => {
         console.error("Error fetching product data:", error);
       });
-  }, [filter, filter.brand, filter.category, location.search]);
+    fetchFavorites();
+  }, [filter]);
 
   useEffect(() => {
     const filtered = products.filter((product) => product.p_status !== "2");
     setFilteredProducts(filtered);
   }, [products]);
 
+  const handleFavoriteClick = async (productId, action) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!user.id) {
+        console.error("User ID not found in localStorage");
+        return;
+      }
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/api/users/${user.id}/addFavorites`,
+        { productId, action },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Favorites updated successfully");
+        fetchFavorites();
+      } else {
+        console.error("Failed to update favorites. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error updating user favorites:", error);
+    }
+  };
+
+  const fetchFavorites = async (token) => {
+    try {
+      if (!user.id) {
+        console.error("User ID not found in localStorage");
+        return;
+      }
+
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/api/users/${user.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        setFavorites(response.data.favor || []);
+      } else {
+        console.error("Failed to fetch favorites. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error fetching user favorites:", error);
+    }
+  };
+
   const onChangeText = (e) => {
     setFilter({ ...filter, name: e.target.value });
   };
+
+  function handleSelect(value, name) {
+    if (value) {
+      setSelected([...selected, name]);
+    } else {
+      setSelected(selected.filter((item) => item !== name));
+    }
+  }
+
+  function selectAll(value) {
+    if (value) {
+      // if true
+      setSelected(allCategories); // select all
+    } else {
+      // if false
+      setSelected([]); // unselect all
+    }
+  }
 
   const onChangeSlider = (type, values) => {
     setFilter({ ...filter, [type]: values });
@@ -411,41 +488,52 @@ const Product = () => {
 
         <Col md={8} lg={9} xl={9}>
           <p className="product-h">Products</p>
-          {filteredProducts.length === 0 ? (
-            <p>There are no products that match the selected filters.</p>
-          ) : (
-            <Row>
-              {filteredProducts.map((product) => (
-                <Col md={6} lg={4} xl={4} className="mt-4">
-                  <Link to={`/product/${product.id}`} key={product.id}>
-                    <div className="product-box">
-                      {product.p_img && product.p_img.length > 0 ? (
-                        <img src={product.p_img[0].url} alt={product.p_name} />
-                      ) : (
-                        <p>No image available</p>
-                      )}
-                      <div
-                        className={`product-status ${
-                          product.p_status === "0"
-                            ? "for-rent"
-                            : product.p_status === "1"
-                            ? "for-sell"
-                            : "sold-out"
-                        }`}
-                      >
-                        {product.p_status === "0"
-                          ? "For Rent"
+          <Row>
+            {filteredProducts.map((product) => (
+              <Col md={6} lg={4} xl={4} className="mt-4">
+                <Link to={`/product/${product.id}`} key={product.id}>
+                  <div className="product-box">
+                    {product.p_img && product.p_img.length > 0 ? (
+                      <img src={product.p_img[0].url} alt={product.p_name} />
+                    ) : (
+                      <p>No image available</p>
+                    )}
+                    <div
+                      className={`product-status ${
+                        product.p_status === "0"
+                          ? "for-rent"
                           : product.p_status === "1"
-                          ? "For Sell"
-                          : "Sold Out"}
-                      </div>
-                      <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
+                          ? "for-sell"
+                          : "sold-out"
+                      }`}
+                    >
+                      {product.p_status === "0"
+                        ? "For Rent"
+                        : product.p_status === "1"
+                        ? "For Sell"
+                        : "Sold Out"}
                     </div>
-                  </Link>
-                </Col>
-              ))}
-            </Row>
-          )}
+                    <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
+                    <div className="product-favorite">
+                      <button
+                        className="favButton"
+                        variant="gray"
+                        onClick={() => handleFavoriteClick(product.id, "add")}
+                      >
+                        {favorites.some(
+                          (item) => item.productId === product.id
+                        ) ? (
+                          <FaHeart style={{ color: "#ff0000" }} />
+                        ) : (
+                          <FaRegHeart style={{ color: "#000000" }} />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+              </Col>
+            ))}
+          </Row>
         </Col>
       </Row>
     </>
