@@ -7,8 +7,6 @@
 }
 
 .product-detail {
-  /* padding: 20px; */
-  /* width: auto; */
   background-color: #fff;
   margin-right: 10%;
   max-width: 550px !important;
@@ -96,8 +94,6 @@
   font-weight: 600;
 }
 .product-detail h4 {
-  /* text-align: left; */
-  /* margin-top: 10px; */
   font-size: 16px;
   font-weight: 600;
 }
@@ -176,4 +172,11 @@
 .profile-icon-de {
   color: #e7c264;
   margin-left: 200px;
+}
+
+.favButtonPD {
+  font-size: 26px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  margin-right: 5px;
 }

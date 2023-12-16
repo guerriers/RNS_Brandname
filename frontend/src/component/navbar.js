@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Nav, Navbar, Container, NavDropdown, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import "../css/component/navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../actions/userActions";
 import { checkVerify } from "../actions/userActions";
-
+import "../css/component/navbar.css";
 import {
   FaSignOutAlt,
   FaUserEdit,
   FaCheckCircle,
   FaShoppingBag,
+  FaHeart,
 } from "react-icons/fa";
 
 const NavbarComponent = () => {
@@ -121,7 +121,7 @@ const NavbarComponent = () => {
                     <FaUserEdit /> My Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/myFavorite">
-                    <FaUserEdit /> My Favorite Product
+                    <FaHeart /> My Favorite product
                   </NavDropdown.Item>
                   {isVerified && (
                     <NavDropdown.Item as={Link} to="/profile">

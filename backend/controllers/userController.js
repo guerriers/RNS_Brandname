@@ -67,10 +67,54 @@ const updateUserById = async (req, res, next) => {
   }
 };
 
-// Add more controllers as needed for user-related operations
+// user add favorites
+const addFavorites = async (req, res, next) => {
+  const userId = req.params.userId;
+  const { productId, action } = req.body;
+
+  try {
+    // Fetch the user by userId
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Initialize the 'favor' field if it's null
+    if (!user.favor) {
+      user.favor = [];
+    }
+
+    let updatedFavor;
+
+    if (action === "add") {
+      // Add the product to favorites if it doesn't exist
+      if (!user.favor.some((item) => item.productId === productId)) {
+        updatedFavor = [...user.favor, { productId }];
+      } else {
+        // If it already exists, remove it to toggle
+        updatedFavor = user.favor.filter(
+          (item) => item.productId !== productId
+        );
+      }
+    } else if (action === "remove") {
+      // Remove the product from favorites if it exists
+      updatedFavor = user.favor.filter((item) => item.productId !== productId);
+    }
+
+    // Update the 'favor' field in the database
+    await user.update({ favor: updatedFavor });
+
+    return res.status(200).json({ message: "Favorites updated successfully" });
+  } catch (error) {
+    console.error("Error updating favorites:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 module.exports = {
+  // Add more exported controllers as needed
   getUserById,
   updateUserById,
-  // Add more exported controllers as needed
+  addFavorites,
 };
