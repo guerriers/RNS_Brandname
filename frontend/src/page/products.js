@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import { SearchOutlined } from "@ant-design/icons";
@@ -61,10 +61,7 @@ const brands = [
 const CheckboxGroup = Checkbox.Group;
 const Product = () => {
   const [favorites, setFavorites] = useState([]);
-  const location = useLocation();
   const user = useSelector((state) => state.auth.user);
-  // const id = localStorage.getItem("id");
-  // const queryParams = new URLSearchParams(location.search);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState({
@@ -494,8 +491,7 @@ const Product = () => {
           <Row>
             {filteredProducts.map((product) => (
               <Col md={6} lg={4} xl={4} className="mt-4">
-                <Link>
-                  {/* <Link to={`/product/${product.id}`} key={product.id}> */}
+                <Link to={`/product/${product.id}`} key={product.id}>
                   <div className="product-box">
                     {product.p_img && product.p_img.length > 0 ? (
                       <img src={product.p_img[0].url} alt={product.p_name} />
