@@ -4,6 +4,7 @@ const {
   getAllProduct,
   getMyProducts,
   getProductById,
+  getProductByUserId,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -22,6 +23,10 @@ router
   .get(getProductById)
   .put(isAuthenticatedUser, authorizeRoles("user"), updateProduct)
   .delete(isAuthenticatedUser, authorizeRoles("user"), deleteProduct);
+
+router
+  .route("/user/:id")
+  .get(isAuthenticatedUser, authorizeRoles("user"), getProductByUserId);
 
 
 module.exports = router;
