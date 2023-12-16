@@ -5,8 +5,8 @@ import { Row, Col } from "react-bootstrap";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Checkbox, Slider } from "antd";
 import { useSelector } from "react-redux";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import "../css/products.css";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const allCategories = [
   "Accessories",
@@ -62,9 +62,9 @@ const CheckboxGroup = Checkbox.Group;
 const Product = () => {
   const [favorites, setFavorites] = useState([]);
   const location = useLocation();
-  const id = localStorage.getItem("id");
   const user = useSelector((state) => state.auth.user);
-  const queryParams = new URLSearchParams(location.search);
+  // const id = localStorage.getItem("id");
+  // const queryParams = new URLSearchParams(location.search);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState({
@@ -128,10 +128,6 @@ const Product = () => {
   };
 
   useEffect(() => {
-    const params = {
-      category: queryParams.getAll("category"),
-      brand: queryParams.getAll("brand"),
-    };
     const token = localStorage.getItem("token");
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/api/products`, {
@@ -148,7 +144,7 @@ const Product = () => {
         console.error("Error fetching product data:", error);
       });
     fetchFavorites();
-  }, [filter, location.search]);
+  }, [filter]);
 
   useEffect(() => {
     const filtered = products.filter((product) => product.p_status !== "2");
@@ -214,6 +210,24 @@ const Product = () => {
   const onChangeText = (e) => {
     setFilter({ ...filter, name: e.target.value });
   };
+
+  function handleSelect(value, name) {
+    if (value) {
+      setSelected([...selected, name]);
+    } else {
+      setSelected(selected.filter((item) => item !== name));
+    }
+  }
+
+  function selectAll(value) {
+    if (value) {
+      // if true
+      setSelected(allCategories); // select all
+    } else {
+      // if false
+      setSelected([]); // unselect all
+    }
+  }
 
   const onChangeSlider = (type, values) => {
     setFilter({ ...filter, [type]: values });
@@ -506,15 +520,16 @@ const Product = () => {
                     <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
                     <div className="product-favorite">
                       <button
+                        className="favButton"
                         variant="gray"
                         onClick={() => handleFavoriteClick(product.id, "add")}
                       >
                         {favorites.some(
                           (item) => item.productId === product.id
                         ) ? (
-                          <FaHeart />
+                          <FaHeart style={{ color: "#ff0000" }} />
                         ) : (
-                          <FaRegHeart />
+                          <FaRegHeart style={{ color: "#000000" }} />
                         )}
                       </button>
                     </div>

@@ -109,6 +109,15 @@
   padding-bottom: 10px;
 }
 
+.favButton {
+  position: absolute;
+  font-size: 26px;
+  bottom: 1%;
+  left: 4%;
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+
 .filter-side {
   color: #ffffff;
 }
