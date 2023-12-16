@@ -95,11 +95,11 @@ const MyProfile = () => {
       formData.append("email", formValues.email);
       formData.append("phone", formValues.phone);
       profile.forEach((file) => {
-        formData.append("img", file);
+        formData.append("profile_img", file);
       });
 
       const response = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/api/users/${user.id}`,
+        `${process.env.REACT_APP_BASE_URL}/api/auth/me/update`,
         formData,
         {
           headers: {
