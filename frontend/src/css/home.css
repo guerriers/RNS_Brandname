@@ -164,6 +164,7 @@ p {
   height: 200px;
   border-radius: 10%;
   margin-left: 50px;
+  object-fit: cover;
 }
 
 .category:hover {
@@ -189,13 +190,16 @@ p {
 }
 
 .brand p {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 .brand img {
-  width: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  width: 85%;
   height: 200px;
-  border-radius: 100%;
+  object-fit: contain;
+  margin-left: 23%;
 }
 
 .brand:hover {

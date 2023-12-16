@@ -26,7 +26,6 @@
   max-height: 250px;
   width: 100%;
   height: auto;
-  object-fit: cover;
 }
 
 .product-box:hover {
@@ -38,6 +37,7 @@
   height: auto;
   max-height: 250px;
   border-radius: 16px;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
