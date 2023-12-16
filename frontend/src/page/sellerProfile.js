@@ -135,14 +135,15 @@ function SellerProfile() {
                   style={{ color: "#18af2a" }}
                 />
               </span>
-              <h3>E-mail: {user.email}</h3>
-              <h3>Tel: {user.phone}</h3>
+              <h3><b>E-mail: </b>{user.email}</h3>
+              <h3><b>Tel: </b>{user.phone}</h3>
               <div>
                 <h3>
-                  {user.f_name}'s products: {productCount}
+                  <b>{user.f_name}'s products: </b>
+                  {productCount}
                 </h3>
                 <h3>
-                  Joined since:{" "}
+                <b>Joined since: </b>{" "}
                   {user.createdAt ? formatDate(user.createdAt) : "N/A"}
                 </h3>
               </div>
