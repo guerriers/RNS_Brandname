@@ -15,17 +15,21 @@ const MyProducts = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
   const { user, loading } = useSelector((state) => state.auth);
-  const { isVerified, verifyStatus } = useSelector(
+  const { loading: isLoaded, isVerified, verifyStatus } = useSelector(
     (state) => state.verify_status
   );
 
   useEffect(() => {
-    if (!isVerified) {
+    if (isLoaded) {
+      return;
+    }
+    if (isVerified !== undefined && !isVerified) {
       navigate("/userVerify");
     } else {
       fetchProducts();
     }
-  }, [isVerified, navigate]);
+
+  }, [isLoaded, isVerified, navigate, fetchProducts]);
 
   const fetchProducts = () => {
     // Fetch the user's products

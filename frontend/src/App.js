@@ -4,10 +4,12 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./component/route/ProtectedRoute";
 import Navbar from "./component/navbar";
+// import Messenger from "./component/messenger";
 import Home from "./page/home";
 import Login from "./page/login";
 import Register from "./page/register";
 import Products from "./page/products";
+// import Chat from "./page/chat";
 import MyProducts from "./page/myProducts";
 import AddProduct from "./page/addProduct";
 import EditProduct from "./page/editProduct";
@@ -28,7 +30,7 @@ import MyProfile from "./page/myProfile";
 import MyFavorite from "./page/myFavorite";
 
 // from store
-import store from "./store";
+import {store} from "./store";
 import { useSelector } from "react-redux";
 import { loadUser } from "./actions/userActions";
 
@@ -56,6 +58,9 @@ function App() {
         <Route path="/password/forgot" element={<ForgotPassword />} exact />
         <Route path="/password/reset/:token" element={<NewPassword />} exact />
         {/* UserPage */}
+        {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="chat" element={<Chat />} />
+        </Route> */}
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="products" element={<Products />} />
         </Route>
@@ -76,6 +81,9 @@ function App() {
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="submitted" element={<Submitted />} />
         </Route>
+        {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+          <Route path="messenger" element={<Messenger />} />
+        </Route> */}
         <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="myProfile" element={<MyProfile />} />
         </Route>

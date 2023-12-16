@@ -20,7 +20,7 @@ db.sync()
 
 const server = app.listen(process.env.PORT, () => {
   console.log(
-    `Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
+    `Server started on PORT... ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
   );
 });
 

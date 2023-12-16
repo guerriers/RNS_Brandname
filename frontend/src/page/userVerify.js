@@ -24,10 +24,17 @@ const UserVerify = () => {
   const [formValid, setFormValid] = useState(true);
 
   useEffect(() => {
-    if (verifyStatus === "submitted") {
-      navigate("/submitted");
+    if (loading) {
+      return;
     }
-  }, [verifyStatus, navigate]);
+    if (verifyStatus !== undefined) {
+      if (verifyStatus === "submitted") {
+        navigate("/submitted");
+      }  if (verifyStatus === "verified") {
+        navigate("/");
+      }
+    }
+  }, [loading, verifyStatus, navigate]);
 
   const MAX_IMAGE_SIZE_MB = 149;
   const handleIdCardChange = (e) => {
