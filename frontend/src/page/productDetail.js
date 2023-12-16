@@ -22,20 +22,19 @@ const ProductDetail = () => {
       .then((data) => {
         setProduct(data);
         console.log(`Product`, data);
+        // Fetch user details based on product user_id
+        return fetch(
+          `${process.env.REACT_APP_BASE_URL}/api/users/${data.user_id}`
+        );
       })
-      .catch((error) =>
-        console.error("Error fetching product details: ", error)
-      );
-
-    // Fetch user details based on product user_id
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${product.user_id}`)
       .then((response) => response.json())
       .then((userData) => {
         setUserData(userData);
       })
-      .catch((error) => console.error("Error fetching user details: ", error));
+      .catch((error) => console.error("Error fetching details: ", error));
+
     fetchFavorites();
-  }, [id, product.user_id]);
+  }, [id]);
 
   const fetchFavorites = async () => {
     try {
@@ -189,7 +188,7 @@ const ProductDetail = () => {
                   className="faCheckProductDe"
                   style={{ color: "#003cf0" }}
                 />
-                {user.f_name} {user.l_name}
+                {userData.f_name} {userData.l_name}
                 <img
                   className="profile-modal-icon2"
                   src="../assets/userProfile.png"
@@ -221,12 +220,12 @@ const ProductDetail = () => {
             <img
               className="profile-modal-icon"
               src="../assets/userProfile.png" /* Don't forgot to change the pic na */
-              alt={`Profile Image of ${user.f_name}`}
+              alt={`Profile Image of ${userData.f_name}`}
               style={{ width: "100px", height: "100px", borderRadius: "50%" }}
             />
-            <p className="profile-modal-info">{`${user.f_name} ${user.l_name}`}</p>
-            <p className="profile-modal-info">Email: {user.email}</p>
-            <p className="profile-modal-info">Phone: 0{user.phone}</p>
+            <p className="profile-modal-info">{`${userData.f_name} ${userData.l_name}`}</p>
+            <p className="profile-modal-info">Email: {userData.email}</p>
+            <p className="profile-modal-info">Phone: 0{userData.phone}</p>
             <LinkContainer to={`/profile/${product.user_id}`}>
               <button className="sellerprofile-button">Seller's Profile</button>
             </LinkContainer>
