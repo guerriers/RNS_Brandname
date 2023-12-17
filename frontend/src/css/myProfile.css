@@ -53,7 +53,8 @@
 .editProfileForm {
   display: flex;
   margin: 20px;
-  justify-content: space-around;
+  /* justify-content: center; */
+  /* justify-content: space-around; */
 }
 
 .formGridFirstName {
@@ -68,9 +69,44 @@
   margin: 10px;
 }
 
-.editProfileBtn {
-  margin: 10px;
-  bottom: 100px;
-  right: 150px;
-  position: fixed;
+.editProfileButton {
+  text-align: center;
+  margin-bottom: 30px;
+  /* margin-left: -7%; */
+  margin-top: 60px;
+}
+.editButton {
+  padding: 12px 24px 12px 24px;
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  background: #333333;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+}
+.editButton:hover {
+  background-color: #be9f4e;
+  color: #ffffff;
+}
+
+.cancelButton {
+  padding: 12px 24px 12px 24px;
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  background-color: #e02121;
+  margin-left: 10%;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+}
+
+.cancelButton:hover {
+  background-color: #333333;
+  color: #ffffff;
 }
