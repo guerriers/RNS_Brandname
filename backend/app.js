@@ -5,6 +5,7 @@ const User = require("./models/user");
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require("./routes/userRoutes");
 const userVerifyRoutes = require('./routes/userVerifyRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 const app = express();
 const cookieParser = require("cookie-parser");
 const { errorHandler, sequelizeErrorHandler } = require("./middlewares/errorHandlers");
@@ -24,6 +25,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use("/api/users", userRoutes);
 app.use('/api/userVerify', userVerifyRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Middleware to handle errors
 app.use(sequelizeErrorHandler);
