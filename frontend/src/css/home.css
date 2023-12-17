@@ -149,22 +149,8 @@ p {
   flex-wrap: wrap;
 }
 
-.category {
-  max-width: 300px;
-  margin: 15px;
-  padding: 10px;
-}
-
 .category p {
   margin-top: 20px;
-}
-
-.category img {
-  width: 200px;
-  height: 200px;
-  border-radius: 10%;
-  margin-left: 50px;
-  object-fit: cover;
 }
 
 .category:hover {
@@ -173,6 +159,52 @@ p {
 }
 
 .category:not(:hover) {
+  transform: scale(1);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.category {
+  max-width: 300px;
+  margin: 15px;
+  padding: 10px;
+}
+.category img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+  margin-left: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.home-product {
+  position: relative;
+  max-width: 300%;
+  border-radius: 16px;
+  margin: 15px;
+  padding: 10px;
+  transition: transform 0.2s;
+  height: 200px;
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.home-product img {
+  width: 150px;
+  height: auto;
+  border-radius: 16px;
+  margin-left: 30%;
+  object-fit: cover;
+  max-height: 200px;
+  max-width: 200px;
+  cursor: pointer;
+}
+.home-product:hover {
+  transform: scale(1.15);
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.home-product:not(:hover) {
   transform: scale(1);
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
@@ -200,6 +232,7 @@ p {
   height: 200px;
   object-fit: contain;
   margin-left: 23%;
+  cursor: pointer;
 }
 
 .brand:hover {
@@ -315,9 +348,8 @@ footer p {
 
 .product-status-home {
   position: absolute;
-  top: 10px;
-  margin-top: 10px;
-  right: 50px;
+  top: 5px;
+  right: 40px;
   padding: 5px 10px;
   border-radius: 100px;
   font-weight: bold;
@@ -326,8 +358,8 @@ footer p {
 
 .product-price-home {
   position: absolute;
-  bottom: 5%;
-  left: 55%;
+  bottom: 5px;
+  left: 51%;
   transform: translateX(-50%);
   background-color: #333333;
   color: #ffffff;

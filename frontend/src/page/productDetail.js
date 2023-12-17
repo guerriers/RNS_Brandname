@@ -16,6 +16,18 @@ const ProductDetail = () => {
   // const [showContactModal, setShowContactModal] = useState(false);
   const user = useSelector((state) => state.auth.user);
 
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === product.p_img.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? product.p_img.length - 1 : prevIndex - 1
+    );
+  };
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`)
       .then((response) => response.json())
@@ -109,34 +121,35 @@ const ProductDetail = () => {
   return (
     <Container>
       <div className="product-detail-container">
-      <div className="product-image">
+        <div
+          class="product_image"
+          data-flickity-options='{ "wrapAround": true }'
+        >
           {product.p_img && (
-            <Carousel>
+            <Carousel activeIndex={currentIndex} onSelect={() => {}}>
               {product.p_img.map((image, index) => (
                 <Carousel.Item key={index}>
                   <img
                     src={image.url}
                     alt={`Product Image ${index + 1}`}
-                    className="d-block w-100 h-100"
+                    className="d-block_w-100_h-100"
                   />
                 </Carousel.Item>
               ))}
             </Carousel>
           )}
-        </div>
-
-        <div>
-          {product.p_img &&
-            product.p_img.map((image, index) => (
-              <img
-                key={index}
-                src={image.url}
-                alt={`Product Image ${index + 1}`}
-                style={{
-                  margin: "auto",
-                }}
-              />
-            ))}
+          <div className="carousel-controls">
+            <Button
+              className="carousel-control-prev-icon"
+              variant="light"
+              onClick={handlePrev}
+            ></Button>
+            <Button
+              className="carousel-control-next-icon"
+              variant="light"
+              onClick={handleNext}
+            ></Button>
+          </div>
         </div>
 
         <div className="product-detail">

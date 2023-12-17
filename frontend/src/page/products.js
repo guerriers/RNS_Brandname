@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import { SearchOutlined } from "@ant-design/icons";
@@ -60,6 +60,9 @@ const brands = [
 
 const CheckboxGroup = Checkbox.Group;
 const Product = () => {
+  const { state } = useLocation();
+
+  console.log("STATE", state);
   const [favorites, setFavorites] = useState([]);
   const user = useSelector((state) => state.auth.user);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -81,6 +84,14 @@ const Product = () => {
     checkedCategory.length > 0 && checkedCategory.length < allCategories.length;
   const indeterminateBrand =
     checkedBrand.length > 0 && checkedBrand.length < brands.length;
+  useEffect(() => {
+    // if(state.categoryId){
+    //   setFilter({category:state.categoryId})
+    // }else if(state.brandId){
+    //   setFilter({brand:state.brandId})
+    // }
+  }, [setFilter]);
+
   const onChangeCheckbox = (type, list) => {
     if (type == "category") {
       setCheckedCategory(list);

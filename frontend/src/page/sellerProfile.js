@@ -45,7 +45,7 @@ function SellerProfile() {
       handleCloseModal();
     }
   };
-  
+
   const formatDate = (timestamp) => {
     const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
     return new Date(timestamp).toLocaleDateString(undefined, options);
@@ -53,16 +53,13 @@ function SellerProfile() {
 
   const fetchProducts = (userId) => {
     const token = localStorage.getItem("token");
-    fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/products/user/${userId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/products/user/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         const sortedProducts = data.sort((a, b) => a.p_status - b.p_status);
@@ -77,16 +74,13 @@ function SellerProfile() {
 
   const fetchReviews = (userId) => {
     const token = localStorage.getItem("token");
-    fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/reviews/user/${userId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/reviews/user/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setReviews(data);
@@ -95,7 +89,7 @@ function SellerProfile() {
       .catch((error) => {
         console.error("Error fetching user reviews data:", error);
       });
-    };
+  };
 
   const fetchVerificationStatus = async (userId) => {
     try {
@@ -123,14 +117,12 @@ function SellerProfile() {
         console.error("Error fetching user details from URL: ", error)
       );
 
-      fetchVerificationStatus(id);
-      fetchReviews(id);
+    fetchVerificationStatus(id);
+    fetchReviews(id);
   }, [id]);
 
-
-
   return (
-    <Container>
+    <Container className="sellerProfile">
       <Row className="sellerPro">
         <Col md={4}>
           <div className="user-profile-container">
@@ -150,25 +142,29 @@ function SellerProfile() {
                   style={{ color: "#18af2a" }}
                 />
               </span>
-              <h3><b>E-mail: </b>{user.email}</h3>
-              <h3><b>Tel: </b>{user.phone}</h3>
-              <div>
+              <div className="seller-detail">
+                <h3>
+                  <b>E-mail: </b>
+                  {user.email}
+                </h3>
+                <h3>
+                  <b>Tel: </b>0{user.phone}
+                </h3>
                 <h3>
                   <b>{user.f_name}'s products: </b>
                   {productCount}
                 </h3>
                 <h3>
-                <b>Joined since: </b>{" "}
+                  <b>Joined since: </b>{" "}
                   {user.createdAt ? formatDate(user.createdAt) : "N/A"}
                 </h3>
               </div>
-
             </div>
           </div>
         </Col>
         <Col md={8}>
+          <h4>{user.f_name}'s products</h4>
           <div className="userProduct-grid">
-            <h4>{user.f_name}'s products</h4>
             {userProducts.length > 0 ? (
               userProducts.map((product) => (
                 <Link to={`/product/${product.id}`} key={product.id}>
@@ -206,29 +202,29 @@ function SellerProfile() {
       <Row>
         <div className="review-container">
           <h2>Reviews</h2>
-          {reviews.length > 0 ? (   
-          <div>
-            <ul>
-              {reviews.map((review, index) => (
-                <li key={index}>
-                  <div className="review-header">
-                    <p className="starClass">
-                      {Array.from({ length: review.re_score }, (_, i) => (
-                        <FontAwesomeIcon icon={faStar} key={i} />
-                      ))}
+          {reviews.length > 0 ? (
+            <div>
+              <ul>
+                {reviews.map((review, index) => (
+                  <li key={index}>
+                    <div className="review-header">
+                      <p className="starClass">
+                        {Array.from({ length: review.re_score }, (_, i) => (
+                          <FontAwesomeIcon icon={faStar} key={i} />
+                        ))}
+                      </p>
+                      <p>{review.re_text}</p>
+                    </div>
+                    <p>
+                      {review.createdAt ? formatDate(review.createdAt) : "N/A"}
                     </p>
-                    <p>{review.re_text}</p>
-                  </div>
-                  <p>{review.createdAt ? formatDate(review.createdAt) : "N/A"}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-         ) : (
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
             <p>This seller hasn't received any reviews.</p>
-          )
-        }
-          
+          )}
         </div>
       </Row>
     </Container>

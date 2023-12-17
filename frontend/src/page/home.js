@@ -33,11 +33,11 @@ function HomePage() {
   }, []);
 
   function handleCategoryClick(category) {
-    navigate(`/products?category=${category}`);
+    navigate(`/products`, { state: { categoryId: category } });
   }
 
   function handleBrandClick(brand) {
-    navigate(`/products?brand=${brand}`);
+    navigate(`/products`, { state: { brandId: brand } });
   }
 
   function handleDotClick(slideIndex) {
@@ -382,7 +382,7 @@ function HomePage() {
         <h1 className="decorated-h1">Recently Posted Products</h1>
         <Slider {...autoSlideSettings}>
           {filteredProducts.map((product) => (
-            <div className="category">
+            <div className="home-product">
               <Link to={`/product/${product.id}`} key={product.id}>
                 {product.p_img && product.p_img.length > 0 ? (
                   <img src={product.p_img[0].url} alt={product.p_name} />
