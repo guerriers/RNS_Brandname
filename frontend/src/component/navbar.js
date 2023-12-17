@@ -18,6 +18,7 @@ import {
 const NavbarComponent = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
+  const [imageUrl, setImageUrl] = useState("");
   const { isVerified, verify_status } = useSelector(
     (state) => state.verify_status
   );
@@ -30,6 +31,22 @@ const NavbarComponent = () => {
 
     fetchData();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (user && user.profile_img) {
+      try {
+        const doubleEscapedString = user.profile_img;
+        const singleEscapedString = doubleEscapedString.replace(/\\\"/g, '"');
+        const parsedObj = JSON.parse(JSON.parse(singleEscapedString));
+        // Assuming the inner object has a "url" property
+        const imageUrl = parsedObj.url;
+  
+        setImageUrl(imageUrl);
+      } catch (error) {
+        console.error("Error parsing profile_img:", error);
+      }
+    }
+  }, [user]);
 
   const logoutHandler = async () => {
     dispatch(logout());
@@ -92,26 +109,19 @@ const NavbarComponent = () => {
 
               {user.roles === "user" && (
                 <NavDropdown
-                  id="nav-dropdown-dark"
-                  title={
-                    user && user.profile_img ? (
-                      <Image
-                        // src={userProfile}
-                        src={user.profile_img}
-                        className="userProfile"
-                        alt="no img"
-                      />
-                    ) : (
-                      // <span>No Profile Image</span>
-                      <Image
-                        // src={userProfile}
-                        src={userProfile}
-                        className="userProfile"
-                        alt="no img"
-                      />
-                    )
-                  }
-                  menuVariant="dark"
+                id="nav-dropdown-dark"
+                title={
+                  imageUrl ? (
+                    <Image src={imageUrl} className="userProfile" alt="Profile Image" />
+                  ) : (
+                    <Image
+                      src={userProfile}  /* Assuming userProfile is your default image */
+                      className="userProfile"
+                      alt="No Profile Image"
+                    />
+                  )
+                }
+                menuVariant="dark"
                 >
                   <NavDropdown.Item disabled>
                     <span className="text-dot-200">
