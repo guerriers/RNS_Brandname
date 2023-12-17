@@ -457,7 +457,7 @@ function HomePage() {
 
         <h4 className="footer-text">CONTACT</h4>
         <p>+666531892219</p>
-        <p>rns_brandname@gmail.com</p>
+        <p>rnsbrandname@gmail.com</p>
 
         <div className="footer-icons">
           <a href="https://www.facebook.com/">
@@ -472,7 +472,7 @@ function HomePage() {
         </div>
 
         <img src="../rns_logo.png" alt="Logo" className="navbar-logo" />
-        <p>&copy; {new Date().getFullYear()} RNS</p>
+        <p>&copy; {new Date().getFullYear()} RNS. ALL RIGHTS RESERVED.</p>
       </footer>
     </div>
   );
