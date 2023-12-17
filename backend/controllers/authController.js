@@ -4,6 +4,7 @@ const { ErrorHandler } = require("../middlewares/errorHandlers");
 const UserVerify = require("../models/userVerify");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const Review = require("../models/reviews");
 const {
   uploadImagesToAzure,
   deleteImagesFromAzure,
@@ -136,6 +137,50 @@ exports.resetPassword = async (req, res, next) => {
     next(error);
   }
 };
+
+// Send review invitation => /api/auth/sendreviewinvite
+exports.sendReviewInvitation = async (req, res, next) => {
+  try {
+    // Retrieve necessary data from request body
+    const { userEmail } = req.body;
+
+    // Ensure that the user's email is available in the request body
+    if (!userEmail) {
+      return res.status(400).json({
+        success: false,
+        message: "User email not provided in the request body",
+      });
+    }
+
+    // Generate a review token using the existing function in reviews.js
+    const reviewToken = await Review.generateReviewToken();
+
+    // Example review link
+    const reviewLink = `${process.env.FRONTEND_URL}/review/${reviewToken}`;
+
+    // Example email content
+    const emailSubject = "Invitation to Write a Review";
+    const emailMessage = `Hello,\n\nWe invite you to write a review. Click the following link to submit your review: ${reviewLink}\n\nThank you!`;
+
+    // Send email
+    await sendEmail({
+      email: userEmail,
+      subject: emailSubject,
+      message: emailMessage,
+    });
+
+    // Respond to the client
+    res.status(200).json({
+      success: true,
+      message: `Review invitation sent to ${userEmail}`,
+    });
+  } catch (error) {
+    // Handle errors
+    console.error(error);
+    return next(new ErrorHandler("Failed to send review invitation", 500));
+  }
+};
+
 
 // user profile
 exports.getUserProfile = async (req, res, next) => {

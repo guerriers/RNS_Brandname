@@ -29,6 +29,12 @@ import {
   NEW_PASSWORD_REQUEST,
   NEW_PASSWORD_SUCCESS,
   NEW_PASSWORD_FAIL,
+  SEND_REVIEW_INVITATION_REQUEST,
+  SEND_REVIEW_INVITATION_SUCCESS,
+  SEND_REVIEW_INVITATION_FAIL,
+  NEW_REVIEW_REQUEST,
+  NEW_REVIEW_SUCCESS,
+  NEW_REVIEW_FAIL,
   ALL_USERS_REQUEST,
   ALL_USERS_SUCCESS,
   ALL_USERS_FAIL,
@@ -343,6 +349,45 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
   }
 };
 
+// Write a review
+export const reviewProduct = (token, reviewInfo, sellerId) => async (dispatch) => {
+  try {
+    dispatch({ type: NEW_REVIEW_REQUEST });
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    // Include the sellerId in the request payload
+    const requestData = {
+      ...reviewInfo,
+      user_id: sellerId,
+    };
+
+    console.log("Review Request Data:", requestData);
+
+    await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/api/reviews`,
+      requestData,
+      config
+    );
+
+    dispatch({
+      type: NEW_REVIEW_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_REVIEW_FAIL,
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred",
+    });
+  }
+}
+
 // Logout user
 export const logout = () => async (dispatch) => {
   try {
@@ -364,6 +409,63 @@ export const logout = () => async (dispatch) => {
     });
   }
 };
+
+
+// send a review invitation
+export const sendReviewInvitation = (productId, userEmail) => async (dispatch) => {
+  try {
+    // Dispatch an action to indicate that the invitation request has started
+    dispatch({ type: SEND_REVIEW_INVITATION_REQUEST });
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const requestBody = {
+      productId,
+      userEmail,
+    };
+
+    console.log("Review Invitation Request Body:", requestBody);
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/api/auth/sendreviewinvite`,
+      requestBody,
+      config
+    );
+
+    console.log("Review Invitation Response:", response.data);
+
+    // Dispatch an action to handle the success or update the state as needed
+    dispatch({
+      type: SEND_REVIEW_INVITATION_SUCCESS,
+      payload: response.data.success,
+    });
+
+    // Optionally, you can display a success message to the user
+    alert("Review invitation sent successfully!");
+  } catch (error) {
+    // Handle errors and dispatch appropriate actions
+    console.error("Review Invitation Error:", error);
+
+    dispatch({
+      type: SEND_REVIEW_INVITATION_FAIL,
+      payload: error.response
+        ? error.response.data.message
+        : "An error occurred while sending the review invitation",
+    });
+
+    alert(
+      error.response
+        ? error.response.data.message
+        : "An error occurred while sending the review invitation"
+    );
+  }
+};
+
 
 // Get all users
 export const allUsers = () => async (dispatch) => {

@@ -139,15 +139,17 @@ export const getProductDetails = (id) => async (dispatch) => {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
         const token = localStorage.getItem("token");
 
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`,{
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`,{
             headers: {
               'Authorization': `Bearer ${token}`,
             },
           })
 
+        const { seller_id, ...productDetails  } = response.data;
+
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
-            payload: data
+            payload: response.data
         })
 
     } catch (error) {

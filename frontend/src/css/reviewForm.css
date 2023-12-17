@@ -1,0 +1,72 @@
+/* Add your styles here */
+.product-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+  
+.product-image img {
+    max-width: 40%;
+    height: auto;
+}
+  
+.card {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+  
+.card-body {
+    text-align: center;
+}
+  
+
+.review-text {
+    margin: 20px 20px 20px 0px;
+}
+
+.reviewform-container {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 60px;
+    user-select: none;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 5px;
+}
+
+.starClass {
+  display: flex;
+  align-items: center;
+  color: #be9f4e;
+  margin-bottom: 10px;
+}
+
+.star.selected {
+  color: #be9f4e;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+  
+.form-control {
+    width: 100%;
+    margin-bottom: 10px;
+}
+  
+.button {
+    width: 100%;
+}
+  

@@ -10,6 +10,7 @@ const {
   updateProfile,
   logout,
   allUsers,
+  sendReviewInvitation
 //   getUserDetails,
 //   updateUser,
 //   deleteUser,
@@ -21,6 +22,7 @@ router.route("/login").post(login);
 
 router.route("/password/forgot").post(forgotPassword);
 router.route("/password/reset/:token").put(resetPassword);
+router.route("/sendreviewinvite").post(sendReviewInvitation);
 router.route("/logout").get(logout);
 router.route("/me").get(isAuthenticatedUser, getUserProfile);
 router.route("/password/update").put(isAuthenticatedUser, updatePassword);

@@ -139,17 +139,17 @@ function HomePage() {
   ];
   const brandname = [
     {
-      img: `../assets/Nike.jpeg`,
+      img: `../assets/Nike.png`,
       text: `Nike`,
       targetURL: ``,
     },
     {
-      img: `../assets/vans.jpeg`,
+      img: `../assets/vans.png`,
       text: `Vans`,
       targetURL: ``,
     },
     {
-      img: `../assets/channel.jpeg`,
+      img: `../assets/channel.png`,
       text: `Channel`,
       targetURL: ``,
     },
@@ -169,7 +169,7 @@ function HomePage() {
       targetURL: ``,
     },
     {
-      img: `../assets/Sephora.jpeg`,
+      img: `../assets/Sephora.png`,
       text: `Sephora`,
       targetURL: ``,
     },
@@ -179,7 +179,7 @@ function HomePage() {
       targetURL: ``,
     },
     {
-      img: `../assets/versace.jpeg`,
+      img: `../assets/versace.png`,
       text: `Versace`,
       targetURL: ``,
     },
@@ -264,7 +264,7 @@ function HomePage() {
       targetURL: ``,
     },
     {
-      img: `../assets/Balenciaga.jpeg`,
+      img: `../assets/Balenciaga.png`,
       text: `Balenciaga`,
       targetURL: ``,
     },
@@ -417,7 +417,7 @@ function HomePage() {
         <h1 className="decorated-h1">Explore by Brand</h1>
         <Slider {...autoSlideSettings}>
           {brandname.map((d) => (
-            <div className="category" onClick={() => handleBrandClick(d.text)}>
+            <div className="brand" onClick={() => handleBrandClick(d.text)}>
               <img src={d.img} alt={d.text} />
               <p>{d.text}</p>
             </div>
