@@ -136,6 +136,7 @@ function SellerProfile() {
           <div className="user-profile-container">
             <div className="user-profile-image">
               <img src="../assets/userProfile.png" alt="user profile" />{" "}
+              <img src={user.profile_img} alt="user profile" />{" "}
               {/* Don't forgot to change the pic na */}
             </div>
             <div className="user-profile-info">
