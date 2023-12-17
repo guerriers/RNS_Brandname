@@ -225,7 +225,7 @@ exports.updateProfile = async (req, res, next) => {
         ? req.files.profile_img
         : [req.files.profile_img].filter(Boolean);
 
-      if (user.profile_img && user.profile_img.length > 0) {
+        if (Array.isArray(user.profile_img) && user.profile_img.length > 0) {
         await Promise.all(
           user.profile_img.map(async (image) => {
             try {

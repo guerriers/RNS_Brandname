@@ -15,9 +15,11 @@ const MyProducts = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
   const { user, loading } = useSelector((state) => state.auth);
-  const { loading: isLoaded, isVerified, verifyStatus } = useSelector(
-    (state) => state.verify_status
-  );
+  const {
+    loading: isLoaded,
+    isVerified,
+    verifyStatus,
+  } = useSelector((state) => state.verify_status);
 
   useEffect(() => {
     if (isLoaded) {
@@ -28,7 +30,6 @@ const MyProducts = () => {
     } else {
       fetchProducts();
     }
-
   }, [isLoaded, isVerified, navigate, fetchProducts]);
 
   const fetchProducts = () => {
@@ -157,7 +158,7 @@ const MyProducts = () => {
                         variant="gray"
                         onClick={() => handleEditProduct(product.id)}
                       >
-                        <FontAwesomeIcon icon={faPen} />
+                        <FontAwesomeIcon className="faPenIcon" icon={faPen} />
                       </Button>
                       <Button
                         variant="gray"

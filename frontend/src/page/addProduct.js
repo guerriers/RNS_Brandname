@@ -122,7 +122,7 @@ const AddProduct = () => {
       }
     }
   };
-  useEffect(() => {});
+  // useEffect(() => {});
   return (
     <Fragment>
       <>

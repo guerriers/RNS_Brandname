@@ -96,13 +96,19 @@ const NavbarComponent = () => {
                   title={
                     user && user.profile_img ? (
                       <Image
-                        src={userProfile}
-                        // src={user.profile_img}
+                        // src={userProfile}
+                        src={user.profile_img}
                         className="userProfile"
-                        alt="User Profile"
+                        alt="no img"
                       />
                     ) : (
-                      <span>No Profile Image</span>
+                      // <span>No Profile Image</span>
+                      <Image
+                        // src={userProfile}
+                        src={userProfile}
+                        className="userProfile"
+                        alt="no img"
+                      />
                     )
                   }
                   menuVariant="dark"

@@ -1,6 +1,5 @@
 require("dotenv").config();
 const db = require("./config/db");
-
 const app = require("./app");
 
 //Handle Uncaught exceptions
