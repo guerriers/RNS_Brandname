@@ -30,8 +30,19 @@ function AboutPage() {
     <Fragment>
     <div>
       <header>
-        <h1>About</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nulla dui, in dapibus mauris tristique id. Nullam semper lectus sed orci venenatis, ac scelerisque lectus luctus.</p>
+        <div className="description">
+          <div><h1>About</h1></div>
+          <div>
+            <p>พวกเราคือเว็บไซต์ตัวกลางที่ช่วยให้พ่อค้า-แม่ค้าทุกคนสามารถมาลงขายสินค้าได้ 
+            </p>
+            <p>
+              โดยเราจะไม่มีส่วนได้ส่วนเสีย และจะไม่รับผิดชอบใดๆ
+            </p>
+            <p>
+              นอกจากซื้อและขายสินค้ามือสองแล้วยังสามารถเช่าสินค้าแบรนด์เนมได้ 
+            </p>
+          </div>
+        </div>
       </header>
 
       <section className="team-section">
