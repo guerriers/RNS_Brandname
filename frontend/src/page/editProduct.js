@@ -5,6 +5,7 @@ import "../css/addProduct.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../actions/productActions";
+import { sendReviewInvitation } from "../actions/userActions";
 
 const EditProduct = ({ history }) => {
   const { id } = useParams();
@@ -128,6 +129,19 @@ const EditProduct = ({ history }) => {
         alert("Edit successfully");
         setIsSubmit(true);
         navigate("/myProducts");
+
+        // Check if the product status is "Sold Out"
+        if (productEdit.p_status === "2") {
+          const buyerEmail = prompt("Product sold! Enter the buyer's email:");
+
+          // Validate the email (you may need a more sophisticated validation)
+          if (buyerEmail && buyerEmail.trim() !== "") {
+            // Dispatch an action to send a review invitation
+            dispatch(sendReviewInvitation(productEdit, buyerEmail));
+          } else {
+            console.log("Buyer's email not provided or invalid.");
+          }
+        }
       }
       if (response.status === 401) {
         alert(response.message);

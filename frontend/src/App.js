@@ -24,6 +24,7 @@ import RequireAuth from './component/route/RequireAuth';
 import Layout from './component/Layout';
 import NewPassword from "./page/NewPassword";
 import ForgotPassword from "./page/ForgotPassword";
+import ReviewForm from "./page/ReviewForm";
 import Submitted from "./page/submitted";
 import SellerProfile from "./page/sellerProfile";
 import MyProfile from "./page/myProfile";
@@ -57,6 +58,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="/password/forgot" element={<ForgotPassword />} exact />
         <Route path="/password/reset/:token" element={<NewPassword />} exact />
+        <Route path="/review/:token" element={<ReviewForm />} exact />
         {/* UserPage */}
         {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
           <Route path="chat" element={<Chat />} />
