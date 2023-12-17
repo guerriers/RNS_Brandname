@@ -25,13 +25,13 @@ const getAllReviews = async (req, res) => {
   }
 };
 
-// Get reviews by user ID
+// Get reviews by user ID (SELLER ID)
 const getReviewsByUserId = async (req, res) => {
   const userId = req.params.id;
   try {
     const reviews = await Review.findAll({
       where: {
-        user_id: userId,
+        seller_id: userId,
       },
     });
     return res.status(200).json(reviews);
