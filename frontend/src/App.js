@@ -4,6 +4,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./component/route/ProtectedRoute";
 import Navbar from "./component/navbar";
+import Footer from './component/Footer';
 // import Messenger from "./component/messenger";
 import Home from "./page/home";
 import Login from "./page/login";
@@ -34,8 +35,11 @@ import MyFavorite from "./page/myFavorite";
 import {store} from "./store";
 import { useSelector } from "react-redux";
 import { loadUser } from "./actions/userActions";
+import { useLocation } from 'react-router-dom';
 
 function App() {
+  const location = useLocation();
+
   useEffect(() => {
     store.dispatch(loadUser());
     console.log("User loaded")
@@ -48,71 +52,74 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="/password/forgot" element={<ForgotPassword />} exact />
-        <Route path="/password/reset/:token" element={<NewPassword />} exact />
-        <Route path="/review/:token" element={<ReviewForm />} exact />
-        {/* UserPage */}
-        {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="chat" element={<Chat />} />
-        </Route> */}
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="products" element={<Products />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="product/:id" element={<ProductDetail />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="userVerify" element={<UserVerify />} />
-        </Route>
-        {/* In case that user clicked from navbar */}
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="profile" element={<SellerProfile />} />
-        </Route>
-          {/* In case that user clicked from productDetail page */}
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="profile/:id" element={<SellerProfile />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="submitted" element={<Submitted />} />
-        </Route>
-        {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="messenger" element={<Messenger />} />
-        </Route> */}
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="myProfile" element={<MyProfile />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="myFavorite" element={<MyFavorite />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="myProducts" element={<MyProducts />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="addProduct" element={<AddProduct />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-          <Route path="editProduct/:id" element={<EditProduct />} />
-        </Route>
-        {/* AdminPage */}
-        <Route element={<RequireAuth allowedRoles={"admin"} isAuthenticated={isAuthenticated} />}>
-          <Route path="adminVerify" element={<AdminVerify />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={"admin"} isAuthenticated={isAuthenticated} />}>
-          <Route path="viewRequest/:id" element={<AdminViewRequest />} />
-        </Route>
+    <div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="/password/forgot" element={<ForgotPassword />} exact />
+          <Route path="/password/reset/:token" element={<NewPassword />} exact />
+          <Route path="/review/:token" element={<ReviewForm />} exact />
+          {/* UserPage */}
+          {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="chat" element={<Chat />} />
+          </Route> */}
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="products" element={<Products />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="product/:id" element={<ProductDetail />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="userVerify" element={<UserVerify />} />
+          </Route>
+          {/* In case that user clicked from navbar */}
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="profile" element={<SellerProfile />} />
+          </Route>
+            {/* In case that user clicked from productDetail page */}
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="profile/:id" element={<SellerProfile />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="submitted" element={<Submitted />} />
+          </Route>
+          {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="messenger" element={<Messenger />} />
+          </Route> */}
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="myProfile" element={<MyProfile />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="myFavorite" element={<MyFavorite />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="myProducts" element={<MyProducts />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="addProduct" element={<AddProduct />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
+            <Route path="editProduct/:id" element={<EditProduct />} />
+          </Route>
+          {/* AdminPage */}
+          <Route element={<RequireAuth allowedRoles={"admin"} isAuthenticated={isAuthenticated} />}>
+            <Route path="adminVerify" element={<AdminVerify />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={"admin"} isAuthenticated={isAuthenticated} />}>
+            <Route path="viewRequest/:id" element={<AdminViewRequest />} />
+          </Route>
 
-        {/* Add the NotFound route */}
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+          {/* Add the NotFound route */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+      {location.pathname !== "/home" && location.pathname !== "/" && <Footer />}
+    </div>
   );
 }
 
