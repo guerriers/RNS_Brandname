@@ -20,18 +20,7 @@ function SellerProfile() {
   const [selectedStars, setSelectedStars] = useState(0);
   const dispatch = useDispatch();
   const verifyStatus = useSelector((state) => state.verify_status);
-  const [reviews, setReviews] = useState([
-    {
-      stars: 4,
-      text: "Great product! Highly recommended.",
-      date: "10:30 14/12/2023",
-    },
-    {
-      stars: 5,
-      text: "Excellent service.",
-      date: "21:30 14/12/2023",
-    },
-  ]);
+  const [reviews, setReviews] = useState([]);
 
   const handleShowReviewModal = () => setShowReviewModal(true);
   const handleCloseModal = () => setShowReviewModal(false);
@@ -61,22 +50,6 @@ function SellerProfile() {
     const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
     return new Date(timestamp).toLocaleDateString(undefined, options);
   };
-  useEffect(() => {
-    // Fetch user details based on product user_id
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${id}`)
-      .then((response) => response.json())
-      .then((userData) => {
-        setUser(userData);
-        fetchProducts(id);
-        console.log("Received user data:", userData);
-        console.log("Received user id:", id);
-      })
-      .catch((error) =>
-        console.error("Error fetching user details from URL: ", error)
-      );
-
-      fetchVerificationStatus(id);
-  }, [id]);
 
   const fetchProducts = (userId) => {
     const token = localStorage.getItem("token");
@@ -102,6 +75,28 @@ function SellerProfile() {
       });
   };
 
+  const fetchReviews = (userId) => {
+    const token = localStorage.getItem("token");
+    fetch(
+      `${process.env.REACT_APP_BASE_URL}/api/reviews/user/${userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setReviews(data);
+        console.log("Received user reviews data:", data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user reviews data:", error);
+      });
+    };
+
   const fetchVerificationStatus = async (userId) => {
     try {
       const response = await axios.get(
@@ -113,6 +108,26 @@ function SellerProfile() {
       console.error("Error fetching verification status:", error);
     }
   };
+
+  useEffect(() => {
+    // Fetch user details based on product user_id
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${id}`)
+      .then((response) => response.json())
+      .then((userData) => {
+        setUser(userData);
+        fetchProducts(id);
+        console.log("Received user data:", userData);
+        console.log("Received user id:", id);
+      })
+      .catch((error) =>
+        console.error("Error fetching user details from URL: ", error)
+      );
+
+      fetchVerificationStatus(id);
+      fetchReviews(id);
+  }, [id]);
+
+
 
   return (
     <Container>
@@ -191,68 +206,31 @@ function SellerProfile() {
       <Row>
         <div className="review-container">
           <h2>Reviews</h2>
-          <div>
-            <button className="reviewButton" onClick={handleShowReviewModal}>
-              Write a Review
-            </button>
-          </div>
+          {reviews.length > 0 ? (   
           <div>
             <ul>
               {reviews.map((review, index) => (
                 <li key={index}>
                   <div className="review-header">
                     <p className="starClass">
-                      {Array.from({ length: review.stars }, (_, i) => (
+                      {Array.from({ length: review.re_score }, (_, i) => (
                         <FontAwesomeIcon icon={faStar} key={i} />
                       ))}
                     </p>
-                    <p>{review.text}</p>
+                    <p>{review.re_text}</p>
                   </div>
-                  <p>{review.date}</p>
+                  <p>{review.createdAt ? formatDate(review.createdAt) : "N/A"}</p>
                 </li>
               ))}
             </ul>
           </div>
+         ) : (
+            <p>This seller hasn't received any reviews.</p>
+          )
+        }
+          
         </div>
       </Row>
-      <Modal show={showReviewModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Write a Review</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formStars">
-              <Form.Label>Select Stars:</Form.Label>
-              {[1, 2, 3, 4, 5].map((stars) => (
-                <span
-                  key={stars}
-                  className={`star ${selectedStars >= stars ? "selected" : ""}`}
-                  onClick={() => handleStarClick(stars)}
-                >
-                  &#9733;
-                </span>
-              ))}
-            </Form.Group>
-            <Form.Group controlId="formReviewContent">
-              <Form.Label>Write a Review:</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={reviewContent}
-                onChange={(e) => setReviewContent(e.target.value)}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSendReview}>
-            Send Review
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </Container>
   );
 }
