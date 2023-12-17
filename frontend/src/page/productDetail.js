@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { Button, Modal, Container } from "react-bootstrap";
+import { Button, Modal, Container, Carousel } from "react-bootstrap";
 import { FaCheckCircle, FaRegHeart, FaHeart } from "react-icons/fa";
 import "../css/productDetail.css";
 
@@ -106,26 +106,26 @@ const ProductDetail = () => {
     setShowProfileModal(false);
   };
 
-  // Contact Seller
-  // const handleContactClick = () => {
-  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/users/${product.user_id}`)
-  //     .then((response) => response.json())
-  //     .then((userData) => {
-  //       setUserData(userData);
-  //       setShowContactModal(true);
-  //     })
-  //     .catch((error) => console.error("Error fetching user details: ", error));
-  // };
-
-  // const handleCloseContactModal = () => {
-  //   setShowContactModal(false);
-  // };
-
   return (
     <Container>
       <div className="product-detail-container">
-        <div className="product-image">
-          {/* <div className="carousel"> */}
+      <div className="product-image">
+          {product.p_img && (
+            <Carousel>
+              {product.p_img.map((image, index) => (
+                <Carousel.Item key={index}>
+                  <img
+                    src={image.url}
+                    alt={`Product Image ${index + 1}`}
+                    className="d-block w-100 h-100"
+                  />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          )}
+        </div>
+
+        <div>
           {product.p_img &&
             product.p_img.map((image, index) => (
               <img
@@ -133,7 +133,6 @@ const ProductDetail = () => {
                 src={image.url}
                 alt={`Product Image ${index + 1}`}
                 style={{
-                  display: index === currentIndex ? "block" : "none",
                   margin: "auto",
                 }}
               />
@@ -202,12 +201,7 @@ const ProductDetail = () => {
           <hr />
           <div>
             <h3>Description</h3>
-
             <p>{product.p_description}</p>
-            {/* <Button className="contact-button" onClick={handleContactClick}>
-              <FaPhone className="phone-icon" />
-              Contact
-            </Button> */}
           </div>
         </div>
 
@@ -234,19 +228,6 @@ const ProductDetail = () => {
             <Button onClick={handleCloseProfileModal}>Close</Button>
           </Modal.Footer>
         </Modal>
-
-        {/* <Modal show={showContactModal} onHide={handleCloseContactModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Contact Seller</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Email: {user.email}</p>
-            <p>Phone: {user.phone}</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={handleCloseContactModal}>Close</Button>
-          </Modal.Footer>
-        </Modal> */}
       </div>
     </Container>
   );

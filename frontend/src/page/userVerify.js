@@ -141,6 +141,7 @@ const UserVerify = () => {
             <h2 className="titleVerify">Identity verification</h2>
             <div className="headerVerify">
               <h5>ยืนยันตัวตนก่อนลงขายสินค้า</h5>
+              <li>การยืนยันตัวตนเป็นระบุตัวตนของผู้ขายหรือผู้ให้เช่า เพื่อยืนยันการมีอยู่จริงของผู้ขายหรือผู้ให้เช่า</li>
               <li>โดยต้องแนบภาพถ่ายดังนี้</li>
             </div>
             <ul className="requirements1">

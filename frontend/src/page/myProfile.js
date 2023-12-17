@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Col, Container, Button } from "react-bootstrap";
+import { Form, Col, Row, Container, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "../css/myProfile.css";
 import axios from "axios";
@@ -10,10 +10,10 @@ const MyProfile = () => {
   const [profilePreview, setProfilePreview] = useState([]);
   const [profile, setProfile] = useState([]);
   const [oldProfile, setOldProfile] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [oldProfilePreview, setOldProfilePreview] = useState([]);
   const [validated, setValidated] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const user = useSelector((state) => state.auth.user);
+  const {user,loading} = useSelector((state) => state.auth);
   const id = localStorage.getItem("id");
   const [formValues, setFormValues] = useState({
     profile_img: [],
@@ -24,33 +24,16 @@ const MyProfile = () => {
   });
 
   useEffect(() => {
-    const fetchInitialValues = async () => {
-      try {
-        if (!user || !user.id) {
-          console.error("User object or user ID is null or undefined.");
-          setLoading(false);
-          return;
-        }
-
-        const token = localStorage.getItem("token");
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/api/users/${user.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        setFormValues(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching initial values:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchInitialValues();
+    if (loading) {
+      return;
+    }
+    if (user && user.profile_img) {
+      console.log("USER",user);
+      setFormValues(user);
+      setOldProfile(user.profile_img || []);
+      setOldProfilePreview(user.profile_img || []);
+    }
+    
   }, [user]);
 
   if (loading) {
@@ -62,6 +45,7 @@ const MyProfile = () => {
 
     setProfilePreview([]);
     setProfile([]);
+    setOldProfile([]);
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -85,7 +69,6 @@ const MyProfile = () => {
       setValidated(true);
       return;
     }
-
     try {
       const token = localStorage.getItem("token");
 
@@ -111,7 +94,6 @@ const MyProfile = () => {
 
       if (response.status === 200) {
         alert("Edit successfully");
-        // navigate("/myProfile");
         window.location.reload();
       } else {
         alert("Failed to edit. Please try again.");
@@ -134,6 +116,7 @@ const MyProfile = () => {
       l_name: oldProfile.l_name,
       email: oldProfile.email,
       phone: oldProfile.phone,
+      profile_img: oldProfile.map((img) => img.url),
     });
   };
 
@@ -141,132 +124,145 @@ const MyProfile = () => {
     <Container>
       <div>
         <h1 className="title">My Profile</h1>
-
-        <Form>
-          <Form.Group as={Col} controlId="formFileMultiple">
-            <Form.Label>
-              <div className="myProfile-img-grid">
-                <div className="profileImgBox">
-                  {oldProfile.map((img, index) => (
-                    <img
-                      key={`${img.url}-${index}`}
-                      src={img.url}
-                      alt={img.url}
-                      className="mt-3 mr-2"
-                      width="55"
-                      height="52"
-                    />
-                  ))}
-                  <img
-                    className="imagePreview"
-                    src={"../assets/userProfile.png"}
-                  />
-
-                  {profilePreview.map((img) => (
-                    <img
-                      src={img}
-                      key={img}
-                      alt="Images Preview"
-                      className="mt-3 mr-2"
-                      width="55"
-                      height="52"
-                    />
-                  ))}
-                  {editMode && (
-                    <div className="addProfileImgActions">
-                      <span className="plus-sign-myP">+</span>
-                      <Form.Control
-                        type="file"
-                        name="img"
-                        accept="image/*"
-                        onChange={handleChange}
-                        style={{ display: "none" }}
-                        multiple
+        <Row className="mb-3">
+          <Form>
+            <Form.Group as={Col} controlId="formFileMultiple">
+              <Form.Label>
+                <div className="myProfile-img-grid">
+                  <div className="profileImgBox">
+                  {/* {oldProfilePreview&&oldProfilePreview.map((img, index) => (
+                      <img
+                        key={`${img.url}`}
+                        src={img.url}
+                        alt={img.public_id}
+                        className="mt-3 mr-2"
+                        width="55"
+                        height="52"
                       />
-                    </div>
-                  )}
+                    ))} */}
+                    
+                    {/* <img
+                        className="imagePreview"
+                        src={"../assets/userProfile.png"}
+                        alt="Default Profile"
+                      /> */}
+
+                    {editMode && (
+                      <div className="addProfileImgActions">
+                        {profilePreview.map((img) => (
+                          <img
+                          key={`${img.url}`}
+                          src={img.url}
+                          alt={img.public_id}
+                            className="mt-3 mr-2"
+                            width="55"
+                            height="52"
+                          />
+                        ))}
+                        <span className="plus-sign-myP">+</span>
+                        <Form.Control
+                          type="file"
+                          name="img"
+                          accept="image/*"
+                          onChange={handleChange}
+                          style={{ display: "none" }}
+                          multiple
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Form.Label>
-          </Form.Group>
-        </Form>
-
-        <Col>
-          <div className="editProfileForm">
-            <Form.Group controlId="formGridFirstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="First Name"
-                name="f_name"
-                value={formValues.f_name}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, f_name: e.target.value })
-                }
-                disabled={!editMode}
-              />
+              </Form.Label>
             </Form.Group>
+          </Form>
+        </Row>
 
-            <Form.Group controlId="formGridLastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Last Name"
-                name="l_name"
-                value={formValues.l_name}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, l_name: e.target.value })
-                }
-                disabled={!editMode}
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formGridEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={formValues.email}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, email: e.target.value })
-                }
-                disabled={!editMode}
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formGridPhone">
-              <Form.Label>Phone</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Phone"
-                name="phone"
-                value={formValues.phone}
-                onChange={(e) =>
-                  setFormValues({ ...formValues, phone: e.target.value })
-                }
-                disabled={!editMode}
-              />
-            </Form.Group>
-
-            <div className="editProfileBtn">
-              {editMode ? (
-                <>
-                  <Button variant="primary" type="submit" onClick={onSubmit}>
-                    Save
-                  </Button>
-                  <Button variant="secondary" onClick={handleCancelClick}>
-                    Cancel
-                  </Button>
-                </>
-              ) : (
-                <Button variant="primary" onClick={handleEditClick}>
-                  Edit
-                </Button>
-              )}
-            </div>
+        <div className="addProductContainer">
+          <Form className="wrapperViewProduct">
+            <Row className="mb-3">
+              <Form.Group as={Col} md={1}></Form.Group>
+              <Form.Group as={Col} md={4} controlId="formGridFirstName">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="First Name"
+                  name="f_name"
+                  value={formValues.f_name}
+                  onChange={(e) =>
+                    setFormValues({ ...formValues, f_name: e.target.value })
+                  }
+                  disabled={!editMode}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md={2}></Form.Group>
+              <Form.Group as={Col} md={4} controlId="formGridLastName">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Last Name"
+                  name="l_name"
+                  value={formValues.l_name}
+                  onChange={(e) =>
+                    setFormValues({ ...formValues, l_name: e.target.value })
+                  }
+                  disabled={!editMode}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md={1}></Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md={1}></Form.Group>
+              <Form.Group as={Col} md={4} controlId="formGridEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={formValues.email}
+                  onChange={(e) =>
+                    setFormValues({ ...formValues, email: e.target.value })
+                  }
+                  disabled
+                />
+              </Form.Group>
+              <Form.Group as={Col} md={2}></Form.Group>
+              <Form.Group as={Col} md={4} controlId="formGridPhone">
+                <Form.Label>Phone</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Phone"
+                  name="phone"
+                  value={formValues.phone}
+                  onChange={(e) =>
+                    setFormValues({ ...formValues, phone: e.target.value })
+                  }
+                  disabled={!editMode}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md={1}></Form.Group>
+            </Row>
+          </Form>
+          <div className="editProfileButton">
+            {editMode ? (
+              <>
+                <button className="addButton" onClick={onSubmit}>
+                  Save
+                </button>
+                <button
+                  className="cancelButton"
+                  type="button"
+                  onClick={handleCancelClick}
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <button className="editButton" onClick={handleEditClick}>
+                Edit
+              </button>
+            )}
           </div>
-        </Col>
+        </div>
       </div>
     </Container>
   );

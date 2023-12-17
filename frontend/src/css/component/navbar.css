@@ -3,6 +3,7 @@
   font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   align-items: flex-end;
+  user-select: none;
 }
 
 .nav-link {

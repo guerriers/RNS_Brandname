@@ -278,10 +278,7 @@ const Product = () => {
 
   return (
     <>
-      <Row
-        style={{ height: "100%", textAlign: "start", margin: 0 }}
-        className="product-container"
-      >
+      <Row style={{ height: "100%", textAlign: "start", margin: 0 }}>
         <Col
           md={4}
           lg={3}
@@ -489,59 +486,54 @@ const Product = () => {
           </Col>
         </Col>
 
-        <Col>
+        <Col md={8} lg={9} xl={9}>
           <p className="product-h">Products</p>
           {filteredProducts.length === 0 ? (
             <p>There are no products that match the selected filter.</p>
           ) : (
             <Row>
               {filteredProducts.map((product) => (
-                <Col md={6} lg={4} xl={4}>
-                  <div className="product-box">
-                    <Link to={`/product/${product.id}`} key={product.id}>
-                      <div className="product-box1">
-                        {product.p_img && product.p_img.length > 0 ? (
-                          <img
-                            src={product.p_img[0].url}
-                            alt={product.p_name}
-                          />
-                        ) : (
-                          <p>No image available</p>
-                        )}
-                        <div
-                          className={`product-status ${
-                            product.p_status === "0"
-                              ? "for-rent"
-                              : product.p_status === "1"
-                              ? "for-sell"
-                              : "sold-out"
-                          }`}
-                        >
-                          {product.p_status === "0"
-                            ? "For Rent"
+                <Col md={6} lg={4} xl={4} className="mt-4">
+                  <Link to={`/product/${product.id}`} key={product.id}>
+                    <div className="product-box">
+                      {product.p_img && product.p_img.length > 0 ? (
+                        <img src={product.p_img[0].url} alt={product.p_name} />
+                      ) : (
+                        <p>No image available</p>
+                      )}
+                      <div
+                        className={`product-status ${
+                          product.p_status === "0"
+                            ? "for-rent"
                             : product.p_status === "1"
-                            ? "For Sell"
-                            : "Sold Out"}
-                        </div>
-                      </div>
-                    </Link>
-                    <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
-                    <div className="product-favorite">
-                      <button
-                        className="favButton"
-                        variant="gray"
-                        onClick={() => handleFavoriteClick(product.id, "add")}
+                            ? "for-sell"
+                            : "sold-out"
+                        }`}
                       >
-                        {favorites.some(
-                          (item) => item.productId === product.id
-                        ) ? (
-                          <FaHeart style={{ color: "#ff0000" }} />
-                        ) : (
-                          <FaRegHeart style={{ color: "#000000" }} />
-                        )}
-                      </button>
+                        {product.p_status === "0"
+                          ? "For Rent"
+                          : product.p_status === "1"
+                          ? "For Sell"
+                          : "Sold Out"}
+                      </div>
+                      <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
+                      <div className="product-favorite">
+                        <button
+                          className="favButton"
+                          variant="gray"
+                          onClick={() => handleFavoriteClick(product.id, "add")}
+                        >
+                          {favorites.some(
+                            (item) => item.productId === product.id
+                          ) ? (
+                            <FaHeart style={{ color: "#ff0000" }} />
+                          ) : (
+                            <FaRegHeart style={{ color: "#000000" }} />
+                          )}
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </Col>
               ))}
             </Row>
