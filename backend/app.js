@@ -30,8 +30,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/userVerify", userVerifyRoutes);
-app.use("/api/chats", chatRoutes);
-app.use("/api/messages", messageRoutes);
 
 // Middleware to handle errors
 app.use(sequelizeErrorHandler);
