@@ -4,7 +4,13 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button, Modal, Container, Carousel } from "react-bootstrap";
-import { FaCheckCircle, FaRegHeart, FaHeart } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaRegHeart,
+  FaHeart,
+  FaAngleRight,
+  FaAngleLeft,
+} from "react-icons/fa";
 import "../css/productDetail.css";
 
 const ProductDetail = () => {
@@ -15,18 +21,7 @@ const ProductDetail = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
   // const [showContactModal, setShowContactModal] = useState(false);
   const user = useSelector((state) => state.auth.user);
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === product.p_img.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? product.p_img.length - 1 : prevIndex - 1
-    );
-  };
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`)
@@ -118,37 +113,57 @@ const ProductDetail = () => {
     setShowProfileModal(false);
   };
 
+  const handleImageClick = (index) => {
+    setSelectedImageIndex(index);
+  };
+
+  const handleNext = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex < product.p_img.length - 1 ? prevIndex + 1 : 0
+    );
+  };
+
+  const handlePrev = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : product.p_img.length - 1
+    );
+  };
+
   return (
     <Container>
       <div className="product-detail-container">
-        <div
-          class="product_image"
-          data-flickity-options='{ "wrapAround": true }'
-        >
-          {product.p_img && (
-            <Carousel activeIndex={currentIndex} onSelect={() => {}}>
-              {product.p_img.map((image, index) => (
-                <Carousel.Item key={index}>
-                  <img
-                    src={image.url}
-                    alt={`Product Image ${index + 1}`}
-                    className="d-block_w-100_h-100"
-                  />
-                </Carousel.Item>
+        <div className="addProductGrid">
+          <div className="product-image-de">
+            {product.p_img && product.p_img.length > 0 && (
+              <>
+                <img
+                  key={selectedImageIndex}
+                  src={product.p_img[selectedImageIndex].url}
+                  alt={`Product Image ${selectedImageIndex + 1}`}
+                />
+                <span className="arrow-prev" onClick={handlePrev}>
+                  <FaAngleLeft />
+                </span>
+                <span className="arrow-next" onClick={handleNext}>
+                  <FaAngleRight />
+                </span>
+              </>
+            )}
+          </div>
+
+          <div className="product-image1">
+            {product.p_img &&
+              product.p_img.map((image, index) => (
+                <img
+                  key={index}
+                  className={`productPreview ${
+                    index === selectedImageIndex ? "selected" : ""
+                  }`}
+                  src={image.url}
+                  alt={`Product Image ${index + 1}`}
+                  onClick={() => handleImageClick(index)}
+                />
               ))}
-            </Carousel>
-          )}
-          <div className="carousel-controls">
-            <Button
-              className="carousel-control-prev-icon"
-              variant="light"
-              onClick={handlePrev}
-            ></Button>
-            <Button
-              className="carousel-control-next-icon"
-              variant="light"
-              onClick={handleNext}
-            ></Button>
           </div>
         </div>
 
