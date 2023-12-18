@@ -83,7 +83,13 @@
   text-decoration: underline;
   font-size: 14px;
 }
-
+.span-add-product{
+  margin-left: 60px;
+  display: flex;
+  justify-content: end;
+  font-size: 28px;
+  align-items: center;
+}
 .receiptAddFile:hover {
   color: #3a6ecf;
 }

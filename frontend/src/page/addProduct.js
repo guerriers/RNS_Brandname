@@ -145,6 +145,7 @@ const AddProduct = () => {
               <Form.Group as={Col} controlId="formFileMultiple">
                 <Form.Label>
                   <div className="addProductGrid">
+                  <span className="span-add-product" style={{ color: "red" }}> *</span>
                     <div className="addProductBox1">
                       {productsPreview.length > 0 ? (
                         <div>

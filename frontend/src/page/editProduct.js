@@ -184,6 +184,7 @@ const EditProduct = ({ history }) => {
               <Form.Group as={Col} controlId="formFileMultiple">
                 <Form.Label>
                   <div className="addProductGrid">
+                  <span className="span-add-product" style={{ color: "red" }}> *</span>
                     <div className="addProductBox1">
                       {oldProducts.length > 0 ? (
                         <div>
