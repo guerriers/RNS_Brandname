@@ -13,7 +13,7 @@ const MyProfile = () => {
   const [oldProfilePreview, setOldProfilePreview] = useState([]);
   const [validated, setValidated] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const {user,loading} = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state) => state.auth);
   const id = localStorage.getItem("id");
   const [formValues, setFormValues] = useState({
     profile_img: [],
@@ -27,18 +27,18 @@ const MyProfile = () => {
     if (loading) {
       return;
     }
+    console.log("Loading profile", oldProfilePreview);
     if (user && user.profile_img) {
-      console.log("USER",user);
+      console.log("USER", user);
       setFormValues(user);
       setOldProfile(user.profile_img || []);
       setOldProfilePreview(user.profile_img || []);
     }
-    
-  }, [user]);
+  }, [user, setOldProfilePreview]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
 
   const handleChange = (e) => {
     const files = Array.from(e.target.files);
@@ -130,6 +130,7 @@ const MyProfile = () => {
               <Form.Label>
                 <div className="myProfile-img-grid">
                   <div className="profileImgBox">
+
                   {/* {oldProfilePreview&&oldProfilePreview.map((img, index) => (
                       <img
                         key={`${img.url}`}
@@ -151,9 +152,9 @@ const MyProfile = () => {
                       <div className="addProfileImgActions">
                         {profilePreview.map((img) => (
                           <img
-                          key={`${img.url}`}
-                          src={img.url}
-                          alt={img.public_id}
+                            key={`${img.url}`}
+                            src={img.url}
+                            alt={img.public_id}
                             className="mt-3 mr-2"
                             width="55"
                             height="52"

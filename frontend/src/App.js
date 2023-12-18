@@ -118,7 +118,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-      {location.pathname !== "/home" && location.pathname !== "/" && location.pathname !== "/login" &&<Footer />}
+      {location.pathname !== "/home" && location.pathname !== "/" && location.pathname !== "/login" && location.pathname !== "/register" &&<Footer />}
     </div>
   );
 }
