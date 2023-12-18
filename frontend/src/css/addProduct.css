@@ -30,7 +30,7 @@
   border-radius: 8px !important;
 }
 .addProductButton2 {
-  text-align:left;
+  text-align: left;
   margin-bottom: 10%;
   margin-left: -7%;
 }
@@ -39,7 +39,7 @@
   border: none;
   text-align: center;
   color: #ffffff;
-  background: #BE9F4E;
+  background: #be9f4e;
   text-decoration: none;
   font-weight: bold;
   border-radius: 16px;
@@ -75,7 +75,7 @@
 }
 
 .receiptAddFile {
-  color: #BE9F4E;
+  color: #be9f4e;
   padding: 15px;
   border: none;
   cursor: pointer;
@@ -104,8 +104,8 @@
 }
 
 .form-check-input:checked {
-  background-color: #BE9F4E !important;
-  border-color: #BE9F4E !important;
+  background-color: #be9f4e !important;
+  border-color: #be9f4e !important;
 }
 .no-arrow {
   -moz-appearance: textfield;
@@ -140,6 +140,7 @@
   font-weight: bold;
   color: #ffffff;
   font-size: 32px;
+  transition: transform 0.2s;
 }
 
 .productPreview {
@@ -148,9 +149,6 @@
   width: 400px;
 }
 
-.addProductGrid {
-  margin-left: 20%;
-}
 .addProductBox {
   position: relative;
   padding: 5px;
@@ -158,7 +156,25 @@
   transition: transform 0.2s;
   cursor: pointer;
   border-radius: 16px;
+  /* display: flex; */
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  /* max-width: 100%;
+  height: 350px; */
+}
+.addProductBox1 {
+  position: relative;
+  padding: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 16px;
+  max-width: 100%;
+  height: 350px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.2s;
 }
 
 .addProductBox:hover {
@@ -166,9 +182,23 @@
 }
 
 .addProductBox img {
-  height: 350px;
+  /* height: 350px;
   width: 400px;
+  border-radius: 16px; */
+  max-width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-left: 10%;
+  border: 1px solid #ddd;
+}
+
+.addProductBox1 img {
   border-radius: 16px;
+  border: 1px solid #ddd;
+  max-width: 100%;
+  height: 300px;
+  object-fit: contain;
+  padding: 5px;
 }
 
 .addProductActions {
@@ -181,6 +211,22 @@
 }
 
 .addProductActions:hover {
-  background-color: #BE9F4E;
+  background-color: #be9f4e;
   color: #333333 !important;
+}
+
+.brand {
+  max-width: 300px;
+  margin: 15px;
+  padding: 0px;
+}
+
+.brand img {
+  max-width: 200px;
+  max-height: 200px;
+  width: 85%;
+  height: 200px;
+  object-fit: contain;
+  margin-left: 23%;
+  cursor: pointer;
 }

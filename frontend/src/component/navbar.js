@@ -40,7 +40,7 @@ const NavbarComponent = () => {
         const parsedObj = JSON.parse(JSON.parse(singleEscapedString));
         // Assuming the inner object has a "url" property
         const imageUrl = parsedObj.url;
-  
+
         setImageUrl(imageUrl);
       } catch (error) {
         console.error("Error parsing profile_img:", error);
@@ -54,8 +54,7 @@ const NavbarComponent = () => {
   };
 
   const userProfile = "../assets/userProfile.png";
-  {
-  }
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -109,19 +108,23 @@ const NavbarComponent = () => {
 
               {user.roles === "user" && (
                 <NavDropdown
-                id="nav-dropdown-dark"
-                title={
-                  imageUrl ? (
-                    <Image src={imageUrl} className="userProfile" alt="Profile Image" />
-                  ) : (
-                    <Image
-                      src={userProfile}  /* Assuming userProfile is your default image */
-                      className="userProfile"
-                      alt="No Profile Image"
-                    />
-                  )
-                }
-                menuVariant="dark"
+                  id="nav-dropdown-dark"
+                  title={
+                    imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        className="userProfile"
+                        alt="Profile Image"
+                      />
+                    ) : (
+                      <Image
+                        src={userProfile}
+                        className="userProfile"
+                        alt="No Profile Image"
+                      />
+                    )
+                  }
+                  menuVariant="dark"
                 >
                   <NavDropdown.Item disabled>
                     <span className="text-dot-200">

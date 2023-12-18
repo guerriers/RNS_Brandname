@@ -130,22 +130,23 @@ const MyProfile = () => {
               <Form.Label>
                 <div className="myProfile-img-grid">
                   <div className="profileImgBox">
-                    {/* {oldProfilePreview &&
-                      oldProfilePreview.map((img, index) => (
-                        <img
-                          key={`${img.url}`}
-                          src={img.url}
-                          alt={img.public_id}
-                          className="mt-3 mr-2"
-                          width="55"
-                          height="52"
-                        />
-                        // <img
-                        //   className="imagePreview"
-                        //   src={"../assets/userProfile.png"}
-                        //   alt="Default Profile"
-                        // />
-                      ))} */}
+
+                  {/* {oldProfilePreview&&oldProfilePreview.map((img, index) => (
+                      <img
+                        key={`${img.url}`}
+                        src={img.url}
+                        alt={img.public_id}
+                        className="mt-3 mr-2"
+                        width="55"
+                        height="52"
+                      />
+                    ))} */}
+                    
+                    <img
+                        className="imagePreview"
+                        src={"../assets/userProfile.png"}
+                        alt="Default Profile"
+                      />
 
                     {editMode && (
                       <div className="addProfileImgActions">
@@ -159,15 +160,15 @@ const MyProfile = () => {
                             height="52"
                           />
                         ))}
-                        <span className="plus-sign-myP">+</span>
-                        <Form.Control
+                        {/* <span className="plus-sign-myP">+</span> */}
+                        {/* <Form.Control
                           type="file"
                           name="img"
                           accept="image/*"
                           onChange={handleChange}
                           style={{ display: "none" }}
                           multiple
-                        />
+                        /> */}
                       </div>
                     )}
                   </div>

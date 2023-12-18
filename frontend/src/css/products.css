@@ -97,6 +97,19 @@
   border-radius: 100px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: #ffffff;
+  /* left: 40%; */
+}
+
+.product-price-fav {
+  position: absolute;
+  bottom: 5px;
+  
+  padding: 5px 10px;
+  font-weight: bold;
+  background-color: #333333;
+  border-radius: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
 }
 
 /* Filter */

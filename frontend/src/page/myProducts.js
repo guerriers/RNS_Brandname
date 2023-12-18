@@ -114,7 +114,7 @@ const MyProducts = () => {
         <div>loading...</div>
       ) : (
         <Container>
-          <div>
+          <div className="myProducts-main">
             <p className="myProduct-h">My Products</p>
             {successMessage && (
               <Alert variant="success">{successMessage}</Alert>

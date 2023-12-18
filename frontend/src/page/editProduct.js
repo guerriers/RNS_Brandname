@@ -184,31 +184,38 @@ const EditProduct = ({ history }) => {
               <Form.Group as={Col} controlId="formFileMultiple">
                 <Form.Label>
                   <div className="addProductGrid">
-                    <div className="addProductBox">
-                      {oldProducts.map((img, index) => (
-                        <img
-                          key={`${img.url}-${index}`}
-                          src={img.url}
-                          alt={img.url}
-                          className="mt-3 mr-2"
-                          width="55"
-                          height="52"
-                        />
-                      ))}
+                    <div className="addProductBox1">
+                      {oldProducts.length > 0 ? (
+                        <div>
+                          <img
+                            src={oldProducts[0].url}
+                            alt={oldProducts[0].url}
+                            className="productPreview"
+                          />
+                        </div>
+                      ) : (
+                        productsPreview.length > 0 && (
+                          <img
+                            src={productsPreview[0]}
+                            alt="Product Preview"
+                            className="productPreview"
+                          />
+                        )
+                      )}
+                      <div className="addProductActions">
+                        <span className="plus-sign">+</span>
+                      </div>
+                    </div>
 
+                    <div className="addProductBox">
                       {productsPreview.map((img) => (
                         <img
                           src={img}
                           key={img}
                           alt="Images Preview"
-                          className="mt-3 mr-2"
-                          width="55"
-                          height="52"
+                          className="productPreview"
                         />
                       ))}
-                      <div className="addProductActions">
-                        <span className="plus-sign">+</span>
-                      </div>
                     </div>
                   </div>
                 </Form.Label>
