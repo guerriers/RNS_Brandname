@@ -218,8 +218,8 @@ const ProductDetail = () => {
             {
               <p className="seller-name" onClick={handleProfileClick}>
                 <FaCheckCircle
-                  className="faCheckProductDe"
-                  style={{ color: "#003cf0" }}
+                  className="FaCheckSellerPro"
+                  style={{ color: "#18af2a" }}
                 />
                 {userData.f_name} {userData.l_name}
                 <img
