@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, OverlayTrigger, Popover } from "react-bootstrap";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Checkbox, Slider } from "antd";
 import { useSelector } from "react-redux";
@@ -61,13 +61,14 @@ const brands = [
 const CheckboxGroup = Checkbox.Group;
 const Product = () => {
   const { state } = useLocation();
-
   console.log("STATE", state);
   const [favorites, setFavorites] = useState([]);
   const user = useSelector((state) => state.auth.user);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [productCount, setProductCount] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+  const [userData, setUserData] = useState({});
   const [filter, setFilter] = useState({
     name: "",
     category: [],
@@ -137,28 +138,40 @@ const Product = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/products`, {
-        params: filter,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setProducts(response.data);
-        console.log("Received product data:", response.data);
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const productResponse = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/api/products`,
+          {
+            params: filter,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setProducts(productResponse.data);
 
         // Update the product count after fetching new data
-        const filteredCount = response.data.filter(
+        const filteredCount = productResponse.data.filter(
           (product) => product.p_status !== "2"
         ).length;
         setProductCount(filteredCount);
-      })
-      .catch((error) => {
-        console.error("Error fetching product data:", error);
-      });
-    fetchFavorites();
+
+        if (productResponse.data.length > 0) {
+          const userResponse = await axios.get(
+            `${process.env.REACT_APP_BASE_URL}/api/users/${productResponse.data[0].user_id}`
+          );
+          setUserData(userResponse.data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, [filter]);
 
   useEffect(() => {
@@ -294,11 +307,38 @@ const Product = () => {
   };
   const [brandColumn1, brandColumn2] = divideBrand(brands);
 
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
+  const [popoverShow, setPopoverShow] = useState(false);
+
+  const popover = (product) => (
+    <Popover className="pop-over" id={`popover-${product.id}`}>
+      <Popover.Header as="h3" className="popover-header">
+        Product Details
+      </Popover.Header>
+      <Popover.Body className="popover-body">
+        <p>{product.p_name}</p>
+        <hr className="hr-line" />
+        <p className="posted-by">
+          Posted by: K.{userData.f_name} {userData.l_name}
+        </p>
+        <hr className="hr-line" />
+        <a className="more-detail"> Click to see more details... </a>
+      </Popover.Body>
+    </Popover>
+  );
+
   return (
     <>
       <Row
         style={{ height: "100%", textAlign: "start", margin: 0 }}
-        className="product-container"
+        className="s-container"
       >
         <Col
           md={4}
@@ -519,49 +559,65 @@ const Product = () => {
               <Row>
                 {filteredProducts.map((product) => (
                   <Col md={6} lg={4} xl={4} key={product.id}>
-                    <div className="product-box">
-                      <Link to={`/product/${product.id}`}>
-                        <div className="product-box1">
-                          {product.p_img && product.p_img.length > 0 ? (
-                            <img
-                              src={product.p_img[0].url}
-                              alt={product.p_name}
-                            />
-                          ) : (
-                            <p>No image available</p>
-                          )}
-                          <div
-                            className={`product-status ${
-                              product.p_status === "0"
-                                ? "for-rent"
+                    <OverlayTrigger
+                      trigger="hover"
+                      placement="top"
+                      overlay={popover(product)}
+                      onMouseOver={() => setPopoverShow(true)}
+                      onMouseOut={() => setPopoverShow(false)}
+                    >
+                      <div
+                        className="product-box"
+                        onMouseOver={handleMouseOver}
+                        onMouseOut={handleMouseOut}
+                      >
+                        <Link to={`/product/${product.id}`}>
+                          <div className="product-box1">
+                            {product.p_img && product.p_img.length > 0 ? (
+                              <img
+                                src={product.p_img[0].url}
+                                alt={product.p_name}
+                              />
+                            ) : (
+                              <p>No image available</p>
+                            )}
+                            <div
+                              className={`product-status ${
+                                product.p_status === "0"
+                                  ? "for-rent"
+                                  : product.p_status === "1"
+                                  ? "for-sell"
+                                  : "sold-out"
+                              }`}
+                            >
+                              {product.p_status === "0"
+                                ? "For Rent"
                                 : product.p_status === "1"
-                                ? "for-sell"
-                                : "sold-out"
-                            }`}
-                          >
-                            {product.p_status === "0"
-                              ? "For Rent"
-                              : product.p_status === "1"
-                              ? "For Sell"
-                              : "Sold Out"}
+                                ? "For Sell"
+                                : "Sold Out"}
+                            </div>
                           </div>
+                        </Link>
+                        <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
+                        <div className="product-favorite">
+                          <button
+                            className="favButton"
+                            variant="gray"
+                            onClick={() =>
+                              handleFavoriteClick(product.id, "add")
+                            }
+                          >
+                            {favorites.some(
+                              (item) => item.productId === product.id
+                            ) ? (
+                              <FaHeart style={{ color: "#ff0000" }} />
+                            ) : (
+                              <FaRegHeart style={{ color: "#000000" }} />
+                            )}
+                          </button>
                         </div>
-                      </Link>
-                      <div className="product-price">{`${product.p_price.toLocaleString()} THB`}</div>
-                      <div className="product-favorite">
-                        <button
-                          className="favButton"
-                          variant="gray"
-                          onClick={() => handleFavoriteClick(product.id, "add")}
-                        >
-                          {favorites.some((item) => item.productId === product.id) ? (
-                            <FaHeart style={{ color: "#ff0000" }} />
-                          ) : (
-                            <FaRegHeart style={{ color: "#000000" }} />
-                          )}
-                        </button>
                       </div>
-                    </div>
+                    </OverlayTrigger>
                   </Col>
                 ))}
               </Row>

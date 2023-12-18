@@ -32,21 +32,21 @@ const NavbarComponent = () => {
     fetchData();
   }, [dispatch]);
 
-  useEffect(() => {
-    if (user && user.profile_img) {
-      try {
-        const doubleEscapedString = user.profile_img;
-        const singleEscapedString = doubleEscapedString.replace(/\\\"/g, '"');
-        const parsedObj = JSON.parse(JSON.parse(singleEscapedString));
-        // Assuming the inner object has a "url" property
-        const imageUrl = parsedObj.url;
+  // useEffect(() => {
+  //   if (user && user.profile_img) {
+  //     try {
+  //       const doubleEscapedString = user.profile_img;
+  //       const singleEscapedString = doubleEscapedString.replace(/\\\"/g, '"');
+  //       const parsedObj = JSON.parse(JSON.parse(singleEscapedString));
+  //       // Assuming the inner object has a "url" property
+  //       const imageUrl = parsedObj.url;
 
-        setImageUrl(imageUrl);
-      } catch (error) {
-        console.error("Error parsing profile_img:", error);
-      }
-    }
-  }, [user]);
+  //       setImageUrl(imageUrl);
+  //     } catch (error) {
+  //       console.error("Error parsing profile_img:", error);
+  //     }
+  //   }
+  // }, [user]);
 
   const logoutHandler = async () => {
     dispatch(logout());

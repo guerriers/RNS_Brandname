@@ -1,7 +1,33 @@
 .product-container {
   user-select: none;
 }
-
+.more-detail {
+  text-align: center;
+}
+.popover-header {
+  font-weight: bold;
+}
+.posted-by {
+  /* text-overflow: ellipsis; */
+  color: #be9f4e;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.hr-line {
+  border: 0.5px solid #666666;
+  margin: 15px 0;
+  border-top: 0.5px solid transparent;
+}
+.popover-body {
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0px;
+}
+.pop-over {
+  border-radius: 16px;
+}
 .product-h {
   text-align: center;
   margin-top: 28px;
@@ -103,7 +129,7 @@
 .product-price-fav {
   position: absolute;
   bottom: 5px;
-  
+
   padding: 5px 10px;
   font-weight: bold;
   background-color: #333333;
