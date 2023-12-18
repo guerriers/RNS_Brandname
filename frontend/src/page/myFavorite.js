@@ -277,7 +277,10 @@ const MyFavorites = () => {
 
   return (
     <>
-      <Row style={{ height: "100%", textAlign: "start", margin: 0 }}>
+      <Row
+        style={{ height: "100%", textAlign: "start", margin: 0 }}
+        className="product-container"
+      >
         <Col
           md={4}
           lg={3}
@@ -485,25 +488,28 @@ const MyFavorites = () => {
           </Col>
         </Col>
 
-        <Col md={8} lg={9} xl={9}>
+        <Col>
           <p className="product-h">My favorite products</p>
           {favorites.length === 0 ? (
             <p>You have no favorite products.</p>
+          ) : filteredProducts.length === 0 ? (
+            <p>There are no products that match the selected filter.</p>
           ) : (
-            filteredProducts.length === 0 ? (
-              <p>There are no products that match the selected filter.</p>
-            ) : (
-              <Row>
-                {filteredProducts
-                  .filter((product) =>
-                    favorites.some((item) => item.productId === product.id)
-                  )
-                  .map((product) => (
-                    <Col md={6} lg={4} xl={4} className="mt-4" key={product.id}>
-                      <Link to={`/product/${product.id}`}>
-                        <div className="product-box">
+            <Row>
+              {filteredProducts
+                .filter((product) =>
+                  favorites.some((item) => item.productId === product.id)
+                )
+                .map((product) => (
+                  <Col md={6} lg={4} xl={4}>
+                    <div className="product-box">
+                      <Link to={`/product/${product.id}`} key={product.id}>
+                        <div className="product-box1">
                           {product.p_img && product.p_img.length > 0 ? (
-                            <img src={product.p_img[0].url} alt={product.p_name} />
+                            <img
+                              src={product.p_img[0].url}
+                              alt={product.p_name}
+                            />
                           ) : (
                             <p>No image available</p>
                           )}
@@ -522,30 +528,30 @@ const MyFavorites = () => {
                               ? "For Sell"
                               : "Sold Out"}
                           </div>
-                          <div className="product-price">
-                            {`${product.p_price.toLocaleString()} THB`}
-                          </div>
-                          <div className="product-favorite">
-                            <button
-                              className="favButton"
-                              variant="gray"
-                              onClick={() => handleFavoriteClick(product.id, "add")}
-                            >
-                              {favorites.some(
-                                (item) => item.productId === product.id
-                              ) ? (
-                                <FaHeart style={{ color: "#ff0000" }} />
-                              ) : (
-                                <FaRegHeart style={{ color: "#000000" }} />
-                              )}
-                            </button>
-                          </div>
                         </div>
                       </Link>
-                    </Col>
-                  ))}
-              </Row>
-            )
+                      <div className="product-price">
+                        {`${product.p_price.toLocaleString()} THB`}
+                      </div>
+                      <div className="product-favorite">
+                        <button
+                          className="favButton"
+                          variant="gray"
+                          onClick={() => handleFavoriteClick(product.id, "add")}
+                        >
+                          {favorites.some(
+                            (item) => item.productId === product.id
+                          ) ? (
+                            <FaHeart style={{ color: "#ff0000" }} />
+                          ) : (
+                            <FaRegHeart style={{ color: "#000000" }} />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+            </Row>
           )}
         </Col>
       </Row>

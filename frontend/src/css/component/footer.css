@@ -7,7 +7,8 @@
   justify-content: center;
 }
 
-.footer-text, footer p {
+.footer-text,
+footer p {
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-size: 18px; /* Adjust the font size as needed */
@@ -16,12 +17,12 @@
 }
 
 .contact {
-    text-align: center;
-    font-family: "Roboto", sans-serif;
-    font-size: 14px; /* Adjust the font size as needed */
-    color: #ffffff;
-    margin-top: 0px;
-    margin-bottom: 0px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px; /* Adjust the font size as needed */
+  color: #ffffff;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .footer-icons img {

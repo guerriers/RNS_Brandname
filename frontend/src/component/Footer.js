@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="footer">
 
         <h4 className="footer-text"><b>CONTACT</b></h4>
-        <p className='contact'>+666531892219</p>
+        <p className='contact'>+66623725430</p>
         <p className='contact'>rnsbrandname@gmail.com</p>
 
         <div className="footer-icons">

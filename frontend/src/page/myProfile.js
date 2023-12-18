@@ -141,11 +141,11 @@ const MyProfile = () => {
                       />
                     ))} */}
                     
-                    {/* <img
+                    <img
                         className="imagePreview"
                         src={"../assets/userProfile.png"}
                         alt="Default Profile"
-                      /> */}
+                      />
 
                     {editMode && (
                       <div className="addProfileImgActions">
@@ -159,15 +159,15 @@ const MyProfile = () => {
                             height="52"
                           />
                         ))}
-                        <span className="plus-sign-myP">+</span>
-                        <Form.Control
+                        {/* <span className="plus-sign-myP">+</span> */}
+                        {/* <Form.Control
                           type="file"
                           name="img"
                           accept="image/*"
                           onChange={handleChange}
                           style={{ display: "none" }}
                           multiple
-                        />
+                        /> */}
                       </div>
                     )}
                   </div>

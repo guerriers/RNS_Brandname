@@ -1,8 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import { Form, Row, Col, Carousel } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/addProduct.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const AddProduct = () => {
   // const { user, loading } = useSelector((state) => state.auth);
@@ -24,6 +27,7 @@ const AddProduct = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleReset = () => {
     setIsSubmit(false);
@@ -123,6 +127,14 @@ const AddProduct = () => {
     }
   };
   // useEffect(() => {});
+  const settings = {
+    dots: true,
+    infinite: true,
+    // speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
+  };
   return (
     <Fragment>
       <>
@@ -133,22 +145,32 @@ const AddProduct = () => {
               <Form.Group as={Col} controlId="formFileMultiple">
                 <Form.Label>
                   <div className="addProductGrid">
-                    <div className="addProductBox">
+                    <div className="addProductBox1">
                       {productsPreview.length > 0 ? (
-                        productsPreview.map((img) => (
+                        <div>
                           <img
-                            src={img}
-                            key={img}
-                            alt="Products Preview"
+                            src={productsPreview[0]}
+                            alt={`Product Preview 1`}
                             className="productPreview"
                           />
-                        ))
+                        </div>
                       ) : (
                         <img src={"../assets/addImage.jpg"} />
                       )}
                       <div className="addProductActions">
                         <span className="plus-sign">+</span>
                       </div>
+                    </div>
+                    <div className="addProductBox">
+                      {productsPreview.map((img, index) => (
+                        <div key={index}>
+                          <img
+                            src={img}
+                            alt={`Products Preview ${index + 1}`}
+                            className="productPreview"
+                          />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </Form.Label>
