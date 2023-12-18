@@ -4,7 +4,9 @@
   margin-bottom: 40px;
   font-size: 36px;
 }
-
+.adminVerify-main{
+  margin-bottom: 150px;
+}
 .verify-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

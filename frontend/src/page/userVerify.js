@@ -141,11 +141,12 @@ const UserVerify = () => {
             <h2 className="titleVerify">Identity verification</h2>
             <div className="headerVerify">
               <h5>ยืนยันตัวตนก่อนลงขายสินค้า</h5>
-              <li>การยืนยันตัวตนเป็นระบุตัวตนของผู้ขายหรือผู้ให้เช่า เพื่อยืนยันการมีอยู่จริงของผู้ขายหรือผู้ให้เช่า</li>
+              <li>ยืนยันตัวตนของผู้ขายหรือผู้ให้เช่า เพื่อยืนยันการมีอยู่จริงของผู้ขายหรือผู้ให้เช่า</li>
               <li>โดยต้องแนบภาพถ่ายดังนี้</li>
             </div>
             <ul className="requirements1">
               <li>1. ถ่ายภาพบัตรประจําตัวประชาชน</li>
+              <li>*รูปภาพที่อัพโหลดทางเว็บไซต์จะไม่นำไปเผยเแพร่โดยเด็ดขาด</li>
             </ul>
             <Row>
               <Col>
@@ -168,7 +169,7 @@ const UserVerify = () => {
                       onChange={handleIdCardChange}
                       feedback="Please upload ID card image."
                       required
-                    />
+                      />
                   </div>
                 </Form.Group>
               </Col>
@@ -178,6 +179,7 @@ const UserVerify = () => {
                 2. ถ่ายภาพหน้าสมุดบัญชีธนาคาร
                 (ชื่อต้องตรงกับในบัตรประจําตัวประชาชน)
               </li>
+              <li>*รูปภาพที่อัพโหลดทางเว็บไซต์จะไม่นำไปเผยเแพร่โดยเด็ดขาด</li>
             </ul>
             <Row>
               <Col>

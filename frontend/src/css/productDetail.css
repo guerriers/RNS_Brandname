@@ -4,6 +4,8 @@
   margin-top: 50px;
   width: 100%;
   max-width: 1920px;
+  user-select: none;
+  margin-bottom: 100px;
 }
 
 .product-detail {
@@ -113,12 +115,6 @@
   transition: background-color 0.3s ease;
 }
 
-.product-image img {
-  width: auto;
-  max-height: 400px;
-  object-fit: cover;
-}
-
 .profile-modal-icon2 {
   margin: 20px 20px 20px 20px;
   /* margin-left: 39%; */
@@ -181,96 +177,114 @@
   margin-right: 5px;
 }
 
-.carousel.slide {
-  width: 100%;
-  height: 200px;
+.active1 {
+  background: #be9f4e !important;
+  color: #000000 !important;
+  width: 50px;
+}
+.active1:hover {
+  color: #000000 !important;
 }
 
-.carousel-item {
+.product-image-de {
   position: relative;
-  justify-content: center;
-  backface-visibility: hidden;
-  transition: transform 0.6s ease-in-out;
-}
-
-.d-block_w-100_h-100 {
-  width: 450px;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 16px;
   height: 450px;
-  border-style: solid;
-  border-color: #929292;
-  border-width: 1.5px;
-  border-radius: 3%;
-}
-
-.carousel-item.active {
-  width: 450px;
-  height: 450px;
-  border-radius: 20%;
-  margin-right: 60px;
-}
-
-.product-image {
-  position: relative;
-  width: 100%;
-  height: 400px; /* Adjust the height as needed */
-  overflow: hidden;
-}
-
-.carousel {
-  width: 100%;
-  height: 100%;
-}
-
-.carousel-item {
-  position: relative;
-  text-align: center;
-}
-
-.carousel-item.active {
-  opacity: 1; /* Set opacity to 1 for the active item */
-}
-
-.carousel img {
   max-width: 100%;
-  max-height: 100%;
-  object-fit: cover; /* Ensure images maintain aspect ratio and cover the container */
+  width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.2s;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
 }
 
-.carousel-controls {
+.product-image-de img {
+  max-width: 100%;
+  border-radius: 16px;
+  padding: 5px;
+  height: 440px;
+  object-fit: contain;
+  /* border: 1px solid #ddd; */
+}
+
+.product-image1 {
   position: relative;
+  background-color: #fff;
+  transition: transform 0.2s;
+  cursor: pointer;
+  border-radius: 16px;
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  height: 150px;
+  max-width: 100%;
+  width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  margin-bottom: 20px;
+}
+
+.product-image1 img {
+  border: 1px solid #ddd;
+  max-width: 100px;
+  border-radius: 16px;
+  padding: 5px;
+  height: 100px;
+  object-fit: contain;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.arrow-prev {
+  left: 10px;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-.carousel-controls button {
-  background-color: rgb(51, 51, 51);
-  color: #333333;
-  border: 1px solid #000000;
-  border-radius: 50%;
-  padding: 20px 20px;
-  font-size: 16px;
+  font-size: 24px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.carousel-controls button:hover {
-  background-color: #e7c264;
-}
-
-.carousel-indicators {
-  background-color: rgb(51, 51, 51);
-  position: absolute;
-  bottom: -310px;
-  left: 45%;
-  transform: translateX(-50%);
+  color: white;
+  background-color: #be9f4e;
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
-  border-radius: 7px;
-  justify-content: center;
   align-items: center;
-  padding: 0;
-  margin: 0;
+  justify-content: center;
+  user-select: none;
+}
+
+.arrow-next {
+  transition: border-color 0.3s ease-in-out;
+  user-select: none;
+  right: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  background-color: #be9f4e;
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productPreview.selected {
+  border-color: #be9f4e;
+}
+
+.productPreview:hover {
+  border-color: #be9f4e;
 }

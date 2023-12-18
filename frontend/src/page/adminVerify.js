@@ -107,7 +107,7 @@ const AdminVerify = () => {
         <div>loading...</div>
       ) : (
         <Container>
-          <div>
+          <div className="adminVerify-main">
             <p className="adminVerify-h">Verify Request</p>
             {successMessage && (
               <Alert variant="success">{successMessage}</Alert>
