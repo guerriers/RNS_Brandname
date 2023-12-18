@@ -1,14 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Form, Row, Col, Carousel } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/addProduct.css";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 const AddProduct = () => {
-  // const { user, loading } = useSelector((state) => state.auth);
   const initialValues = {
     p_name: "",
     p_category: "",
@@ -125,15 +121,6 @@ const AddProduct = () => {
         alert(response.message);
       }
     }
-  };
-  // useEffect(() => {});
-  const settings = {
-    dots: true,
-    infinite: true,
-    // speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
   };
   return (
     <Fragment>

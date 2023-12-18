@@ -35,7 +35,6 @@ const EditProduct = ({ history }) => {
   const [validated, setValidated] = useState(false);
   const [productEdit, setProductEdit] = useState(initialValues);
   const [hasLoaded, setHasLoaded] = useState(false);
-  // const [hasLoaded, setHasLoaded] = useState(false);
   const { error, product } = useSelector((state) => state.productDetails);
 
   const handleChange = (e) => {
@@ -134,7 +133,6 @@ const EditProduct = ({ history }) => {
         if (productEdit.p_status === "2") {
           const buyerEmail = prompt("Product sold! Enter the buyer's email:");
 
-          // Validate the email (you may need a more sophisticated validation)
           if (buyerEmail && buyerEmail.trim() !== "") {
             // Dispatch an action to send a review invitation
             dispatch(sendReviewInvitation(productEdit, buyerEmail));
@@ -184,7 +182,10 @@ const EditProduct = ({ history }) => {
               <Form.Group as={Col} controlId="formFileMultiple">
                 <Form.Label>
                   <div className="addProductGrid">
-                  <span className="span-add-product" style={{ color: "red" }}> *</span>
+                    <span className="span-add-product" style={{ color: "red" }}>
+                      {" "}
+                      *
+                    </span>
                     <div className="addProductBox1">
                       {oldProducts.length > 0 ? (
                         <div>
