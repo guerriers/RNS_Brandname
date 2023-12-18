@@ -211,6 +211,19 @@
   margin-bottom: 20px;
 }
 
+.verified-badge-pdPage {
+  position: relative;
+  padding: 1px 3px;
+  color: #be9f4e;
+  border: 2px solid #be9f4e;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+  margin-right: 10px;
+}
+
 .product-image-de img {
   max-width: 100%;
   border-radius: 16px;

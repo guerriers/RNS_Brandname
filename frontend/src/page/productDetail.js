@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button, Modal, Container, Carousel } from "react-bootstrap";
 import {
@@ -19,6 +19,8 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [favorites, setFavorites] = useState([]);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const verifyStatus = useSelector((state) => state.verify_status);
+  const dispatch = useDispatch();
   // const [showContactModal, setShowContactModal] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -39,7 +41,8 @@ const ProductDetail = () => {
         setUserData(userData);
       })
       .catch((error) => console.error("Error fetching details: ", error));
-
+    
+    fetchVerificationStatus(id)
     fetchFavorites();
   }, [id]);
 
@@ -61,6 +64,18 @@ const ProductDetail = () => {
       }
     } catch (error) {
       console.error("Error fetching user favorites:", error);
+    }
+  };
+
+  const fetchVerificationStatus = async (userId) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/api/user-verification/${userId}`
+      );
+      const verifyStatus = response.data.verify_status;
+      dispatch({ type: "SET_VERIFY_STATUS", verify_status: verifyStatus });
+    } catch (error) {
+      console.error("Error fetching verification status:", error);
     }
   };
 
@@ -217,10 +232,14 @@ const ProductDetail = () => {
           <div className="seller-info">
             {
               <p className="seller-name" onClick={handleProfileClick}>
-                <FaCheckCircle
-                  className="FaCheckSellerPro"
-                  style={{ color: "#18af2a" }}
-                />
+                <span className="verified-badge-pdPage">
+                  {" "}
+                  {verifyStatus ? "Verified" : "Need Verified"}{" "}
+                  <FaCheckCircle
+                    className="FaCheckSellerPro"
+                    style={{ color: "#18af2a" }}
+                  />
+                </span>
                 {userData.f_name} {userData.l_name}
                 <img
                   className="profile-modal-icon2"
