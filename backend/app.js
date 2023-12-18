@@ -5,6 +5,7 @@ const User = require("./models/user");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
 const userVerifyRoutes = require("./routes/userVerifyRoutes");
+const reviewRoutes = require("./routes/reviewRoutes")
 const app = express();
 
 const cookieParser = require("cookie-parser");
@@ -17,7 +18,7 @@ const fileUpload = require("express-fileupload");
 app.use(fileUpload());
 app.use(
   cors({
-    // origin: "http://localhost:3000",
+    //origin: "http://localhost:3000",
     origin: ["https://rnsbrandname.vercel.app","https://rnsbrandname-api.vercel.app"],
     credentials: true,
   })
@@ -30,6 +31,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/userVerify", userVerifyRoutes);
+app.use("/api/reviews",reviewRoutes)
 
 // Middleware to handle errors
 app.use(sequelizeErrorHandler);
