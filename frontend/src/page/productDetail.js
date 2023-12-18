@@ -129,6 +129,11 @@ const ProductDetail = () => {
     );
   };
 
+  const formatDate = (timestamp) => {
+    const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
+    return new Date(timestamp).toLocaleDateString(undefined, options);
+  };
+
   return (
     <Container>
       <div className="product-detail-container">
@@ -182,6 +187,7 @@ const ProductDetail = () => {
             {product.p_name}
           </h1>
           <h2>{product.p_brand}</h2>
+          <h5 className="product-postdate">Posted since: {product.createdAt ? formatDate(product.createdAt) : "N/A"}</h5>
           <div className="product-favorite"></div>
           <hr />
           <div>
