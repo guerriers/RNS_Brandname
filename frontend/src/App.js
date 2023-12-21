@@ -5,7 +5,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./component/navbar";
 import Layout from "./component/Layout";
-import Footer from "./component/footer";
+import Footer from "./component/Footer";
 import RequireAuth from "./component/route/requireAuth";
 import ProtectedRoute from "./component/route/protectedRoute";
 import Home from "./page/home";
