@@ -10,11 +10,13 @@ const {
   deleteProduct,
 } = require("../controllers/productController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
-// const uploadImg = multer({ dest: "../img" }).single("p_img");
 
 // router.post("/", uploadImg, uploadReceipt, productController.createProduct);
 
-router.route("/").get(getAllProduct).post(isAuthenticatedUser, authorizeRoles("user"), createProduct);
+router
+  .route("/")
+  .get(getAllProduct)
+  .post(isAuthenticatedUser, authorizeRoles("user"), createProduct);
 router
   .route("/myProducts")
   .get(isAuthenticatedUser, authorizeRoles("user"), getMyProducts);
@@ -27,6 +29,5 @@ router
 router
   .route("/user/:id")
   .get(isAuthenticatedUser, authorizeRoles("user"), getProductByUserId);
-
 
 module.exports = router;
