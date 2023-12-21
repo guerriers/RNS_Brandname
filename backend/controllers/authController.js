@@ -41,13 +41,13 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
-      return next(new ErrorHandler("Email or password xxxxx!!", 404));
+      return next(new ErrorHandler("Email or password incorrect!!", 404));
     }
 
     const isPasswordMatched = await user.comparePassword(password);
 
     if (!isPasswordMatched) {
-      return next(new ErrorHandler("Email or password xxxxx!!", 401));
+      return next(new ErrorHandler("Email or password incorrect!!", 401));
     }
 
     sendToken(user, 200, res);
@@ -181,7 +181,6 @@ exports.sendReviewInvitation = async (req, res, next) => {
   }
 };
 
-
 // user profile
 exports.getUserProfile = async (req, res, next) => {
   try {
@@ -225,7 +224,7 @@ exports.updateProfile = async (req, res, next) => {
         ? req.files.profile_img
         : [req.files.profile_img].filter(Boolean);
 
-        if (Array.isArray(user.profile_img) && user.profile_img.length > 0) {
+      if (Array.isArray(user.profile_img) && user.profile_img.length > 0) {
         await Promise.all(
           user.profile_img.map(async (image) => {
             try {

@@ -9,6 +9,7 @@ import "../css/login.css";
 const LoginPage = ({ location }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,6 +38,15 @@ const LoginPage = ({ location }) => {
     }
   }, [dispatch, alert, isAuthenticated, error, navigate]);
 
+  useEffect(() => {
+    // Load saved email from localStorage on component mount
+    const savedEmail = localStorage.getItem("rememberedEmail");
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setRememberMe(true);
+    }
+  }, []);
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -45,9 +55,21 @@ const LoginPage = ({ location }) => {
     setPassword(e.target.value);
   };
 
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmit(true);
+
+    // Save email to localStorage if "Remember Me" is checked
+    if (rememberMe) {
+      localStorage.setItem("rememberedEmail", email);
+    } else {
+      localStorage.removeItem("rememberedEmail");
+    }
+
     try {
       await dispatch(login(email, password));
       setEmail("");
@@ -90,7 +112,12 @@ const LoginPage = ({ location }) => {
                 />
 
                 <div className="checkbox-container">
-                  <input type="checkbox" id="rememberMe" />
+                  <input
+                    type="checkbox"
+                    id="rememberMe"
+                    checked={rememberMe}
+                    onChange={handleRememberMeChange}
+                  />
                   <label for="rememberMe">Remember me</label>
 
                   <a class="forgetPW" href="/password/forgot">
