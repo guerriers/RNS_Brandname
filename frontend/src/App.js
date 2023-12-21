@@ -4,7 +4,7 @@ import "../src/css/index.css";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./component/navbar";
-import Layout from "./component/layout";
+import Layout from "./component/Layout";
 import Footer from "./component/footer";
 import RequireAuth from "./component/route/requireAuth";
 import ProtectedRoute from "./component/route/protectedRoute";
