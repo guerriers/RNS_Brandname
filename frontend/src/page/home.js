@@ -65,24 +65,6 @@ function HomePage() {
     console.log(`Clicked on ${slideIndex + 1}`);
   }
 
-  const [info, setinfo] = useState([
-    {
-      name: "เว็บไซต์ตัวกลาง",
-      image: "../assets/cart_icon.png",
-      desc: "เว็บไซต์ของเราเป็นแค่เว็บไซต์ตัวกลางที่ช่วยให้พ่อค้า-แม่ค้าทุกคนสามารถมาลงขายสินค้าได้ โดยเราจะไม่มีส่วนได้ส่วนเสีย และจะไม่รับผิดชอบใดๆ",
-    },
-    {
-      name: "มีบริการเช่าสินค้า",
-      image: "../assets/cart_icon.png",
-      desc: "นอกจากซื้อและขายสินค้ามือสองแล้วยังสามารถเช่าสินค้าแบรนด์เนมได้ด้วย สำหรับคนที่ต้องการเช่ามาใช้ชั่วคราว",
-    },
-    {
-      name: "สินค้าหลากหลายแบรนด์",
-      image: "../assets/cart_icon.png",
-      desc: "เรามีสินค้าหลากหลายแบรนด์ ไม่ว่าจะเป็น Gucci Dior Cartier และแบรนด์ดังอื่นๆ",
-    },
-  ]);
-
   const autoSlideSettings = {
     dots: true,
     infinite: true,
@@ -94,13 +76,6 @@ function HomePage() {
     beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 3,
-  };
   const redirectToURL = (targetURL) => {
     window.location.href = targetURL;
   };
@@ -325,15 +300,33 @@ function HomePage() {
     },
   ];
 
-  useEffect(() => {
-    info.forEach((list) => {
-      const img = new Image();
-      img.onload = () =>
-        console.log(`${list.name}'s image loaded successfully`);
-      img.onerror = () => console.log(`Failed to load ${list.name}'s image`);
-      img.src = list.image;
-    });
-  }, [info]);
+  // const [info, setinfo] = useState([
+  //   {
+  //     name: "เว็บไซต์ตัวกลาง",
+  //     image: "../assets/cart_icon.png",
+  //     desc: "เว็บไซต์ของเราเป็นแค่เว็บไซต์ตัวกลางที่ช่วยให้พ่อค้า-แม่ค้าทุกคนสามารถมาลงขายสินค้าได้ โดยเราจะไม่มีส่วนได้ส่วนเสีย และจะไม่รับผิดชอบใดๆ",
+  //   },
+  //   {
+  //     name: "มีบริการเช่าสินค้า",
+  //     image: "../assets/cart_icon.png",
+  //     desc: "นอกจากซื้อและขายสินค้ามือสองแล้วยังสามารถเช่าสินค้าแบรนด์เนมได้ด้วย สำหรับคนที่ต้องการเช่ามาใช้ชั่วคราว",
+  //   },
+  //   {
+  //     name: "สินค้าหลากหลายแบรนด์",
+  //     image: "../assets/cart_icon.png",
+  //     desc: "เรามีสินค้าหลากหลายแบรนด์ ไม่ว่าจะเป็น Gucci Dior Cartier และแบรนด์ดังอื่นๆ",
+  //   },
+  // ]);
+
+  // useEffect(() => {
+  //   info.forEach((list) => {
+  //     const img = new Image();
+  //     img.onload = () =>
+  //       console.log(`${list.name}'s image loaded successfully`);
+  //     img.onerror = () => console.log(`Failed to load ${list.name}'s image`);
+  //     img.src = list.image;
+  //   });
+  // }, [info]);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   useEffect(() => {
@@ -365,7 +358,7 @@ function HomePage() {
       </header>
 
       <main className="main">
-        <section className="info-section">
+        {/* <section className="info-section">
           <div className="info-lists">
             {info.map((list) => (
               <div key={list.name} className="info-list">
@@ -375,9 +368,8 @@ function HomePage() {
               </div>
             ))}
           </div>
-        </section>
-
-        <hr className="h" />
+        </section> */}
+        {/* <hr className="h" /> */}
 
         <h1 className="decorated-h1">Recently Posted Products</h1>
         <Slider {...autoSlideSettings}>
