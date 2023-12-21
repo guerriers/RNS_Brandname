@@ -68,7 +68,7 @@
 
 .product-detail .seller-info {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -125,13 +125,13 @@
   user-select: none;
 }
 .profile-modal-icon2 {
-  margin: 20px 20px 20px 20px;
+  margin: 20px;
   /* margin-left: 39%; */
 }
 
 .profile-modal-icon {
   justify-content: center;
-  margin: 20px 20px 20px 20px;
+  margin: 20px;
   margin-left: 39%;
 }
 

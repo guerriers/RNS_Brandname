@@ -86,7 +86,7 @@
 .span-add-product{
   margin-left: 60px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   font-size: 28px;
   align-items: center;
 }

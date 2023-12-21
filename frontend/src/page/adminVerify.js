@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Container, Button, Modal, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";

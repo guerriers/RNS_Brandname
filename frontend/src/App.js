@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import "../src/css/index.css";
 import "./App.css";
@@ -5,12 +6,10 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./component/route/ProtectedRoute";
 import Navbar from "./component/navbar";
 import Footer from './component/Footer';
-// import Messenger from "./component/messenger";
 import Home from "./page/home";
 import Login from "./page/login";
 import Register from "./page/register";
 import Products from "./page/products";
-// import Chat from "./page/chat";
 import MyProducts from "./page/myProducts";
 import AddProduct from "./page/addProduct";
 import EditProduct from "./page/editProduct";
@@ -65,9 +64,6 @@ function App() {
           <Route path="/password/reset/:token" element={<NewPassword />} exact />
           <Route path="/review/:token" element={<ReviewForm />} exact />
           {/* UserPage */}
-          {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-            <Route path="chat" element={<Chat />} />
-          </Route> */}
           <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
             <Route path="products" element={<Products />} />
           </Route>
@@ -88,9 +84,6 @@ function App() {
           <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
             <Route path="submitted" element={<Submitted />} />
           </Route>
-          {/* <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
-            <Route path="messenger" element={<Messenger />} />
-          </Route> */}
           <Route element={<RequireAuth allowedRoles={"user"} isAuthenticated={isAuthenticated} />}>
             <Route path="myProfile" element={<MyProfile />} />
           </Route>

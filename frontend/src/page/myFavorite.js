@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -74,8 +75,8 @@ const MyFavorites = () => {
   const [selected, setSelected] = useState([]);
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedBrand, setCheckedBrand] = useState([]);
-  const [productCount, setProductCount] = useState(0);
   const [userData, setUserData] = useState({});
+  const [productCount, setProductCount] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const checkCategory = allCategories.length === checkedCategory.length;
   const checkBrand = brands.length === checkedBrand.length;

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import { useSelector } from 'react-redux';

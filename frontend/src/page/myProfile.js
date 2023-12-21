@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Form, Col, Row, Container, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";

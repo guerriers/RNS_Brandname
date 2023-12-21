@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";

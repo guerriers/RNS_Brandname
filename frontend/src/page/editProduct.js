@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Fragment, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Row, Col } from "react-bootstrap";

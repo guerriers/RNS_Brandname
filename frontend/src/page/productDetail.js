@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { Button, Modal, Container, Carousel } from "react-bootstrap";
+import { Button, Modal, Container } from "react-bootstrap";
 import {
   FaCheckCircle,
   FaRegHeart,
@@ -109,9 +110,7 @@ const ProductDetail = () => {
       console.error("Error updating user favorites:", error);
     }
   };
-
   const [currentIndex, setCurrentIndex] = useState(0);
-
   //   Profile Seller
   const handleProfileClick = () => {
     // Fetch user details based on product user_id

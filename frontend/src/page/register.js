@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Fragment, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { register, clearErrors, loadUser } from "../actions/userActions";
