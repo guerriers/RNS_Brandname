@@ -23,7 +23,6 @@
   font-weight: 600;
 }
 
-
 .p-statusDetail {
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -122,7 +121,9 @@
   color: #000000;
   transition: background-color 0.3s ease;
 }
-
+.modal {
+  user-select: none;
+}
 .profile-modal-icon2 {
   margin: 20px 20px 20px 20px;
   /* margin-left: 39%; */

@@ -27,6 +27,7 @@
 }
 .pop-over {
   border-radius: 16px;
+  user-select: none;
 }
 .product-h {
   text-align: center;

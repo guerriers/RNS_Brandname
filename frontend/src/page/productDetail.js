@@ -41,8 +41,8 @@ const ProductDetail = () => {
         setUserData(userData);
       })
       .catch((error) => console.error("Error fetching details: ", error));
-    
-    fetchVerificationStatus(id)
+
+    fetchVerificationStatus(id);
     fetchFavorites();
   }, [id]);
 
@@ -202,7 +202,10 @@ const ProductDetail = () => {
             {product.p_name}
           </h1>
           <h2>{product.p_brand}</h2>
-          <h5 className="product-postdate">Posted since: {product.createdAt ? formatDate(product.createdAt) : "N/A"}</h5>
+          <h5 className="product-postdate">
+            Posted since:{" "}
+            {product.createdAt ? formatDate(product.createdAt) : "N/A"}
+          </h5>
           <div className="product-favorite"></div>
           <hr />
           <div>

@@ -3,6 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Anuphan&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
 
+.sellerProfile {
+  user-select: none;
+}
 .user-profile-page {
   display: flex;
   flex-direction: column;
@@ -21,7 +24,7 @@
 
 .verified-badge {
   position: relative;
-  padding: 10px 15px;
+  padding: 8px 10px;
   color: #be9f4e;
   border: 2px solid #be9f4e;
   border-radius: 100px;
@@ -40,8 +43,8 @@
   font-family: "Anuphan", sans-serif;
   font-weight: 600;
   font-size: 28px;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -162,11 +165,23 @@
   display: flex;
   align-items: center;
   color: #be9f4e;
-  margin-top: 3px
+  margin-top: 0;
+}
+
+.starAll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #be9f4e;
 }
 
 .star.selected {
   color: #be9f4e;
+}
+.sCore {
+  margin: 0;
+  font-size: 16px;
+  margin-left: 5px;
 }
 
 .reviewButton {

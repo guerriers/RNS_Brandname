@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import "../css/sellerProfile.css";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
@@ -46,6 +46,26 @@ function SellerProfile() {
     }
   };
 
+  const [averageScore, setAverageScore] = useState(0);
+
+  const calculateAverageScore = (scores) => {
+    if (scores.length === 0) {
+      return 0;
+    }
+    const numericScores = scores.map((score) => parseInt(score, 10));
+    const totalScore = numericScores.reduce((sum, score) => sum + score, 0);
+    const scaledAverage = totalScore / scores.length;
+    const roundedAverage = Math.round(scaledAverage * 10) / 10;
+    return roundedAverage;
+  };
+
+  useEffect(() => {
+    // Calculate and set the average score whenever reviews change
+    const scores = reviews.map((review) => review.re_score);
+    const avgScore = calculateAverageScore(scores);
+    setAverageScore(avgScore);
+  }, [reviews]);
+
   const formatDate = (timestamp) => {
     const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
     return new Date(timestamp).toLocaleDateString(undefined, options);
@@ -65,7 +85,7 @@ function SellerProfile() {
         const sortedProducts = data.sort((a, b) => a.p_status - b.p_status);
         setUserProducts(data);
         setProductCount(data.length);
-        console.log("Received user products data:", data);
+        // console.log("Received user products data:", data);
       })
       .catch((error) => {
         console.error("Error fetching user products data:", error);
@@ -84,7 +104,7 @@ function SellerProfile() {
       .then((response) => response.json())
       .then((data) => {
         setReviews(data);
-        console.log("Received user reviews data:", data);
+        // console.log("Received user reviews data:", data);
       })
       .catch((error) => {
         console.error("Error fetching user reviews data:", error);
@@ -110,8 +130,8 @@ function SellerProfile() {
       .then((userData) => {
         setUser(userData);
         fetchProducts(id);
-        console.log("Received user data:", userData);
-        console.log("Received user id:", id);
+        // console.log("Received user data:", userData);
+        // console.log("Received user id:", id);
       })
       .catch((error) =>
         console.error("Error fetching user details from URL: ", error)
@@ -135,6 +155,23 @@ function SellerProfile() {
               <h2>
                 {user.f_name} {user.l_name}
               </h2>
+
+              {reviews.length > 0 ? (
+                <p className="starAll">
+                  {Array.from({ length: Math.floor(averageScore) }, (_, i) => (
+                    <FontAwesomeIcon icon={faStar} key={i} />
+                  ))}
+                  {averageScore % 1 !== 0 && (
+                    <FontAwesomeIcon icon={faStarHalf} key="half" />
+                  )}
+                  <p className="sCore">{averageScore}</p>
+                </p>
+              ) : (
+                <p>
+                  <FontAwesomeIcon icon={faStar} /> 0
+                </p>
+              )}
+
               <span className="verified-badge">
                 {" "}
                 {verifyStatus ? "Verified" : "Need Verified"}{" "}
@@ -203,6 +240,7 @@ function SellerProfile() {
       <Row>
         <div className="review-container">
           <h2>Reviews</h2>
+
           {reviews.length > 0 ? (
             <div>
               <ul>

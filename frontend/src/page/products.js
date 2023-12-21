@@ -338,7 +338,7 @@ const Product = () => {
     <>
       <Row
         style={{ height: "100%", textAlign: "start", margin: 0 }}
-        className="s-container"
+        className="product-container"
       >
         <Col
           md={4}
