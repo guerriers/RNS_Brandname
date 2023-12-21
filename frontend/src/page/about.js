@@ -28,19 +28,19 @@ function AboutPage() {
   // }, [team]);
   const [info, setinfo] = useState([
     {
-      name: "เว็บไซต์ตัวกลาง",
-      image: "../assets/cart_icon.png",
-      desc: "เว็บไซต์ของเราเป็นแค่เว็บไซต์ตัวกลางที่ช่วยให้พ่อค้า-แม่ค้าทุกคนสามารถมาลงขายสินค้าได้ โดยเราจะไม่มีส่วนได้ส่วนเสีย และจะไม่รับผิดชอบใดๆ",
+      name: "Centralized Platform",
+      image: "../assets/logos/cPlat.png",
+      desc: "Our website is a centralized platform that enables everyone to sell their products. We don't take any commission and we are not responsible for anything.",
     },
     {
-      name: "มีบริการเช่าสินค้า",
-      image: "../assets/cart_icon.png",
-      desc: "นอกจากซื้อและขายสินค้ามือสองแล้วยังสามารถเช่าสินค้าแบรนด์เนมได้ด้วย สำหรับคนที่ต้องการเช่ามาใช้ชั่วคราว",
+      name: "Rental Services Available",
+      image: "../assets/logos/rental.png",
+      desc: "Explore our unique rental service for branded items, offering you the opportunity to enjoy the latest and greatest products without the commitment of ownership.",
     },
     {
-      name: "สินค้าหลากหลายแบรนด์",
-      image: "../assets/cart_icon.png",
-      desc: "เรามีสินค้าหลากหลายแบรนด์ ไม่ว่าจะเป็น Gucci Dior Cartier และแบรนด์ดังอื่นๆ",
+      name: "Diverse Range of Brands",
+      image: "../assets/logos/brandName.png",
+      desc: "We cater to all tastes with a wide selection of brands from around the world. From high-end luxury labels to popular high-street names, you're sure to find brands you love.",
     },
   ]);
 
@@ -63,19 +63,18 @@ function AboutPage() {
               <h1>About Us</h1>
             </div>
             <div>
-              <p>
-                พวกเราคือเว็บไซต์ตัวกลางที่ช่วยให้พ่อค้า-แม่ค้าทุกคนสามารถมาลงขายสินค้าได้
-              </p>
-              <p>โดยเราจะไม่มีส่วนได้ส่วนเสีย และจะไม่รับผิดชอบใดๆ</p>
-              <p>
-                นอกจากซื้อ และขายสินค้ามือสองแล้วยังสามารถเช่าสินค้าแบรนด์เนมได้
+              <p className="aboutUs">
+                "We're a centralized platform connecting buyers and sellers of
+                brand name products. Our user-friendly platform streamlines the
+                process, making it easy for users. Whether you're in search of
+                exclusive brand name items or looking to sell your pre-loved."
               </p>
             </div>
           </div>
         </header>
 
         <section className="team-section">
-          <h2 className="WWA">WHO WE ARE</h2>
+          <h2 className="WWA">Our Services</h2>
           <section className="info-section">
             <div className="info-lists">
               {info.map((list) => (

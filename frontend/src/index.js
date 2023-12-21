@@ -5,7 +5,7 @@ import "./css/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AuthProvider } from './context/AuthProvider';
+import { AuthProvider } from './context/authProvider';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Provider } from 'react-redux'

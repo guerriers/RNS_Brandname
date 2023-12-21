@@ -51,7 +51,7 @@ const updateReview = async (req, res, next) => {
       return next(new ErrorHandler("Review not found", 404));
     }
 
-    // Assuming you want to allow updating only by the user who created the review
+    // Assuming want to allow updating only by the user who created the review
     if (review.user_id !== req.user.id) {
       return next(new ErrorHandler("Unauthorized", 403));
     }
@@ -76,7 +76,7 @@ const deleteReview = async (req, res, next) => {
       return next(new ErrorHandler("Review not found", 404));
     }
 
-    // Assuming you want to allow deletion only by the user who created the review
+    // Assuming want to allow deletion only by the user who created the review
     if (review.user_id !== req.user.id) {
       return next(new ErrorHandler("Unauthorized", 403));
     }

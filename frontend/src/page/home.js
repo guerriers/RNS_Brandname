@@ -83,251 +83,223 @@ function HomePage() {
 
   const categories = [
     {
-      img: `../assets/clothes.jpeg`,
+      img: `assets/categories/clothes.jpeg`,
       text: `Clothes`,
       targetURL: ``,
     },
     {
-      img: `../assets/accessories.jpeg`,
+      img: `assets/categories/accessories.jpeg`,
       text: `Accessories`,
       targetURL: ``,
     },
     {
-      img: `../assets/headwear.jpeg`,
+      img: `assets/categories/headwear.jpeg`,
       text: `Headwear`,
       targetURL: ``,
     },
     {
-      img: `../assets/eyewear.jpg`,
+      img: `assets/categories/eyewear.jpg`,
       text: `Eyewear`,
       targetURL: ``,
     },
     {
-      img: `../assets/bag.jpeg`,
+      img: `assets/categories/bag.jpeg`,
       text: `Bag`,
       targetURL: ``,
     },
     {
-      img: `../assets/shoe.jpeg`,
+      img: `assets/categories/shoe.jpeg`,
       text: `Shoe/Sneakers`,
       targetURL: ``,
     },
   ];
   const brandname = [
     {
-      img: `../assets/Nike.png`,
+      img: `assets/brands/Nike.png`,
       text: `Nike`,
       targetURL: ``,
     },
     {
-      img: `../assets/vans.png`,
+      img: `assets/brands/vans.png`,
       text: `Vans`,
       targetURL: ``,
     },
     {
-      img: `../assets/channel.png`,
+      img: `assets/brands/channel.png`,
       text: `Channel`,
       targetURL: ``,
     },
     {
-      img: `../assets/gucci.png`,
+      img: `assets/brands/gucci.png`,
       text: `Gucci`,
       targetURL: ``,
     },
     {
-      img: `../assets/tiffany-co.jpeg`,
+      img: `assets/brands/tiffany-co.jpeg`,
       text: `Tiffany & CO.`,
       targetURL: ``,
     },
     {
-      img: `../assets/Adidas.jpeg`,
+      img: `assets/brands/Adidas.jpeg`,
       text: `Adidas`,
       targetURL: ``,
     },
     {
-      img: `../assets/Sephora.png`,
+      img: `assets/brands/Sephora.png`,
       text: `Sephora`,
       targetURL: ``,
     },
     {
-      img: `../assets/puma.png`,
+      img: `assets/brands/puma.png`,
       text: `Puma`,
       targetURL: ``,
     },
     {
-      img: `../assets/versace.png`,
+      img: `assets/brands/versace.png`,
       text: `Versace`,
       targetURL: ``,
     },
     {
-      img: `../assets/lvmh.png`,
+      img: `assets/brands/lvmh.png`,
       text: `LVMH`,
       targetURL: ``,
     },
     {
-      img: `../assets/tommyhilfiger.png`,
+      img: `assets/brands/tommyhilfiger.png`,
       text: `Tommy Hilfiger`,
       targetURL: ``,
     },
     {
-      img: `../assets/guess.png`,
+      img: `assets/brands/guess.png`,
       text: `Guess`,
       targetURL: ``,
     },
     {
-      img: `../assets/ck.png`,
+      img: `assets/brands/ck.png`,
       text: `Calvin Klein`,
       targetURL: ``,
     },
     {
-      img: `../assets/coach.png`,
+      img: `assets/brands/coach.png`,
       text: `Coach`,
       targetURL: ``,
     },
     {
-      img: `../assets/prada.png`,
+      img: `assets/brands/prada.png`,
       text: `Prada`,
       targetURL: ``,
     },
     {
-      img: `../assets/lacoste.jpeg`,
+      img: `assets/brands/lacoste.jpeg`,
       text: `Lacoste`,
       targetURL: ``,
     },
     {
-      img: `../assets/Converse.png`,
+      img: `assets/brands/Converse.png`,
       text: `Converse`,
       targetURL: ``,
     },
     {
-      img: `../assets/cartier.jpeg`,
+      img: `assets/brands/cartier.jpeg`,
       text: `Cartier`,
       targetURL: ``,
     },
     {
-      img: `../assets/lv.png`,
+      img: `assets/brands/lv.png`,
       text: `Louis Vuitton`,
       targetURL: ``,
     },
     {
-      img: `../assets/rolex.jpeg`,
+      img: `assets/brands/rolex.jpeg`,
       text: `Rolex`,
       targetURL: ``,
     },
     {
-      img: `../assets/zara.png`,
+      img: `assets/brands/zara.png`,
       text: `Zara`,
       targetURL: ``,
     },
     {
-      img: `../assets/hm.jpeg`,
+      img: `assets/brands/hm.jpeg`,
       text: `H&M`,
       targetURL: ``,
     },
     {
-      img: `../assets/hermes.png`,
+      img: `assets/brands/hermes.png`,
       text: `Hermes`,
       targetURL: ``,
     },
     {
-      img: `../assets/fendi.png`,
+      img: `assets/brands/fendi.png`,
       text: `Fendi`,
       targetURL: ``,
     },
     {
-      img: `../assets/ysl.jpeg`,
+      img: `assets/brands/ysl.jpeg`,
       text: `YSL`,
       targetURL: ``,
     },
     {
-      img: `../assets/Balenciaga.png`,
+      img: `assets/brands/Balenciaga.png`,
       text: `Balenciaga`,
       targetURL: ``,
     },
     {
-      img: `../assets/supreme.png`,
+      img: `assets/brands/supreme.png`,
       text: `Supreme`,
       targetURL: ``,
     },
     {
-      img: `../assets/valentino.jpg`,
+      img: `assets/brands/valentino.jpg`,
       text: `Valentino`,
       targetURL: ``,
     },
     {
-      img: `../assets/dior.jpeg`,
+      img: `assets/brands/dior.jpeg`,
       text: `Dior`,
       targetURL: ``,
     },
     {
-      img: `../assets/patek.jpeg`,
+      img: `assets/brands/patek.jpeg`,
       text: `Patek Philippe`,
       targetURL: ``,
     },
     {
-      img: `../assets/swarovski.png`,
+      img: `assets/brands/swarovski.png`,
       text: `Swarovski`,
       targetURL: ``,
     },
     {
-      img: `../assets/burberry.jpeg`,
+      img: `assets/brands/burberry.jpeg`,
       text: `Burberry`,
       targetURL: ``,
     },
     {
-      img: `../assets/tomford.jpeg`,
+      img: `assets/brands/tomford.jpeg`,
       text: `Tom Ford`,
       targetURL: ``,
     },
     {
-      img: `../assets/vs.png`,
+      img: `assets/brands/vs.png`,
       text: `Victoria's Secret`,
       targetURL: ``,
     },
     {
-      img: `../assets/nb.png`,
+      img: `assets/brands/nb.png`,
       text: `New Balance`,
       targetURL: ``,
     },
     {
-      img: `../assets/louboutin.png`,
+      img: `assets/brands/louboutin.png`,
       text: `Christian Louboutin`,
       targetURL: ``,
     },
     {
-      img: `../assets/rayban.png`,
+      img: `assets/brands/rayban.png`,
       text: `Ray Ban`,
       targetURL: ``,
     },
   ];
-
-  // const [info, setinfo] = useState([
-  //   {
-  //     name: "เว็บไซต์ตัวกลาง",
-  //     image: "../assets/cart_icon.png",
-  //     desc: "เว็บไซต์ของเราเป็นแค่เว็บไซต์ตัวกลางที่ช่วยให้พ่อค้า-แม่ค้าทุกคนสามารถมาลงขายสินค้าได้ โดยเราจะไม่มีส่วนได้ส่วนเสีย และจะไม่รับผิดชอบใดๆ",
-  //   },
-  //   {
-  //     name: "มีบริการเช่าสินค้า",
-  //     image: "../assets/cart_icon.png",
-  //     desc: "นอกจากซื้อและขายสินค้ามือสองแล้วยังสามารถเช่าสินค้าแบรนด์เนมได้ด้วย สำหรับคนที่ต้องการเช่ามาใช้ชั่วคราว",
-  //   },
-  //   {
-  //     name: "สินค้าหลากหลายแบรนด์",
-  //     image: "../assets/cart_icon.png",
-  //     desc: "เรามีสินค้าหลากหลายแบรนด์ ไม่ว่าจะเป็น Gucci Dior Cartier และแบรนด์ดังอื่นๆ",
-  //   },
-  // ]);
-
-  // useEffect(() => {
-  //   info.forEach((list) => {
-  //     const img = new Image();
-  //     img.onload = () =>
-  //       console.log(`${list.name}'s image loaded successfully`);
-  //     img.onerror = () => console.log(`Failed to load ${list.name}'s image`);
-  //     img.src = list.image;
-  //   });
-  // }, [info]);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   useEffect(() => {
@@ -341,13 +313,13 @@ function HomePage() {
         <div className="slider-wrapper">
           <img
             id="slide-1"
-            src="../assets/banner2.png"
+            src="../assets/banners/banner2.png"
             alt="Banner"
             className={activeSlide === 0 ? "active" : "inactive"}
           />
           <img
             id="slide-2"
-            src="../assets/bg1.jpg"
+            src="../assets/banners/banner3.jpg"
             alt="Banner"
             className={activeSlide === 1 ? "active" : "inactive"}
           />
@@ -435,13 +407,10 @@ function HomePage() {
 
       <footer className="homefooter">
         <div className="footer-banner">
-          <img src="../assets/footerbanner.png" alt="FooterBanner" />
+          <img src="../assets/banners/footerbanner.png" alt="FooterBanner" />
           <h4 className="image-text">
-            "เว็บไซต์ของเราเป็นแค่เว็บไซต์ตัวกลางที่ช่วยให้ พ่อค้า-แม่ค้า
-            ทุกคนสามารถมาลงขายสินค้าได้ เรามีสินค้าหลากหลายแบรนด์
-            <br />
-            นอกจากซื้อและขายสินค้ามือสองแล้วยังสามารถเช่าสินค้าแบรนด์เนมได้ด้วย
-            สำหรับคนที่ต้องการเช่ามาใช้ชั่วคราว"
+            "We're a centralized platform connecting buyers and sellers of brand
+            name products, providing a user-friendly experience."
             <LinkContainer to="/about">
               <button className="image-button">About Us</button>
             </LinkContainer>
@@ -454,13 +423,13 @@ function HomePage() {
 
         <div className="footer-icons">
           <a href="https://www.facebook.com/">
-            <img src="../assets/facebook.png" alt="Facebook" />
+            <img src="../assets/logos/facebook.png" alt="Facebook" />
           </a>
           <a href="https://www.instagram.com/">
-            <img src="../assets/instagram.png" alt="Instagram" />
+            <img src="../assets/logos/instagram.png" alt="Instagram" />
           </a>
           <a href="https://www.twitter.com/">
-            <img src="../assets/x.png" alt="Twitter" />
+            <img src="../assets/logos/x.png" alt="Twitter" />
           </a>
         </div>
 

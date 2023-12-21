@@ -445,7 +445,7 @@ export const sendReviewInvitation = (productId, userEmail) => async (dispatch) =
       payload: response.data.success,
     });
 
-    // Optionally, you can display a success message to the user
+    // Display a success message to the user
     alert("Review invitation sent successfully!");
   } catch (error) {
     // Handle errors and dispatch appropriate actions

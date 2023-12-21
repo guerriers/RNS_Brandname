@@ -1,11 +1,13 @@
-html, body {
+html,
+body {
   height: 100%;
-
+  font-family: "Poppins", sans-serif;
 }
 
-#root{
+#root {
   height: 100%;
   user-select: none;
+  font-family: "Poppins", sans-serif;
 }
 
 .App {

@@ -40,71 +40,70 @@ const ReviewForm = () => {
     }
   }, [dispatch, alert, error, success, navigate, id]);
 
-    const handleReviewSubmit = async (e) => {
-        e.preventDefault();
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
 
-        try {
-        const newReview = {
-            re_score: selectedStars,
-            re_text: reviewText,
-            seller_id: user_id,
-        };
+    try {
+      const newReview = {
+        re_score: selectedStars,
+        re_text: reviewText,
+        seller_id: user_id,
+      };
 
-        const config = {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          };
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
 
-        // Send the review to the server
-        const response = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}/api/reviews`,
-            newReview,
-            config
-        );
+      // Send the review to the server
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/reviews`,
+        newReview,
+        config
+      );
 
-        if (response.status === 201) {
-            // Review submitted successfully, you can handle the response as needed
-            console.log("Review submitted successfully");
+      if (response.status === 201) {
+        // Review submitted successfully
+        console.log("Review submitted successfully");
 
-            alert("Review submitted successfully, Thank you for your review!");
-            // Optionally, you can fetch updated reviews for the product and update the UI
-        }
-        } catch (error) {
-        console.error("Error submitting review:", error);
-        // Handle the error, show an alert, etc.
-        }
-    };
-    
+        alert("Review submitted successfully, Thank you for your review!");
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      // Handle the error, show an alert, etc.
+    }
+  };
 
   return (
     <div>
       <Card>
         <Card.Body>
-        <div className="product-image">
-          {product.p_img &&
-            product.p_img.map((image, index) => (
-              <img
-                key={index}
-                src={image.url}
-                alt={`Product Image ${index + 1}`}
-                style={{
-                  display: "block",
-                  margin: "auto",
-                }}
-              />
-            ))}
-        </div>
+          <div className="product-image">
+            {product.p_img &&
+              product.p_img.map((image, index) => (
+                <img
+                  key={index}
+                  src={image.url}
+                  alt={`Product Image ${index + 1}`}
+                  style={{
+                    display: "block",
+                    margin: "auto",
+                  }}
+                />
+              ))}
+          </div>
           <Card.Title>{product.p_name}</Card.Title>
           <Card.Text>Price: ${product.p_price}</Card.Text>
         </Card.Body>
       </Card>
 
-      <Form className='reviewform-container' onSubmit={handleReviewSubmit}>
+      <Form className="reviewform-container" onSubmit={handleReviewSubmit}>
         <Form.Group controlId="reviewText">
           <Form.Label>Review Message</Form.Label>
-          <Form.Control className="review-text"
+          <Form.Control
+            className="review-text"
             as="textarea"
             rows={3}
             value={reviewText}
@@ -114,17 +113,17 @@ const ReviewForm = () => {
         </Form.Group>
 
         <Form.Group controlId="formStars">
-              <Form.Label>Select Stars:</Form.Label>
-              {[1, 2, 3, 4, 5].map((stars) => (
-                <span
-                  key={stars}
-                  className={`star ${selectedStars >= stars ? "selected" : ""}`}
-                  onClick={() => handleStarClick(stars)}
-                >
-                  &#9733;
-                </span>
-              ))}
-            </Form.Group>
+          <Form.Label>Select Stars:</Form.Label>
+          {[1, 2, 3, 4, 5].map((stars) => (
+            <span
+              key={stars}
+              className={`star ${selectedStars >= stars ? "selected" : ""}`}
+              onClick={() => handleStarClick(stars)}
+            >
+              &#9733;
+            </span>
+          ))}
+        </Form.Group>
 
         <Button variant="primary" type="submit">
           Submit Review

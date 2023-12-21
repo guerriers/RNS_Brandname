@@ -1,11 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
-@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anuphan&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
-
 body {
   margin: 0;
-  font-family: "Arial", sans-serif;
 }
 
 .homepage {
@@ -119,11 +113,21 @@ header img {
   border: 1px solid #bdbcbc;
   border-radius: 10%;
   text-align: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
 }
 
-.info-list h4,
-p {
-  font-family: "Kanit", sans-serif;
+.info-list h4 {
+  font-weight: bold;
+  font-size: 22px;
+  color: #333333;
+  margin: 10px 3px 20px 3px;
+}
+
+.info-list p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin-left: 0px;
 }
 
 .info-list img {

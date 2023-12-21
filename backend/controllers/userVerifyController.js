@@ -46,7 +46,7 @@ const getAllUserVerify = async (req, res) => {
 
 // Get user verification status by user_id
 const getUserVerificationStatus = async (req, res) => {
-  const userId = req.params.id; // Assuming you're passing the user_id as a route parameter
+  const userId = req.params.id; // Assuming passing the user_id as a route parameter
 
   try {
     const userVerification = await UserVerify.findOne({
