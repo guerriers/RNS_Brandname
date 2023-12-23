@@ -23,7 +23,7 @@ const Footer = () => {
       </div>
 
       <img src="../rns_logo.png" alt="Logo" className="footer-logo" />
-      <p>&copy; {new Date().getFullYear()} RNS. ALL RIGHTS RESERVED.</p>
+      <p>&copy; {new Date().getFullYear()} RNS Brandname</p>
     </footer>
   );
 };
