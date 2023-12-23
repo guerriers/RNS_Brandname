@@ -62,7 +62,6 @@ const brands = [
 const CheckboxGroup = Checkbox.Group;
 const Product = () => {
   const { state } = useLocation();
-  console.log("STATE", state);
   const [favorites, setFavorites] = useState([]);
   const user = useSelector((state) => state.auth.user);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -316,8 +315,6 @@ const Product = () => {
     setIsHovering(false);
   };
 
-  const [popoverShow, setPopoverShow] = useState(false);
-
   const popover = (product) => (
     <Popover className="pop-over" id={`popover-${product.id}`}>
       <Popover.Header as="h3" className="popover-header">
@@ -564,8 +561,6 @@ const Product = () => {
                       trigger="hover"
                       placement="top"
                       overlay={popover(product)}
-                      onMouseOver={() => setPopoverShow(true)}
-                      onMouseOut={() => setPopoverShow(false)}
                     >
                       <div
                         className="product-box"
