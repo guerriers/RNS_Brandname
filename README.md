@@ -154,4 +154,4 @@ Ensure these configurations match your setup to establish the necessary connecti
 
 Next, open [http://localhost:3000](http://localhost:3000) in your browser to see the result. 😄💕
 
-Feel free to explore and contribute to the RNS Brandname project! If you have any questions or issues, don't hesitate to reach out. Happy coding! 🚀🚀
+Feel free to explore and contribute to the RNS Brandname project! If you have any questions or issues, don't hesitate to reach out. Happy coding!! 🚀🚀
