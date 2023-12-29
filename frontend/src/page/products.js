@@ -323,10 +323,10 @@ const Product = () => {
       <Popover.Body className="popover-body">
         <p>{product.p_name}</p>
         <hr className="hr-line" />
-        <p className="posted-by">
+        {/* <p className="posted-by">
           Posted by: K.{userData.f_name} {userData.l_name}
         </p>
-        <hr className="hr-line" />
+        <hr className="hr-line" /> */}
         <a className="more-detail"> Click to see more details... </a>
       </Popover.Body>
     </Popover>
