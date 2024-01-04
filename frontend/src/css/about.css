@@ -27,6 +27,7 @@ h2 {
   font-size: 18px;
   line-height: 1.5;
   width: 700px;
+  margin: 0 auto;
 }
 p {
   font-size: 16px;
@@ -67,26 +68,6 @@ p {
   background-color: #f8f8f8;
 }
 
-.img-member {
-  margin-right: 10px;
-}
-
-.team-members {
-  display: flex;
-}
-
-.team-member {
-  text-align: center;
-  margin: 140px;
-}
-
-.team-member img {
-  width: 100%;
-  height: auto;
-  border-radius: 100%;
-  margin: 10px auto;
-}
-
 .description {
   display: flex;
   width: 90%;
@@ -99,4 +80,38 @@ p {
   margin-top: 20px;
   font-size: 36px;
   color: #333333;
+}
+
+@media only screen and (max-width: 768px) {
+  header {
+    padding: 20px 0;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .aboutUs {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+  
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .aboutUs {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
 }

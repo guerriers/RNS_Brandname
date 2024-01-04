@@ -3,29 +3,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import "../css/about.css";
 
 function AboutPage() {
-  // const [team, setTeam] = useState([
-  //   {
-  //     name: 'Watchara Faichai',
-  //     image: "../assets/watchara.png"
-  //   },
-  //   {
-  //     name: 'Rachen Chaisri',
-  //     image: "../assets/rachen.png"
-  //   },
-  //   {
-  //     name: 'Nawasa Jaima',
-  //     image: "../assets/nawasa.png"
-  //   },
-  // ]);
-
-  // useEffect(() => {
-  //   team.forEach(member => {
-  //     const img = new Image();
-  //     img.onload = () => console.log(`${member.name}'s image loaded successfully`);
-  //     img.onerror = () => console.log(`Failed to load ${member.name}'s image`);
-  //     img.src = member.image;
-  //   });
-  // }, [team]);
   const [info, setinfo] = useState([
     {
       name: "Centralized Platform",
@@ -87,14 +64,6 @@ function AboutPage() {
             </div>
             <hr className="hh" />
           </section>
-          {/* <div className="team-members">
-            {team.map((member) => (
-              <div key={member.name} className="team-member">
-                <img src={member.image} alt={member.name} />
-                <p>{member.name}</p>
-              </div>
-            ))}
-          </div> */}
         </section>
       </div>
     </Fragment>

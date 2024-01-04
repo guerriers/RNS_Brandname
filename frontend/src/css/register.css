@@ -206,3 +206,32 @@ label {
   background-color: #333333;
   color: #ffffff;
 }
+
+@media only screen and (max-width: 768px) {
+  .register-box {
+    width: 60%;
+  }
+  .terms-of-service-popup {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .register-box {
+    width: 90%;
+  }
+
+  .rowInput-register {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .input2-register {
+    margin: 0;
+    margin-bottom: 25px;
+    margin-top: 0;
+  }
+  .terms-of-service-popup {
+    width: 80%;
+  }
+}

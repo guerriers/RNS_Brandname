@@ -26,19 +26,13 @@
   border-radius: 30px;
 }
 
-.p {
+.p,
+.fffText,
+.label {
   margin: 0px;
   font-weight: 400;
   font-size: 15px;
   text-align: center;
-}
-
-.fffText {
-  margin: 0px;
-  font-weight: 400;
-  font-size: 15px;
-  text-align: center;
-  color: #ffffff;
 }
 
 .form-wrapper {
@@ -113,4 +107,16 @@ label {
   width: auto;
   height: 100px;
   margin: 20% 0px;
+}
+
+@media only screen and (max-width: 768px) {
+  .login-box {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .login-box {
+    width: 90%;
+  }
 }
